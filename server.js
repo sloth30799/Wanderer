@@ -7,19 +7,19 @@ const session = require("express-session")
 const MongoStore = require("connect-mongo")
 const flash = require("express-flash")
 const logger = require("morgan")
-const connectDB = require("./config/database")
-const mainRoutes = require("./routes/main")
-const authRoutes = require("./routes/auth")
-const postsRoutes = require("./routes/posts")
-const gearsRoutes = require("./routes/gears")
-const tripsRoutes = require("./routes/trips")
-const templatesRoutes = require("./routes/templates")
+const connectDB = require("./server/config/database")
+const mainRoutes = require("./server/routes/main")
+const authRoutes = require("./server/routes/auth")
+const postsRoutes = require("./server/routes/posts")
+const gearsRoutes = require("./server/routes/gears")
+const tripsRoutes = require("./server/routes/trips")
+const templatesRoutes = require("./server/routes/templates")
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" })
+require("dotenv").config({ path: "./server/config/.env" })
 
 // Passport config
-require("./config/passport")(passport)
+require("./server/config/passport")(passport)
 
 //Connect To Database
 connectDB()
@@ -36,12 +36,12 @@ app.use(logger("dev"))
 
 // Setup Sessions - stored in MongoDB
 app.use(
-	session({
-		secret: "keyboard cat",
-		resave: false,
-		saveUninitialized: false,
-		store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
-	})
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+    store: new MongoStore({ mongoUrl: process.env.DB_STRING }),
+  })
 )
 
 // Passport middleware
@@ -67,5 +67,5 @@ const PORT = process.env.PORT || 5000
 
 //Server Running
 app.listen(PORT, () => {
-	console.log(`Server is running on ${PORT}, you better catch it!`)
+  console.log(`Server is running on ${PORT}, you better catch it!`)
 })
