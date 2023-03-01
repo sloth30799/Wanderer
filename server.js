@@ -59,9 +59,9 @@ app.use("/api/trip", tripsRoutes)
 app.use("/api/gear", gearsRoutes)
 app.use("/api/template", templatesRoutes)
 
-// app.use("*", (_, res) => {
-// 	res.sendFile(path.join(__dirname, "frontend/build/index.html"))
-// })
+app.use("*", (_, res) => {
+  res.sendFile(path.join(__dirname, "frontend/build/index.html"))
+})
 
 const PORT = process.env.PORT || 5000
 
