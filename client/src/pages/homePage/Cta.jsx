@@ -9,7 +9,7 @@ const styles = {
 const Cta = () => {
   return (
     <section id="cta" className={styles.container}>
-      <div className="container flex flex-col items-center justify-between px-6 py-24 mx-auto space-y-12 sm:py-12 sm:flex-row sm:space-y-0">
+      <div className="container flex flex-col items-center justify-between px-6 py-12 mx-auto space-y-12 sm:py-6 sm:flex-row sm:space-y-0">
         <h2 className="text-3xl font-bold leading-tight text-center text-white sm:text-3xl sm:max-w-xl sm:text-left">
           Start Your Journey with Wanderer Now!
         </h2>

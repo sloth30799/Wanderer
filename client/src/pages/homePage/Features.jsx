@@ -23,11 +23,11 @@ const FeaturesBox = ({ id, title, body }) => {
           <div className="px-4 py-2 text-white rounded-full sm:py-1 bg-goldenYellow">
             {id}
           </div>
-          <h3 className="text-base font-bold sm:mb-4 sm:hidden">{title}</h3>
+          <h3 className="text-base sm:mb-4 sm:hidden">{title}</h3>
         </div>
       </div>
       <div>
-        <h3 className="hidden mb-4 text-lg font-bold sm:block">{title}</h3>
+        <h3 className="hidden mt-0 mb-4 text-lg sm:block">{title}</h3>
         <p className="">{body}</p>
       </div>
     </div>
@@ -45,7 +45,7 @@ const Features = () => {
     <section id="features">
       <div className="container flex flex-col px-4 mx-auto mt-10 space-y-12 sm:space-y-0 sm:flex-row">
         <div className="flex flex-col space-y-12 sm:w-1/2">
-          <h2 className="max-w-sm text-4xl font-bold text-center sm:text-left">
+          <h2 className="max-w-sm text-4xl text-center sm:text-left">
             {/* eslint-disable-next-line react/no-unescaped-entities */}
             What's different about Wanderer?
           </h2>

@@ -1,7 +1,11 @@
 import React from "react"
-import { Button, Link, TextField } from "@mui/material"
-import { Link as RouterLink } from "react-router-dom"
+import { Button, TextField } from "@mui/material"
+import { Link } from "react-router-dom"
 import logoWhite from "../../assets/default-monochrome-white.svg"
+
+const styles = {
+  link: `no-underline text-tealBlue hover:text-goldenYellow`,
+}
 
 const Footer = () => {
   return (
@@ -22,46 +26,25 @@ const Footer = () => {
         </div>
         <div className="flex justify-around space-x-32">
           <div className="flex flex-col space-y-3 text-white">
-            <Link
-              to="/"
-              component={RouterLink}
-              underline="none"
-              className="text-tealBlue hover:text-goldenYellow"
-            >
+            <Link to="#" className={styles.link}>
               Home
             </Link>
             <Link
               href="https://hanyehtun.netlify.app/"
               target={"_blank"}
-              underline="none"
-              className="text-tealBlue hover:text-goldenYellow"
+              className={styles.link}
             >
               Developer
             </Link>
-            <Link
-              to="/feed"
-              component={RouterLink}
-              underline="none"
-              className="text-tealBlue hover:text-goldenYellow"
-            >
+            <Link to="/feed" className={styles.link}>
               Feed
             </Link>
           </div>
           <div className="flex flex-col space-y-3 text-white">
-            <Link
-              to="#"
-              component={RouterLink}
-              underline="none"
-              className="text-tealBlue hover:text-goldenYellow"
-            >
+            <Link to="#" className={styles.link} in>
               Careers
             </Link>
-            <Link
-              to="/gearTemplate"
-              component={RouterLink}
-              underline="none"
-              className="text-tealBlue hover:text-goldenYellow"
-            >
+            <Link to="#" className={styles.link}>
               Templates
             </Link>
           </div>
@@ -77,7 +60,7 @@ const Footer = () => {
               />
               <Button
                 variant="contained"
-                className="bg-whiteSmoke font-pally text-tealBlue rounded-lg hover:bg-tealBlue hover:text-white"
+                className="bg-whiteSmoke text-tealBlue rounded-lg hover:bg-tealBlue hover:text-white"
               >
                 Go
               </Button>
