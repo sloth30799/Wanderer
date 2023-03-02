@@ -2,6 +2,7 @@ import React from "react"
 import { Button, TextField } from "@mui/material"
 import { Link } from "react-router-dom"
 import logoWhite from "../../assets/default-monochrome-white.svg"
+import twitterIcon from "../../assets/icon-twitter.svg"
 
 const styles = {
   link: `no-underline text-tealBlue hover:text-goldenYellow`,
@@ -16,11 +17,11 @@ const Footer = () => {
             Copyright &copy; 2023, All Rights Reserved
           </div>
           <div>
-            <img src={logoWhite} className="h-8" alt="" />
+            <img src={logoWhite} className="h-8" alt="logo" />
           </div>
           <div className="flex justify-center space-x-4">
             <Link href="https://twitter.com/hanyehtun" target={"_blank"}>
-              <img src="imgs/icon-twitter.svg" alt="" className="h-8" />
+              <img src={twitterIcon} alt="twitter icon" className="h-6" />
             </Link>
           </div>
         </div>
@@ -41,7 +42,7 @@ const Footer = () => {
             </Link>
           </div>
           <div className="flex flex-col space-y-3 text-white">
-            <Link to="#" className={styles.link} in>
+            <Link to="#" className={styles.link}>
               Careers
             </Link>
             <Link to="#" className={styles.link}>
