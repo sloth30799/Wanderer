@@ -13,8 +13,9 @@ export async function postLogin(email, password) {
   return data
 }
 
-export async function postSignup(email, password, confirmPassword) {
+export async function postSignup(userName, email, password, confirmPassword) {
   const { data } = await axios.post("api/auth/signup", {
+    userName,
     email,
     password,
     confirmPassword,

@@ -5,6 +5,7 @@ import {
   useActionData,
   useLocation,
   useNavigate,
+  useOutletContext,
 } from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import GoogleIcon from "@mui/icons-material/Google"
@@ -25,6 +26,7 @@ export async function action({ request }) {
 }
 
 const Login = () => {
+  const { displayMessage } = useOutletContext()
   const { userObject, loginUser } = useUserContext()
   const formData = useActionData()
   const location = useLocation()
@@ -34,13 +36,13 @@ const Login = () => {
   useEffect(() => {
     if (formData?.email && formData?.password) {
       const { email, password } = formData
-      loginUser(email, password)
+      loginUser(email, password).then((data) => displayMessage(data.messages))
     }
     if (userObject?._id) navigate(from, { replace: true })
   }, [formData, userObject])
 
   function google() {
-    window.open("http://localhost:1230/auth/google", "_self")
+    window.open("http://localhost:1230/api/auth/google", "_self")
   }
 
   return (

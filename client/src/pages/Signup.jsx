@@ -1,5 +1,10 @@
 import React, { useEffect } from "react"
-import { Form, useActionData, useNavigate } from "react-router-dom"
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useOutletContext,
+} from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import { useUserContext } from "../context/UserContext"
 import { postSignup } from "../api/api"
@@ -9,11 +14,12 @@ import PersonPinIcon from "@mui/icons-material/PersonPin"
 
 export async function action({ request }) {
   const formData = await request.formData()
+  const userName = formData.get("userName")
   const email = formData.get("email")
   const password = formData.get("password")
   const confirmPassword = formData.get("confirmPassword")
   try {
-    const data = await postSignup(email, password, confirmPassword)
+    const data = await postSignup(userName, email, password, confirmPassword)
     return data
   } catch (error) {
     console.log(error)
@@ -21,16 +27,18 @@ export async function action({ request }) {
 }
 
 const Signup = () => {
-  const { setUserObject } = useUserContext()
+  const { displayMessage } = useOutletContext()
+  const { changeUser } = useUserContext()
   const data = useActionData()
   const navigate = useNavigate()
 
   useEffect(() => {
     if (data?.user) {
-      setUserObject(data.user)
+      changeUser(data.user)
       navigate("/profile", { replace: true })
     }
-  }, [data?.user])
+    if (data?.messages) displayMessage(data.messages)
+  }, [data?.user, data?.messages])
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">

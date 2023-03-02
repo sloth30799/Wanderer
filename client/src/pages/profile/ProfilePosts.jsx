@@ -12,9 +12,14 @@ const styles = {
 
 const ProfileGears = () => {
   const { backpacker } = useBackpackerContext()
+
+  if (backpacker === undefined) return null
+  else if (backpacker === null) return <h2>Data not found!</h2>
+
   const { posts } = backpacker
 
-  console.log(posts)
+  if (posts.length < 1) return <h2>Add A Blog!</h2>
+
   const postsRender = posts.map((post) => {
     return (
       <Link to={`/post/${post._id}`} key={post._id} className="no-underline">

@@ -23,16 +23,17 @@ import Gear from "./pages/Gear"
 import Post from "./pages/Post"
 import Favorite from "./pages/Favorite"
 import Explore from "./pages/Explore"
-import SideBarDrawer from "./components/sidebar/SideBarDrawer"
+import Authenticated from "./components/Authenticated"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<ErrorPage />}>
       <Route index element={<HomePage />} />
-      <Route path="login" element={<Login />} action={loginAction} />
-      <Route path="signup" element={<Signup />} action={signupAction} />
+      <Route element={<Authenticated />}>
+        <Route path="login" element={<Login />} action={loginAction} />
+        <Route path="signup" element={<Signup />} action={signupAction} />
+      </Route>
       <Route path="logout" element={<Logout />} />
-      <Route path="sidebar" element={<SideBarDrawer />} />
 
       <Route element={<AuthRequired />}>
         <Route element={<SideBar />}>

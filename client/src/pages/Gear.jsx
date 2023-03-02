@@ -41,16 +41,23 @@ const Gear = () => {
   if (gear === undefined) return null
   else if (gear === null) return <h2>Gear not found!</h2>
 
-  // async function editGearInfo(event) {
+  // async function editName(event) {
   // 	event.preventDefault();
   // 	const name = await event.target.name.value;
-  // 	const note = await event.target.note.value;
   // 	setGear({
-  // 		...gear,
-  // 		name: name,
-  // 		note: note,
+  //     ...gear,
+  // 		name,
   // 	});
   // };
+
+  // async function editNote(e) {
+  //   e.preventDefault()
+  //   const note = await e.target.note.value;
+  //   setGear({
+  //     ...gear,
+  // 		 note,
+  // 	});
+  // }
 
   async function handleDelete() {
     const data = await deleteGear(gear._id) // api call

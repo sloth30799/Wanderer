@@ -15,7 +15,11 @@ const Hero = () => {
       <nav className="relative container mx-auto p-3">
         <div className="flex items-center justify-between">
           <div className="">
-            <img src={logoWhite} className="h-8 text-whiteSmoke" alt="" />
+            <img
+              src={logoWhite}
+              className="h-7 mt-1 text-whiteSmoke"
+              alt="logo"
+            />
           </div>
           <div className="hidden sm:flex space-x-6">
             <Link to="profile" className={styles.link}>

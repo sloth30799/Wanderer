@@ -22,6 +22,10 @@ export function UserProvider({ children }) {
     return data
   }
 
+  async function changeUser(user) {
+    setUserObject(user)
+  }
+
   async function logoutUser() {
     const data = await postLogout()
     if (data === "Logout success") setUserObject(null)
@@ -33,7 +37,9 @@ export function UserProvider({ children }) {
   }, [])
 
   return (
-    <UserContext.Provider value={{ userObject, loginUser, logoutUser }}>
+    <UserContext.Provider
+      value={{ userObject, loginUser, logoutUser, changeUser }}
+    >
       {children}
     </UserContext.Provider>
   )

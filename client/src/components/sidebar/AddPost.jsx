@@ -37,7 +37,6 @@ const AddPost = ({ sideBarOpen }) => {
       body: new FormData(form),
     })
     const json = await response.json()
-    console.log(json)
     if (json.post) {
       updateBackpackerData(json.post, "posts")
       setOpen(false)

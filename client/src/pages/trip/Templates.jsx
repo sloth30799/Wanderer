@@ -42,7 +42,6 @@ const Templates = ({ useTemplate }) => {
   useEffect(() => {
     async function getTemplates() {
       const data = await getAllTemplates()
-      console.log(data)
       setTemplates(data.template)
     }
     getTemplates()
