@@ -25,7 +25,7 @@ require("./server/config/passport")(passport)
 connectDB()
 
 //Static Folder
-app.use(express.static("frontend/build"))
+app.use(express.static("client/dist"))
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }))
@@ -60,7 +60,7 @@ app.use("/api/gear", gearsRoutes)
 app.use("/api/template", templatesRoutes)
 
 app.use("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "frontend/build/index.html"))
+  res.sendFile(path.join(__dirname, "client/dist/index.html"))
 })
 
 const PORT = process.env.PORT || 5000

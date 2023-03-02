@@ -50,18 +50,6 @@ const Hero = () => {
             >
               Templates
             </Link>
-            {/* {user && (
-							<Link
-								to='/logout'
-								component={RouterLink}
-								replace={true}
-								underline='none'
-							>
-								<Button variant='contained' color='error'>
-									Log out
-								</Button>
-							</Link>
-						)} */}
           </div>
         </div>
       </nav>
