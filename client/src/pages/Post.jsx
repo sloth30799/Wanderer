@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   IconButton,
   Card,
@@ -15,6 +15,7 @@ import { useUserContext } from "../context/UserContext"
 import { fromNowFormat } from "../utils/timeFormat"
 import { fetchPost, postDelete, postLike } from "../api/api"
 import { useBackpackerContext } from "../context/BackpackerContext"
+import PostSkeleton from "../components/PostSkeleton"
 
 const Post = () => {
   const { deleteOneData } = useBackpackerContext()
@@ -32,7 +33,7 @@ const Post = () => {
     getPost()
   }, [])
 
-  if (post === undefined) return null
+  if (post === undefined) return <PostSkeleton />
   else if (post === null) return <h2>Post not found!</h2>
 
   const handleLike = async () => {
@@ -48,34 +49,43 @@ const Post = () => {
   }
 
   return (
-    <Card>
-      <CardHeader
-        avatar={
-          <Avatar className="bg-scarletRed" aria-label="recipe">
-            W
-          </Avatar>
-        }
-        title={post.title}
-        subheader={fromNowFormat(post.createdAt)}
-      />
-      <CardMedia component="img" image={post.image} alt="Paella dish" />
-      <CardContent>
-        <p className="font-body">{post.caption}</p>
-      </CardContent>
-      <CardActions className="flex justify-between">
-        <div>
-          <IconButton aria-label="add to favorites" onClick={handleLike}>
-            <ThumbUpIcon className="text-black" />
-          </IconButton>
-          <span>{post.likes}</span>
-        </div>
-        {post.user === userObject._id && (
-          <IconButton aria-label="delete" onClick={handleDelete}>
-            <DeleteIcon className="text-black" />
-          </IconButton>
-        )}
-      </CardActions>
-    </Card>
+    <div className="flex flex-col gap-3">
+      <Link
+        to="/profile/post"
+        relative="path"
+        className="no-underline text-black"
+      >
+        &larr; <span>Back to Blogs</span>
+      </Link>
+      <Card className="shadow-none">
+        <CardHeader
+          avatar={
+            <Avatar className="bg-scarletRed" aria-label="recipe">
+              W
+            </Avatar>
+          }
+          title={post.title}
+          subheader={fromNowFormat(post.createdAt)}
+        />
+        <CardMedia component="img" image={post.image} alt={post.title} />
+        <CardContent>
+          <p className="font-body">{post.caption}</p>
+        </CardContent>
+        <CardActions className="flex justify-between">
+          <div className="flex place-items-center gap-2">
+            <IconButton aria-label="add to favorites" onClick={handleLike}>
+              <ThumbUpIcon className="text-black" />
+            </IconButton>
+            <span className="text-xl">{post.likes}</span>
+          </div>
+          {post.user === userObject._id && (
+            <IconButton aria-label="delete" onClick={handleDelete}>
+              <DeleteIcon className="text-black" />
+            </IconButton>
+          )}
+        </CardActions>
+      </Card>
+    </div>
   )
 }
 

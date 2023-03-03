@@ -35,8 +35,7 @@ module.exports = {
         palePurple: "#ab47bc",
       },
       backgroundImage: {
-        "hero-pattern": "url('./src/assets/Hero-bg.png')",
-        "beaver-bg2": "url('./src/assets/beaver-backpack.png')",
+        heroBg: "url('/imgs/Hero-bg.png')",
       },
     },
   },

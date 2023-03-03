@@ -2,6 +2,7 @@ import React from "react"
 import { Button } from "@mui/material"
 import { Link } from "react-router-dom"
 import logoWhite from "../../assets/default-monochrome-white.svg"
+// import heroBg from "../../assets/Hero-bg.png"
 
 const styles = {
   logo: `text-whiteSmoke tracking-tighter font-extrabold font-body text-3xl`,
@@ -11,7 +12,7 @@ const styles = {
 
 const Hero = () => {
   return (
-    <section className="bg-hero-pattern bg-cover">
+    <section className="bg-heroBg bg-cover">
       <nav className="relative container mx-auto p-3">
         <div className="flex items-center justify-between">
           <div className="">

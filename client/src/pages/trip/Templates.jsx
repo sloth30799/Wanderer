@@ -60,7 +60,7 @@ const Templates = ({ useTemplate }) => {
         <CardActionArea>
           <CardContent className="flex flex-col gap-3">
             <div className="flex justify-between">
-              <h3>{template.name}</h3>
+              <h3 className="m-0 font-pally">{template.name}</h3>
               <p>By {template.createdBy}</p>
             </div>
             <div className="flex flex-col md:flex-row gap-3">

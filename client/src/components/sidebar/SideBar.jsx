@@ -31,7 +31,7 @@ import Messages from "../Messages"
 const styles = {
   logo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
   drawerLogo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
-  activeNavbar: `no-underline text-brightGreen`,
+  activeNavbar: `no-underline text-purple`,
   inactiveNavbar: `no-underline text-black`,
   logoutBtn: `text-scarletRed border-scarletRed rounded-lg`,
 }

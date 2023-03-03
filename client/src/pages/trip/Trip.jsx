@@ -1,6 +1,11 @@
 import React from "react"
 import { useState, useEffect } from "react"
-import { useNavigate, useOutletContext, useParams } from "react-router-dom"
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom"
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import { timeFormat } from "../../utils/timeFormat"
@@ -9,6 +14,7 @@ import GearDisplay from "../../components/GearDisplay"
 import { completedTrip, deleteTrip, fetchTrip } from "../../api/api"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 import Templates from "./Templates"
+import ProgressSkeleton from "../../components/ProgressSkeleton"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
@@ -34,7 +40,7 @@ const Trip = () => {
     getTrip()
   }, [id])
 
-  if (trip === undefined) return null
+  if (trip === undefined) return <ProgressSkeleton progress={trip} />
   else if (trip === null) return <h2>Trip not found!</h2>
 
   const handleCompleted = async (e) => {
@@ -63,6 +69,13 @@ const Trip = () => {
   return (
     <div>
       <div className="flex flex-col gap-3">
+        <Link
+          to="/profile/trip"
+          relative="path"
+          className="no-underline text-black"
+        >
+          &larr; <span>Back to Trips</span>
+        </Link>
         <div className="flex flex-col">
           <h2 className="my-0">{trip.destination}</h2>
           <span className={styles.timeText}>

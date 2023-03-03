@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   TextField,
   Dialog,
@@ -68,6 +68,13 @@ const Gear = () => {
 
   return (
     <div className="container m-auto flex flex-col">
+      <Link
+        to="/profile/gear"
+        relative="path"
+        className="no-underline text-black"
+      >
+        &larr; <span>Back to Gears</span>
+      </Link>
       <div className="flex flex-col items-center tracking-wide">
         <h1>{gear.name}</h1>
         <p>{gear.note}</p>
