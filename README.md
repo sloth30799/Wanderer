@@ -20,11 +20,11 @@ Tech Used:
 
 # Optimizations
 
-More features to come!!!
+More features to come!!! Have to do better data caching with react query.
 
 # Lessons Learned:
 
-Getting better with MERN stack, mainly React.
+Getting better with MERN stack, mainly React // Refactored the code with better file structure!
 
 # How to Use
 
