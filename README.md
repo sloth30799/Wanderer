@@ -20,7 +20,7 @@ Tech Used:
 
 # Optimizations
 
-More features to come!!! Have to do better data caching with react query.
+More features to come!!! Have only one feature, planning the trip for now.
 
 # Lessons Learned:
 
