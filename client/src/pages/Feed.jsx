@@ -43,7 +43,7 @@ const PostCard = ({ post, handleLike }) => {
   }
 
   return (
-    <Card className="w-full shadow-none border-solid border-0 border-b rounded-none">
+    <Card className="w-full shadow-none border-solid border-0 border-b rounded-none p-6">
       <CardHeader
         avatar={
           <Avatar className="bg-scarletRed" aria-label="recipe">
@@ -60,7 +60,7 @@ const PostCard = ({ post, handleLike }) => {
         image={post.image}
         alt={post.title}
         onClick={() => navigate(`/post/${post._id}`)}
-        className="hover:cursor-pointer rounded-lg"
+        className="hover:cursor-pointer rounded-lg  md:h-[500px] object-contain"
       />
       <CardContent>
         <h3 className="my-0">{post.title}</h3>
@@ -112,7 +112,6 @@ const Feed = () => {
       })
       setPosts(newPosts)
     }
-    console.log(res)
     const postsRender = posts.map((post) => {
       return <PostCard key={post._id} post={post} handleLike={handleLike} />
     })

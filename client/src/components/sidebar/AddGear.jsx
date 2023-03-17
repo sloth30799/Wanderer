@@ -11,13 +11,17 @@ import { createTemplate } from "../../api/api"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 
 const AddGear = ({ sideBarOpen }) => {
-  const { updateBackpackerData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
 
   async function handleClick() {
-    const data = await createTemplate()
-    if (data.gear) navigate(`/gear/${data.gear._id}`)
-    updateBackpackerData(data.gear, "gears")
+    const { gear } = await createTemplate()
+    if (gear) navigate(`/gear/${gear._id}`)
+    dispatch({
+      type: "UPDATE_BACKPACKER",
+      dataType: "gears",
+      data: gear,
+    })
   }
 
   return (

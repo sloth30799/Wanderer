@@ -23,7 +23,7 @@ const styles = {
 }
 
 const Trip = () => {
-  const { deleteOneData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const { displayMessage } = useOutletContext()
   const { id } = useParams()
   const navigate = useNavigate()
@@ -52,7 +52,7 @@ const Trip = () => {
 
   const handleDelete = async () => {
     const data = await deleteTrip(trip._id) // api call
-    deleteOneData(id, "trips") // update state
+    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "trips" })
     navigate(-1)
     return data
   }

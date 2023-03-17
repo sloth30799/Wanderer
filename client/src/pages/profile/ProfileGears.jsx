@@ -29,12 +29,12 @@ const GearCard = ({ gear }) => {
 }
 
 const ProfileGears = () => {
-  const { backpacker } = useBackpackerContext()
+  const { state } = useBackpackerContext()
 
-  if (backpacker === undefined) return null
-  else if (backpacker === null) return <h2>Data not found!</h2>
+  if (state.backpacker === undefined) return null
+  else if (state.backpacker === null) return <h2>Data not found!</h2>
 
-  const { gears } = backpacker
+  const gears = state.backpacker.gears
 
   if (gears.length < 1) return <h2>Create a template!</h2>
 

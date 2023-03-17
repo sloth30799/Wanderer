@@ -12,6 +12,7 @@ import {
 import { useBackpackerContext } from "../../context/BackpackerContext"
 import { createTemplate } from "../../api/api"
 import { getAllTemplates } from "../../api/api"
+import ProgressSkeleton from "../../components/ProgressSkeleton"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,
@@ -22,13 +23,13 @@ const styles = {
 const Templates = ({ useTemplate }) => {
   const [templates, setTemplates] = useState()
   const [open, setOpen] = useState(false)
-  const { updateBackpackerData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
 
   async function newGear() {
-    const data = await createTemplate()
-    if (data.gear) navigate(`/gear/${data.gear._id}`)
-    updateBackpackerData(data.gear, "gears")
+    const { gear } = await createTemplate()
+    if (gear) navigate(`/gear/${gear._id}`)
+    dispatch({ type: "UPDATE_BACKPACKER", dataType: "gears", data: gear })
   }
 
   const handleClickOpen = () => {
@@ -47,7 +48,7 @@ const Templates = ({ useTemplate }) => {
     getTemplates()
   }, [])
 
-  if (templates === undefined) return null
+  if (templates === undefined) return <ProgressSkeleton progress={templates} />
   if (templates === null) return
 
   const templateCards = templates.map((template) => {

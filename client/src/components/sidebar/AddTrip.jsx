@@ -27,7 +27,7 @@ const styles = {
 }
 
 const AddTrip = ({ sideBarOpen }) => {
-  const { updateBackpackerData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const [open, setOpen] = React.useState(false)
   const navigate = useNavigate()
 
@@ -44,10 +44,14 @@ const AddTrip = ({ sideBarOpen }) => {
     const form = event.currentTarget
     const formData = new URLSearchParams(new FormData(form))
     try {
-      const data = await createTrip(formData)
-      if (data.trip) navigate(`/trip/${data.trip._id}`)
+      const { trip } = await createTrip(formData)
+      if (trip) navigate(`/trip/${trip._id}`)
       setOpen(false)
-      updateBackpackerData(data.trip, "trips")
+      dispatch({
+        type: "UPDATE_BACKPACKER",
+        dataType: "trips",
+        data: trip,
+      })
     } catch (error) {
       console.error(error)
     }

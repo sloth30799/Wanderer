@@ -13,9 +13,10 @@ import EditIcon from "@mui/icons-material/Edit"
 import { deleteGear, fetchGear } from "../api/api"
 import GearDisplay from "../components/GearDisplay"
 import { useBackpackerContext } from "../context/BackpackerContext"
+import ProgressSkeleton from "../components/ProgressSkeleton"
 
 const Gear = () => {
-  const { deleteOneData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
   const { id } = useParams()
 
@@ -38,7 +39,7 @@ const Gear = () => {
     getGear()
   }, [])
 
-  if (gear === undefined) return null
+  if (gear === undefined) return <ProgressSkeleton progress={gear} />
   else if (gear === null) return <h2>Gear not found!</h2>
 
   // async function editName(event) {
@@ -61,7 +62,7 @@ const Gear = () => {
 
   async function handleDelete() {
     const data = await deleteGear(gear._id) // api call
-    deleteOneData(id, "gears") // update state
+    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "gears" })
     navigate(-1)
     return data
   }

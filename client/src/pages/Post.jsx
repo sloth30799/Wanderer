@@ -18,7 +18,7 @@ import { useBackpackerContext } from "../context/BackpackerContext"
 import PostSkeleton from "../components/PostSkeleton"
 
 const Post = () => {
-  const { deleteOneData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const { userObject } = useUserContext()
   const navigate = useNavigate()
   const { id } = useParams()
@@ -43,7 +43,7 @@ const Post = () => {
 
   const handleDelete = async () => {
     const data = await postDelete(post._id) // api call
-    deleteOneData(id, "posts") // update state
+    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "posts" })
     navigate(-1)
     return data
   }

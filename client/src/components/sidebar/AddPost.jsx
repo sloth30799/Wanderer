@@ -17,7 +17,7 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 
 const AddPost = ({ sideBarOpen }) => {
-  const { updateBackpackerData } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -38,7 +38,11 @@ const AddPost = ({ sideBarOpen }) => {
     })
     const json = await response.json()
     if (json.post) {
-      updateBackpackerData(json.post, "posts")
+      dispatch({
+        type: "UPDATE_BACKPACKER",
+        dataType: "posts",
+        data: json.post,
+      })
       setOpen(false)
       navigate(`/post/${json.post._id}`)
     }

@@ -11,12 +11,12 @@ const styles = {
 }
 
 const ProfileGears = () => {
-  const { backpacker } = useBackpackerContext()
+  const { state } = useBackpackerContext()
 
-  if (backpacker === undefined) return null
-  else if (backpacker === null) return <h2>Data not found!</h2>
+  if (state.backpacker === undefined) return null
+  else if (state.backpacker === null) return <h2>Data not found!</h2>
 
-  const { posts } = backpacker
+  const posts = state.backpacker.posts
 
   if (posts.length < 1) return <h2>Add A Blog!</h2>
 

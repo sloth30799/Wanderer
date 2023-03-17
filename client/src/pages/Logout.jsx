@@ -5,13 +5,13 @@ import { useUserContext } from "../context/UserContext"
 
 const Logout = () => {
   const { logoutUser } = useUserContext()
-  const { logoutBackpacker } = useBackpackerContext()
+  const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
 
   useEffect(() => {
     const fetchLogout = async () => {
       const data = await logoutUser()
-      logoutBackpacker()
+      dispatch({ type: "EMPTY_BACKPACKER" })
       if (data === "Logout success") navigate("/")
     }
     fetchLogout()

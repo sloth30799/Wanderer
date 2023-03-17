@@ -19,12 +19,12 @@ const styles = {
 }
 
 const ProfileTrips = () => {
-  const { backpacker } = useBackpackerContext()
+  const { state } = useBackpackerContext()
 
-  if (backpacker === undefined) return null
-  else if (backpacker === null) return <h2>Data not found!</h2>
+  if (state.backpacker === undefined) return null
+  else if (state.backpacker === null) return <h2>Data not found!</h2>
 
-  const { trips } = backpacker
+  const trips = state.backpacker.trips
 
   if (trips.length < 1) return <h2>Start an adventure!</h2>
 
