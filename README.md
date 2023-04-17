@@ -1,6 +1,6 @@
 # Wanderer-App: [Visit Here](https://wanderer.onrender.com/)
 
-Welcome to the Wanderer-App! This tool is designed to help you with your trips planning.
+Explore new places with Wanderer - the ultimate backpacker app that lets you plan your travels, share your experiences, and connect with like-minded travelers from all around the world.
 
 ![Imgur](https://i.imgur.com/zhY50vE.png)
 
