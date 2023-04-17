@@ -7,14 +7,14 @@ import {
   useParams,
 } from "react-router-dom"
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
+import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { timeFormat } from "../../utils/timeFormat"
-import { dollarFormat } from "../../utils/moneyFormat"
-import GearDisplay from "../../components/GearDisplay"
-import { completedTrip, deleteTrip, fetchTrip } from "../../api/api"
-import { useBackpackerContext } from "../../context/BackpackerContext"
-import Templates from "./Templates"
-import ProgressSkeleton from "../../components/ProgressSkeleton"
+import { timeFormat } from "../utils/timeFormat"
+import { dollarFormat } from "../utils/moneyFormat"
+import { useBackpackerContext } from "../context/BackpackerContext"
+import Templates from "../components/Templates"
+import ProgressSkeleton from "../components/ProgressSkeleton"
+import { completedTrip, deleteTrip, fetchTrip } from "../api/api"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,

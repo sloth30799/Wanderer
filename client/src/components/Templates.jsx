@@ -9,10 +9,10 @@ import {
   CardActionArea,
   CardContent,
 } from "@mui/material"
-import { useBackpackerContext } from "../../context/BackpackerContext"
-import { createTemplate } from "../../api/api"
-import { getAllTemplates } from "../../api/api"
-import ProgressSkeleton from "../../components/ProgressSkeleton"
+import { useBackpackerContext } from "../context/BackpackerContext"
+import { createTemplate } from "../api/api"
+import { getAllTemplates } from "../api/api"
+import ProgressSkeleton from "./ProgressSkeleton"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,

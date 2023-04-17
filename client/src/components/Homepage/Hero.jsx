@@ -2,7 +2,6 @@ import React from "react"
 import { Button } from "@mui/material"
 import { Link } from "react-router-dom"
 import logoWhite from "../../assets/default-monochrome-white.svg"
-// import heroBg from "../../assets/Hero-bg.png"
 
 const styles = {
   logo: `text-whiteSmoke tracking-tighter font-extrabold font-body text-3xl`,
