@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-const colors = require("material-ui-colors")
 
 module.exports = {
   corePlugins: {
@@ -22,7 +21,6 @@ module.exports = {
         pally: ["Pally", "sans-serif"],
       },
       colors: {
-        ...colors,
         whiteSmoke: "#edede9",
         grey: "f0f0f0",
         brightYellow: "#ffeb3b",
