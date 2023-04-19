@@ -13,8 +13,8 @@ export default defineConfig({
   plugins: [react(), eslintPlugin()],
   resolve: {
     alias: {
-      "@": "/src",
-      api: "/src/api",
+      "@": "/src/",
+      "@assets": "/src/assets/",
     },
   },
 })

@@ -35,6 +35,7 @@ const router = createBrowserRouter(
         <Route path="login" element={<Login />} action={loginAction} />
         <Route path="signup" element={<Signup />} action={signupAction} />
       </Route>
+
       <Route path="logout" element={<Logout />} />
       <Route path="skeleton" element={<PostSkeleton />} />
 

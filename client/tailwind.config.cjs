@@ -3,22 +3,33 @@
 module.exports = {
   corePlugins: {
     preflight: false,
+    divideStyle: true,
   },
   important: "#root",
-  content: ["./src/**/*.{js,jsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      screens: {
-        sm: "480px",
-        md: "768px",
-        lp: "976px",
-        xl: "1440px",
-      },
       fontFamily: {
-        title: ["Neutron", "sans-serif"],
-        body: ["Imprima", "sans-serif"],
-        span: ["Cormorant", "sans-serif"],
-        pally: ["Pally", "sans-serif"],
+        title: '"Pilcrow Rounded"',
+      },
+      boxShadow: {
+        "3xl": "4px 4px 0px 0px rgba(0,0,0,1);",
+      },
+      container: {
+        center: true,
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+        },
+        padding: {
+          DEFAULT: "1rem",
+          sm: "2rem",
+          lg: "4rem",
+          xl: "5rem",
+          "2xl": "6rem",
+        },
       },
       colors: {
         whiteSmoke: "#edede9",
@@ -31,9 +42,16 @@ module.exports = {
         paleGreen: "#a3c382",
         purple: "#9c27b0",
         palePurple: "#ab47bc",
+        // new colors
+        goldenOrange: "#e6a02d",
+        brightOrange: "#ff9900",
+        deepBlue: "#0a3d62",
+        oliveGreen: "#556b2f",
+        warmBrown: "#8b4513",
+        softCream: "#f5f5dc",
       },
       backgroundImage: {
-        heroBg: "url('/imgs/Hero-bg.png')",
+        hero: "url('/imgs/Hero-bg.png')",
       },
     },
   },

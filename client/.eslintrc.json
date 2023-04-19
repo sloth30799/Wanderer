@@ -10,7 +10,13 @@
       "version": "detect"
     }
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
+
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -19,7 +25,7 @@
     "sourceType": "module"
   },
   "overrides": [],
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "no-lonely-if": "warn",
     "react/react-in-jsx-scope": "off",
