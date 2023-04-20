@@ -4,7 +4,7 @@ import GoogleIcon from "@mui/icons-material/Google"
 
 const GoogleLogin = () => {
   function google() {
-    window.open("http://localhost:1230/auth/google", "_self")
+    window.open("http://wanderer.onrender.com/auth/google", "_self")
   }
 
   return (

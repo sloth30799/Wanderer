@@ -8,7 +8,7 @@ import {
   useOutletContext,
 } from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
-// import GoogleIcon from "@mui/icons-material/Google"
+import GoogleIcon from "@mui/icons-material/Google"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
@@ -41,9 +41,9 @@ const Login = () => {
     if (userObject?._id) navigate(from, { replace: true })
   }, [formData, userObject])
 
-  // function google() {
-  //   window.open("http://localhost:1230/api/auth/google", "_self")
-  // }
+  function google() {
+    window.open("http://wanderer.onrender.com/api/auth/google", "_self")
+  }
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">
@@ -88,7 +88,7 @@ const Login = () => {
             </Button>
           </FormControl>
         </Form>
-        {/* <p className="text-center mx-3">Or Login with</p>
+        <p className="text-center mx-3">Or Login with</p>
         <div>
           <Button
             variant="contained"
@@ -98,7 +98,7 @@ const Login = () => {
           >
             Log in with Google
           </Button>
-        </div> */}
+        </div>
         <p className="text-center mx-3">
           {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account?{" "}
