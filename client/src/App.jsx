@@ -26,7 +26,7 @@ import {
   ProfileGears,
   ProfilePosts,
   ProfileTrips,
-} from "./pages/Profile"
+} from "@pages/Profile"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
