@@ -7,19 +7,19 @@ const session = require("express-session")
 const MongoStore = require("connect-mongo")
 const flash = require("express-flash")
 const logger = require("morgan")
-const connectDB = require("./server/config/database")
-const mainRoutes = require("./server/routes/main")
-const authRoutes = require("./server/routes/auth")
-const postsRoutes = require("./server/routes/posts")
-const gearsRoutes = require("./server/routes/gears")
-const tripsRoutes = require("./server/routes/trips")
-const templatesRoutes = require("./server/routes/templates")
+const connectDB = require("./config/database")
+const mainRoutes = require("./routes/main")
+const authRoutes = require("./routes/auth")
+const postsRoutes = require("./routes/posts")
+const gearsRoutes = require("./routes/gears")
+const tripsRoutes = require("./routes/trips")
+const templatesRoutes = require("./routes/templates")
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./server/config/.env" })
+require("dotenv").config({ path: "./config/.env" })
 
 // Passport config
-require("./server/config/passport")(passport)
+require("./config/passport")(passport)
 
 //Connect To Database
 connectDB()
@@ -60,7 +60,7 @@ app.use("/api/gear", gearsRoutes)
 app.use("/api/template", templatesRoutes)
 
 app.use("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "client/dist/index.html"))
+  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
 })
 
 const PORT = process.env.PORT || 5000
