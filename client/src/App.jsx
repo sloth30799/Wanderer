@@ -10,23 +10,23 @@ import AuthRequired from "./components/AuthRequired"
 import SideBar from "./components/sidebar/SideBar"
 import Authenticated from "./components/Authenticated"
 import PostSkeleton from "./components/PostSkeleton"
-import ErrorPage from "@pages/ErrorPage"
-import HomePage from "@pages/HomePage"
-import Login, { action as loginAction } from "@pages/Login"
-import Signup, { action as signupAction } from "@pages/Signup"
-import Logout from "@pages/Logout"
-import Feed, { loader as feedLoader } from "@pages/Feed"
-import Trip from "@pages/Trip"
-import Gear from "@pages/Gear"
-import Post from "@pages/Post"
-import Favorite from "@pages/Favorite"
-import Explore from "@pages/Explore"
+import ErrorPage from "./pages/ErrorPage"
+import HomePage from "./pages/HomePage"
+import Login, { action as loginAction } from "./pages/Login"
+import Signup, { action as signupAction } from "./pages/Signup"
+import Logout from "./pages/Logout"
+import Feed, { loader as feedLoader } from "./pages/Feed"
+import Trip from "./pages/Trip"
+import Gear from "./pages/Gear"
+import Post from "./pages/Post"
+import Favorite from "./pages/Favorite"
+import Explore from "./pages/Explore"
 import {
   Profile,
   ProfileGears,
   ProfilePosts,
   ProfileTrips,
-} from "@pages/Profile"
+} from "./pages/Profile"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
