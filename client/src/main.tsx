@@ -8,17 +8,19 @@ import App from "./App"
 import "./assets/main.css"
 
 const rootElement = document.getElementById("root")
-const root = createRoot(rootElement)
+if (rootElement !== null) {
+  const root = createRoot(rootElement)
 
-root.render(
-  <React.StrictMode>
-    <StyledEngineProvider injectFirst>
-      <AnimatePresence>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
-        </ThemeProvider>
-      </AnimatePresence>
-    </StyledEngineProvider>
-  </React.StrictMode>
-)
+  root.render(
+    <React.StrictMode>
+      <StyledEngineProvider injectFirst>
+        <AnimatePresence>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </ThemeProvider>
+        </AnimatePresence>
+      </StyledEngineProvider>
+    </React.StrictMode>
+  )
+}

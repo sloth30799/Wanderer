@@ -17,8 +17,7 @@ const Footer = () => {
         <div className="flex flex-col gap-3">
           <h6 className={styles.bold}>Wanderer</h6>
           <p className="text-xs font-whiteSmoke my-0 brightness-50">
-            We offers a big range of vehicles for all your driving needs. We
-            have the perfect car to meet your needs.
+            We believe that the journey is just as important as the destination.
           </p>
           <Link to="/" className={styles.linkWithIcon}>
             <LocalPhoneIcon style={{ fontSize: "1rem" }} /> (123) -456-789

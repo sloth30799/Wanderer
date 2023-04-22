@@ -20,7 +20,7 @@ const styles = {
   card: `md:w-1/2 rounded-lg shadow-md text-black bg-whiteSmoke hover:bg-tealBlue hover:text-white`,
 }
 
-const Templates = ({ useTemplate }) => {
+const Templates = ({ chooseTemplate }) => {
   const [templates, setTemplates] = useState()
   const [open, setOpen] = useState(false)
   const { dispatch } = useBackpackerContext()
@@ -56,7 +56,7 @@ const Templates = ({ useTemplate }) => {
       <Card
         className={styles.card}
         key={template._id}
-        onClick={() => useTemplate(template)}
+        onClick={() => chooseTemplate(template)}
       >
         <CardActionArea>
           <CardContent className="flex flex-col gap-3">

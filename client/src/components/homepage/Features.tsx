@@ -1,6 +1,6 @@
-import s1 from "@assets/s1.svg"
-import s2 from "@assets/s2.svg"
-import s3 from "@assets/s3.svg"
+import s1 from "../../assets/s1.svg"
+import s2 from "../../assets/s2.svg"
+import s3 from "../../assets/s3.svg"
 
 const featuresData = [
   {
@@ -40,11 +40,16 @@ const Card = ({ title, body, image }: CardProps) => {
 
 const Features = () => {
   return (
-    <main className="text-center py-12 bg-whiteSmoke rounded-bl-xl">
+    <main
+      id="features"
+      className="text-center py-12 bg-whiteSmoke rounded-bl-xl"
+    >
       <span className="text-xs text-brightOrange tracking-tight">
-        WE’RE OFFERING THESE POPULAR SERVICES
+        OUR POPULAR SERVICES
       </span>
-      <h3 className="font-title text-2xl">Getting Adventure with Services</h3>
+      <h3 className="font-title text-2xl">
+        Create Unforgettable Travel Experiences
+      </h3>
       <div className="w-1/5 m-auto mb-6 border-solid border-0 border-b-4 border-brightOrange"></div>
       <div className="container grid grid-rows gap-6 justify-items-center lg:grid-cols-3">
         {featuresData.map((feature) => (

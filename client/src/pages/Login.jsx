@@ -100,7 +100,6 @@ const Login = () => {
           </Button>
         </div>
         <p className="text-center mx-3">
-          {/* eslint-disable-next-line react/no-unescaped-entities */}
           Don't have an account?{" "}
           <Link
             to="/signup"

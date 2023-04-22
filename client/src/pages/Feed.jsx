@@ -23,7 +23,7 @@ export function loader() {
 }
 
 const ExpandMore = styled((props) => {
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { expand, ...other } = props
   return <IconButton {...other} />
 })(({ theme, expand }) => ({
@@ -99,7 +99,7 @@ const PostCard = ({ post, handleLike }) => {
 const Feed = () => {
   const loaderData = useLoaderData()
 
-  function renderFeed(res) {
+  function RenderFeed(res) {
     const [posts, setPosts] = useState(res.posts)
 
     const handleLike = async (id) => {
@@ -121,7 +121,7 @@ const Feed = () => {
   return (
     <div className="container m-auto flex flex-col">
       <Suspense fallback={<PostSkeleton />}>
-        <Await resolve={loaderData.feed}>{renderFeed}</Await>
+        <Await resolve={loaderData.feed}>{RenderFeed}</Await>
       </Suspense>
     </div>
   )

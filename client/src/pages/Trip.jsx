@@ -57,7 +57,7 @@ const Trip = () => {
     return data
   }
 
-  const useTemplate = (template) => {
+  const chooseTemplate = (template) => {
     setGear({
       ...gear,
       equipments: template.equipments,
@@ -145,7 +145,7 @@ const Trip = () => {
       </div>
       <div className="flex flex-col justify-between mt-3">
         <h3 className="text-center">Gear List</h3>
-        <Templates useTemplate={useTemplate} />
+        <Templates chooseTemplate={chooseTemplate} />
         <GearDisplay gearData={gear} />
       </div>
     </div>

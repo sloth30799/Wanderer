@@ -4,9 +4,9 @@ import { Button, IconButton, useScrollTrigger } from "@mui/material"
 import { motion } from "framer-motion"
 import MenuIcon from "@mui/icons-material/Menu"
 import CancelIcon from "@mui/icons-material/Cancel"
-import logo from "@assets/default-monochrome-black.svg"
-import logoWhite from "@assets/default-monochrome-white.svg"
-import bg from "@assets/Hero-bg.png"
+import logo from "../../assets/logo-black.svg"
+import logoWhite from "../../assets/logo-white.svg"
+import bg from "../../assets/hero-bg.png"
 
 const styles = {
   navbar: `bg-goldenOrange text-white shadow-lg`,
@@ -92,9 +92,9 @@ const Hero = () => {
               <Link to="#hero" className={styles.link}>
                 Home
               </Link>
-              <Link to="feed" className={styles.link}>
-                Feed
-              </Link>
+              <a href="#features" className={styles.link}>
+                Features
+              </a>
               <Link
                 to="https://hanyehtun.netlify.app/"
                 target={"_blank"}
@@ -103,13 +103,15 @@ const Hero = () => {
                 Developer
               </Link>
             </div>
-            <Button
-              variant="contained"
-              color="primary"
-              className="hidden lg:block"
-            >
-              Get Started
-            </Button>
+            <Link to="login" className="no-underline">
+              <Button
+                variant="contained"
+                color="primary"
+                className="hidden lg:block"
+              >
+                Get Started
+              </Button>
+            </Link>
           </div>
         </nav>
         {trigger ? (
@@ -138,12 +140,12 @@ const Hero = () => {
                 </IconButton>
               )}
               <div className="hidden lg:flex justify-center items-center gap-8">
-                <Link to="#hero" className={styles.triggerLink}>
+                <Link to="#" className={styles.triggerLink}>
                   Home
                 </Link>
-                <Link to="feed" className={styles.triggerLink}>
-                  Feed
-                </Link>
+                <a href="#features" className={styles.triggerLink}>
+                  Features
+                </a>
                 <Link
                   to="https://hanyehtun.netlify.app/"
                   target={"_blank"}
@@ -152,12 +154,14 @@ const Hero = () => {
                   Developer
                 </Link>
               </div>
-              <Button
-                variant="contained"
-                className="shadow-3xl hidden bg-white text-black hover:bg-gray-200 lg:block"
-              >
-                Get Started
-              </Button>
+              <Link to="login" className="no-underline">
+                <Button
+                  variant="contained"
+                  className="shadow-3xl hidden bg-white text-black hover:bg-gray-200 lg:block"
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </nav>
         ) : null}
@@ -168,11 +172,11 @@ const Hero = () => {
           initial="closed"
           animate={open ? "open" : "closed"}
         >
-          <Link to="#hero" className={styles.dropdownLink}>
+          <Link to="#" className={styles.dropdownLink}>
             Home
           </Link>
           <Link to="feed" className={styles.dropdownLink}>
-            Feed
+            Features
           </Link>
           <Link
             to="https://hanyehtun.netlify.app/"
@@ -181,22 +185,26 @@ const Hero = () => {
           >
             Developer
           </Link>
+          <Link to="login" className={styles.dropdownLink}>
+            Get Started
+          </Link>
         </motion.div>
         <div className="container mt-24">
           <div className="w-full md:w-1/2">
             <h1 className="font-title text-brightOrange text-4xl">
-              Get inspired and start planning your dream trip today.
+              Unleash your inner adventurer with Wanderer.
             </h1>
             <p className="text-white font-light text-sm">
-              Discover new cultures, try new foods, and create unforgettable
-              memories with{" "}
-              <span className="font-bold text-brightOrange">Wanderer</span>
-              .Get out of your comfort zone and make new friends and make your
-              travel dreams a reality.
+              Whether you're an avid traveler or a first-time adventurer,{" "}
+              <span className="font-bold text-brightOrange">Wanderer</span> has
+              everything you need to make your travel dreams a reality. Download
+              the app now and start planning your next big adventure.
             </p>
-            <Button variant="contained" className="shadow-3xl">
-              Get Started
-            </Button>
+            <Link to="login" className="no-underline">
+              <Button variant="contained" className="shadow-3xl">
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </section>

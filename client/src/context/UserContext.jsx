@@ -4,6 +4,7 @@ import { fetchUser, postLogin, postLogout } from "../api/api"
 
 export const UserContext = createContext({})
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useUserContext = () => {
   return useContext(UserContext)
 }

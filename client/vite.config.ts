@@ -1,17 +1,16 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
-import eslintPlugin from "vite-plugin-eslint"
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    extensions: [".tsx", ".ts", ".jsx", ".js"],
+  },
   server: {
     port: 3000,
     proxy: {
       "/api": "http://localhost:1230",
     },
-  },
-  plugins: [react(), eslintPlugin()],
-  resolve: {
-    extensions: [".tsx", ".ts", ".jsx", ".js"],
   },
 })

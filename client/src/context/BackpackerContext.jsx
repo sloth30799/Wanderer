@@ -6,6 +6,7 @@ import { useUserContext } from "./UserContext"
 
 export const BackpackerContext = createContext({})
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useBackpackerContext() {
   return useContext(BackpackerContext)
 }
