@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Button,
@@ -9,10 +9,10 @@ import {
   CardActionArea,
   CardContent,
 } from "@mui/material"
+import LoadingCircle from "./LoadingCircle"
 import { useBackpackerContext } from "../context/BackpackerContext"
-import { createTemplate } from "../api/api"
-import { getAllTemplates } from "../api/api"
-import ProgressSkeleton from "./ProgressSkeleton"
+import { createTemplate, getAllTemplates } from "../api"
+import { GearType } from "../types"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,
@@ -20,8 +20,12 @@ const styles = {
   card: `md:w-1/2 rounded-lg shadow-md text-black bg-whiteSmoke hover:bg-tealBlue hover:text-white`,
 }
 
-const Templates = ({ chooseTemplate }) => {
-  const [templates, setTemplates] = useState()
+type TemplatesProps = {
+  chooseTemplate: (template: GearType) => void
+}
+
+const Templates = ({ chooseTemplate }: TemplatesProps) => {
+  const [templates, setTemplates] = useState<GearType[]>([])
   const [open, setOpen] = useState(false)
   const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
@@ -48,7 +52,7 @@ const Templates = ({ chooseTemplate }) => {
     getTemplates()
   }, [])
 
-  if (templates === undefined) return <ProgressSkeleton progress={templates} />
+  if (templates === undefined) return <LoadingCircle progress={templates} />
   if (templates === null) return
 
   const templateCards = templates.map((template) => {

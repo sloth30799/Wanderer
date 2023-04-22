@@ -7,7 +7,7 @@ import {
 } from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import { useUserContext } from "../context/UserContext"
-import { postSignup } from "../api/api"
+import { postSignup } from "../api"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"

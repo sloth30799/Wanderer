@@ -4,8 +4,8 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
 import { CssBaseline } from "@mui/material"
 import { AnimatePresence } from "framer-motion"
 import { theme } from "./theme"
-import App from "./App"
 import "./assets/main.css"
+import App from "./App.jsx"
 
 const rootElement = document.getElementById("root")
 if (rootElement !== null) {

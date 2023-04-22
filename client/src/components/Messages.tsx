@@ -1,10 +1,15 @@
 import { Alert } from "@mui/material"
-import React from "react"
+import { MessagesType } from "../types"
 
-function Messages({ messages, resetMessage }) {
+type MessagesProps = {
+  messages: MessagesType
+  resetMessage: () => void
+}
+
+function Messages({ messages, resetMessage }: MessagesProps) {
   return (
     <>
-      {messages.errors &&
+      {messages.errors != null &&
         messages.errors.map((el) => (
           <Alert
             key={el.msg}
@@ -15,7 +20,7 @@ function Messages({ messages, resetMessage }) {
             {el.msg}
           </Alert>
         ))}
-      {messages.success &&
+      {messages.success != null &&
         messages.success.map((el) => (
           <Alert
             key={el.msg}
@@ -26,7 +31,7 @@ function Messages({ messages, resetMessage }) {
             {el.msg}
           </Alert>
         ))}
-      {messages.info &&
+      {messages.info != null &&
         messages.info.map((el) => (
           <Alert
             key={el.msg}

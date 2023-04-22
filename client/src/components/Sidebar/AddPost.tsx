@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Button,
@@ -16,12 +16,16 @@ import {
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 
-const AddPost = ({ sideBarOpen }) => {
+type AddPostProps = {
+  sideBarOpen: boolean
+}
+
+const AddPost = ({ sideBarOpen }: AddPostProps) => {
   const { dispatch } = useBackpackerContext()
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  function handleClickOpen() {
+  function handleOpen() {
     setOpen(true)
   }
 
@@ -29,7 +33,7 @@ const AddPost = ({ sideBarOpen }) => {
     setOpen(false)
   }
 
-  async function makePost(event) {
+  async function makePost(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const response = await fetch(form.action, {
@@ -72,7 +76,7 @@ const AddPost = ({ sideBarOpen }) => {
             justifyContent: sideBarOpen ? "initial" : "center",
             px: 2.5,
           }}
-          onClick={handleClickOpen}
+          onClick={handleOpen}
         >
           <ListItemIcon
             sx={{

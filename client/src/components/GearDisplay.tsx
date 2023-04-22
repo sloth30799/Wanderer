@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState, FormEvent, SyntheticEvent } from "react"
 import { useOutletContext } from "react-router-dom"
 import {
   Button,
@@ -13,21 +13,36 @@ import {
 } from "@mui/material"
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore"
 import DeleteIcon from "@mui/icons-material/Delete"
-import {
-  addItem,
-  checkItem,
-  removeItem,
-  resetItems,
-} from "../utils/gearFunctions"
-import { putGear } from "../api/api"
+import { putGear } from "../api"
 import { useEffect } from "react"
+import { GearCategory, GearType, ItemType, DisplayMessageType } from "../types"
+
+type OneItemProps = {
+  item: ItemType
+  category: GearCategory
+  checkGear: (
+    e: SyntheticEvent<Element, Event>,
+    category: GearCategory,
+    id: string
+  ) => void
+  removeGear: (category: GearCategory, id: string) => void
+}
+
+type AddItemProps = {
+  category: GearCategory
+  addGear: (e: FormEvent<HTMLFormElement>) => void
+}
+
+type GearDisplayProps = {
+  gearData: GearType
+}
 
 const styles = {
   listsBox: `flex flex-col items-center rounded-lg p-3 gap-3 md:shadow-xl md:border-2 md:border-solid md:border-black md:w-1/3`,
   listTitle: `text-tealBlue`,
 }
 
-const OneItem = ({ item, gearType, checkGear, removeGear }) => {
+const OneItem = ({ item, category, checkGear, removeGear }: OneItemProps) => {
   const { name, completed } = item
 
   return (
@@ -35,11 +50,13 @@ const OneItem = ({ item, gearType, checkGear, removeGear }) => {
       <FormControlLabel
         control={<Checkbox className="text-black" />}
         label={name}
-        onChange={(e) => checkGear(e, name, gearType)}
+        onChange={(e: SyntheticEvent<Element, Event>) =>
+          checkGear(e, category, item._id)
+        }
         checked={completed}
       />
       <IconButton
-        onClick={() => removeGear(name, gearType)}
+        onClick={() => removeGear(category, item._id)}
         aria-label="delete"
         className="text-black "
       >
@@ -49,7 +66,7 @@ const OneItem = ({ item, gearType, checkGear, removeGear }) => {
   )
 }
 
-const AddItem = ({ gearType, addGear }) => {
+const AddItem = ({ category, addGear }: AddItemProps) => {
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -67,13 +84,13 @@ const AddItem = ({ gearType, addGear }) => {
         className="text-brightGreen border-brightGreen"
         onClick={handleClickOpen}
       >
-        Add {gearType}
+        Add {category}
       </Button>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Add {gearType}</DialogTitle>
+        <DialogTitle>Add {category}</DialogTitle>
         <DialogContent>
           <form onSubmit={addGear} className="flex flex-col gap-3 p-1">
-            <TextField variant="standard" label="Gear" name={`${gearType}`} />
+            <TextField variant="standard" label="Gear" name={`${category}`} />
             <Button
               variant="outlined"
               className="text-brightGreen border-brightGreen"
@@ -88,8 +105,11 @@ const AddItem = ({ gearType, addGear }) => {
   )
 }
 
-const GearDisplay = ({ gearData }) => {
-  const { displayMessage } = useOutletContext()
+const GearDisplay = ({ gearData }: GearDisplayProps) => {
+  const { displayMessage } = useOutletContext() as {
+    displayMessage: DisplayMessageType
+  }
+
   const [gear, setGear] = useState(gearData)
   const { equipments, accessories, essentials } = gear
 
@@ -98,32 +118,75 @@ const GearDisplay = ({ gearData }) => {
   }, [gearData])
 
   // actions
-  async function addGear(e) {
+  function addGear(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
-    const formData = new FormData(e.target)
-    const keys = [...formData.keys()]
-    const gearType = keys[0]
-    const item = formData.get(gearType)
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+    const category = formData.get("category") as GearCategory
+    const item = formData.get("item") as string
+    const itemList = gear[category]
 
-    const newGear = await addItem(gear, gearType, item)
-    setGear(newGear)
+    setGear((prevGear) => {
+      return {
+        ...prevGear,
+        [category]: [
+          ...itemList,
+          {
+            name: item,
+            completed: false,
+          },
+        ],
+      }
+    })
   }
 
-  async function checkGear(e, name, gearType) {
-    const itemStatus = await e.target.checked
-    const newGear = await checkItem(gear, gearType, itemStatus, name)
-    setGear(newGear)
+  function checkGear(
+    e: SyntheticEvent<Element, Event>,
+    category: GearCategory,
+    id: string
+  ) {
+    const checkbox = e.target as HTMLInputElement
+    const itemStatus = checkbox.checked
+    const itemList = gear[category]
+
+    const newList = itemList.map((item) => {
+      if (item._id === id) {
+        return {
+          ...item,
+          completed: itemStatus,
+        }
+      }
+      return item
+    })
+
+    setGear((prevGear) => {
+      return { ...prevGear, [category]: newList }
+    })
   }
 
-  async function removeGear(name, gearType) {
-    const newGear = await removeItem(gear, gearType, name)
-    setGear(newGear)
+  function removeGear(category: GearCategory, id: string) {
+    const itemList = gear[category]
+
+    const filteredList = itemList.filter((item: ItemType) => item._id !== id)
+
+    setGear((prevGear) => {
+      return {
+        ...prevGear,
+        [category]: filteredList,
+      }
+    })
   }
 
-  async function resetGear() {
-    const newGear = await resetItems(gear)
-    setGear(newGear)
+  function resetGear() {
+    setGear((prevGear) => {
+      return {
+        ...prevGear,
+        equipments: [],
+        essentials: [],
+        accessories: [],
+      }
+    })
   }
 
   async function updateGear() {
@@ -136,7 +199,7 @@ const GearDisplay = ({ gearData }) => {
       <OneItem
         key={item.name}
         item={item}
-        gearType={"equipments"}
+        category={"equipments"}
         checkGear={checkGear}
         removeGear={removeGear}
       />
@@ -148,7 +211,7 @@ const GearDisplay = ({ gearData }) => {
       <OneItem
         key={item.name}
         item={item}
-        gearType={"accessories"}
+        category={"accessories"}
         checkGear={checkGear}
         removeGear={removeGear}
       />
@@ -160,7 +223,7 @@ const GearDisplay = ({ gearData }) => {
       <OneItem
         key={item.name}
         item={item}
-        gearType={"essentials"}
+        category={"essentials"}
         checkGear={checkGear}
         removeGear={removeGear}
       />
@@ -173,33 +236,30 @@ const GearDisplay = ({ gearData }) => {
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Equipments</h2>
           {equipmentsLists}
-          <AddItem gearType={"equipments"} gear={gear} addGear={addGear} />
+          <AddItem category={"equipments"} addGear={addGear} />
         </div>
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Accessories</h2>
           {accessoriesLists}
-          <AddItem gearType={"accessories"} gear={gear} addGear={addGear} />
+          <AddItem category={"accessories"} addGear={addGear} />
         </div>
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Essentials</h2>
           {essentialsLists}
-          <AddItem gearType={"essentials"} gear={gear} addGear={addGear} />
+          <AddItem category={"essentials"} addGear={addGear} />
         </div>
       </div>
       <div className="flex flex-row gap-3 place-self-end mr-6">
         <Button
-          variant="standard"
+          variant="text"
           startIcon={<SettingsBackupRestoreIcon />}
+          color="error"
           className="hover:bg-scarletRed hover:text-white"
           onClick={resetGear}
         >
           Reset
         </Button>
-        <Button
-          variant="contained"
-          className="bg-brightGreen w-24"
-          onClick={updateGear}
-        >
+        <Button variant="contained" color="success" onClick={updateGear}>
           Save
         </Button>
       </div>

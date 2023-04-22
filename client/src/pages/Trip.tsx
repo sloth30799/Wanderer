@@ -9,12 +9,13 @@ import {
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
 import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
-import { timeFormat } from "../utils/timeFormat"
-import { dollarFormat } from "../utils/moneyFormat"
-import { useBackpackerContext } from "../context/BackpackerContext"
 import Templates from "../components/Templates"
-import ProgressSkeleton from "../components/ProgressSkeleton"
-import { completedTrip, deleteTrip, fetchTrip } from "../api/api"
+import LoadingCircle from "../components/LoadingCircle"
+import { useBackpackerContext } from "../context/BackpackerContext"
+import { completedTrip, deleteTrip, fetchTrip } from "../api"
+import { GearType, TripType } from "../types"
+import { timeFormat } from "../utils/formats"
+import { dollarFormat } from "../utils/formats"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
@@ -28,8 +29,8 @@ const Trip = () => {
   const { id } = useParams()
   const navigate = useNavigate()
 
-  const [trip, setTrip] = useState()
-  const [gear, setGear] = useState()
+  const [trip, setTrip] = useState<TripType>()
+  const [gear, setGear] = useState<GearType>()
 
   useEffect(() => {
     const getTrip = async () => {
@@ -40,14 +41,14 @@ const Trip = () => {
     getTrip()
   }, [id])
 
-  if (trip === undefined) return <ProgressSkeleton progress={trip} />
+  if (trip === undefined) return <LoadingCircle progress={trip} />
   else if (trip === null) return <h2>Trip not found!</h2>
 
   const handleCompleted = async (e) => {
     e.preventDefault()
     const data = await completedTrip(trip._id, trip.completed)
     if (data.messages) displayMessage(data.messages)
-    setTrip({ ...trip, completed: !trip.completed })
+    setTrip((prevTrip) => ({ ...prevTrip, completed: !prevTrip.completed }))
   }
 
   const handleDelete = async () => {
@@ -57,12 +58,15 @@ const Trip = () => {
     return data
   }
 
-  const chooseTemplate = (template) => {
-    setGear({
-      ...gear,
-      equipments: template.equipments,
-      essentials: template.essentials,
-      accessories: template.accessories,
+  const chooseTemplate = (template: GearType) => {
+    console.log(template)
+    setGear((prevGear) => {
+      return {
+        ...prevGear,
+        equipments: template.equipments || [],
+        essentials: template.essentials || [],
+        accessories: template.accessories || [],
+      }
     })
   }
 

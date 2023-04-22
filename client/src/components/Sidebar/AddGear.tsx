@@ -1,4 +1,3 @@
-import React from "react"
 import { useNavigate } from "react-router-dom"
 import {
   ListItem,
@@ -7,10 +6,14 @@ import {
   ListItemText,
 } from "@mui/material"
 import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined"
-import { createTemplate } from "../../api/api"
+import { createTemplate } from "../../api"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 
-const AddGear = ({ sideBarOpen }) => {
+type AddGearProps = {
+  sideBarOpen: boolean
+}
+
+const AddGear = ({ sideBarOpen }: AddGearProps) => {
   const { dispatch } = useBackpackerContext()
   const navigate = useNavigate()
 

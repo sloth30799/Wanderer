@@ -1,5 +1,4 @@
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material"
-import React from "react"
 
 const PostSkeleton = () => {
   return (
@@ -7,7 +6,7 @@ const PostSkeleton = () => {
       <CardHeader
         avatar={
           <Skeleton
-            animation="wave"
+            animation="pulse"
             variant="circular"
             width={40}
             height={40}
@@ -16,19 +15,19 @@ const PostSkeleton = () => {
         action={null}
         title={
           <Skeleton
-            animation="wave"
-            height={10}
+            animation="pulse"
+            height={20}
             width="80%"
             style={{ marginBottom: 6 }}
           />
         }
-        subheader={<Skeleton animation="wave" height={10} width="40%" />}
+        subheader={<Skeleton animation="pulse" height={20} width="40%" />}
       />
-      <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />
+      <Skeleton sx={{ height: 190 }} animation="pulse" variant="rectangular" />
 
       <CardContent>
-        <Skeleton animation="wave" height={10} style={{ marginBottom: 6 }} />
-        <Skeleton animation="wave" height={10} width="80%" />
+        <Skeleton animation="pulse" height={20} style={{ marginBottom: 6 }} />
+        <Skeleton animation="pulse" height={20} width="80%" />
       </CardContent>
     </Card>
   )

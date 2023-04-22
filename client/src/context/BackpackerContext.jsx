@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react"
 import { createContext, useContext } from "react"
-import { fetchProfile } from "../api/api"
+import { fetchProfile } from "../api"
 import { backpackerReducer } from "./reducer/backpackerReducer"
 import { useUserContext } from "./UserContext"
 

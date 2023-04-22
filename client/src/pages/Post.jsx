@@ -12,8 +12,8 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import { useUserContext } from "../context/UserContext"
-import { fromNowFormat } from "../utils/timeFormat"
-import { fetchPost, postDelete, postLike } from "../api/api"
+import { fromNowFormat } from "../utils/formats"
+import { fetchPost, postDelete, postLike } from "../api"
 import { useBackpackerContext } from "../context/BackpackerContext"
 import PostSkeleton from "../components/PostSkeleton"
 

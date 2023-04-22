@@ -1,4 +1,3 @@
-import React, { Suspense } from "react"
 import { styled } from "@mui/material/styles"
 import {
   Card,
@@ -9,20 +8,25 @@ import {
   Collapse,
   Avatar,
   IconButton,
+  IconButtonProps,
 } from "@mui/material"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
-import { Await, defer, useLoaderData, useNavigate } from "react-router-dom"
-import { fetchFeed, postLike } from "../api/api"
-import { fromNowFormat } from "../utils/timeFormat"
+import { useNavigate } from "react-router-dom"
+import { fromNowFormat } from "../utils/formats"
 import { useState } from "react"
-import PostSkeleton from "../components/PostSkeleton"
+import { PostType } from "../types"
 
-export function loader() {
-  return defer({ feed: fetchFeed() })
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean
 }
 
-const ExpandMore = styled((props) => {
+type BlogCardProps = {
+  post: PostType
+  handleLike: (id: string) => Promise<void>
+}
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { expand, ...other } = props
   return <IconButton {...other} />
@@ -34,8 +38,8 @@ const ExpandMore = styled((props) => {
   }),
 }))
 
-const PostCard = ({ post, handleLike }) => {
-  const [expanded, setExpanded] = React.useState(false)
+export const BlogCard = ({ post, handleLike }: BlogCardProps) => {
+  const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
   const handleExpandClick = () => {
@@ -95,36 +99,3 @@ const PostCard = ({ post, handleLike }) => {
     </Card>
   )
 }
-
-const Feed = () => {
-  const loaderData = useLoaderData()
-
-  function RenderFeed(res) {
-    const [posts, setPosts] = useState(res.posts)
-
-    const handleLike = async (id) => {
-      const data = await postLike(id)
-      const newPosts = await posts.map((post) => {
-        if (post._id === id) {
-          return { ...post, likes: data.data }
-        }
-        return post
-      })
-      setPosts(newPosts)
-    }
-    const postsRender = posts.map((post) => {
-      return <PostCard key={post._id} post={post} handleLike={handleLike} />
-    })
-    return postsRender
-  }
-
-  return (
-    <div className="container m-auto flex flex-col">
-      <Suspense fallback={<PostSkeleton />}>
-        <Await resolve={loaderData.feed}>{RenderFeed}</Await>
-      </Suspense>
-    </div>
-  )
-}
-
-export default Feed

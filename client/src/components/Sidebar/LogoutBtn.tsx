@@ -1,4 +1,3 @@
-import React from "react"
 import { Link } from "react-router-dom"
 import {
   ListItem,
@@ -8,7 +7,11 @@ import {
 } from "@mui/material"
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined"
 
-const LogoutBtn = ({ sideBarOpen }) => {
+type LogoutBtnProps = {
+  sideBarOpen: boolean
+}
+
+const LogoutBtn = ({ sideBarOpen }: LogoutBtnProps) => {
   return (
     <Link to="/logout" className="no-underline text-scarletRed">
       <ListItem disablePadding sx={{ display: "block" }}>

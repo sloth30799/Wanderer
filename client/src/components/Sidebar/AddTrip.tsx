@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import {
   Button,
@@ -18,7 +18,7 @@ import {
   ListItem,
 } from "@mui/material"
 import BackpackOutlinedIcon from "@mui/icons-material/BackpackOutlined"
-import { createTrip } from "../../api/api"
+import { createTrip } from "../../api"
 import { useBackpackerContext } from "../../context/BackpackerContext"
 
 const styles = {
@@ -26,12 +26,16 @@ const styles = {
   costLabel: `font-span text-black`,
 }
 
-const AddTrip = ({ sideBarOpen }) => {
+type AddTripProps = {
+  sideBarOpen: boolean
+}
+
+const AddTrip = ({ sideBarOpen }: AddTripProps) => {
   const { dispatch } = useBackpackerContext()
-  const [open, setOpen] = React.useState(false)
+  const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
-  function handleClickOpen() {
+  function handleOpen() {
     setOpen(true)
   }
 
@@ -39,10 +43,36 @@ const AddTrip = ({ sideBarOpen }) => {
     setOpen(false)
   }
 
-  async function handleSubmit(event) {
+  // fix error version
+  // async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   const form = event.currentTarget;
+  //   const formData = new FormData(form);
+  //   const searchParams = new URLSearchParams();
+  //   for (const [key, value] of formData.entries()) {
+  //     searchParams.append(key, value as string);
+  //   }
+
+  //   try {
+  //     const { trip } = await createTrip(searchParams);
+  //     if (trip) navigate(`/trip/${trip._id}`);
+  //     setOpen(false);
+  //     dispatch({
+  //       type: "UPDATE_BACKPACKER",
+  //       dataType: "trips",
+  //       data: trip,
+  //     });
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
-    const formData = new URLSearchParams(new FormData(form))
+    const data = new FormData(form)
+    const formData = new URLSearchParams(data)
+
     try {
       const { trip } = await createTrip(formData)
       if (trip) navigate(`/trip/${trip._id}`)
@@ -66,7 +96,7 @@ const AddTrip = ({ sideBarOpen }) => {
             justifyContent: sideBarOpen ? "initial" : "center",
             px: 2.5,
           }}
-          onClick={handleClickOpen}
+          onClick={handleOpen}
         >
           <ListItemIcon
             sx={{
@@ -160,7 +190,6 @@ const AddTrip = ({ sideBarOpen }) => {
               type="number"
               id="cost"
               name="accommodationCost"
-              label="Cost"
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }
@@ -185,7 +214,6 @@ const AddTrip = ({ sideBarOpen }) => {
               type="number"
               id="cost"
               name="transportationCost"
-              label="Cost"
               startAdornment={
                 <InputAdornment position="start">$</InputAdornment>
               }

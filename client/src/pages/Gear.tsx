@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   TextField,
@@ -10,10 +10,10 @@ import {
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
-import { deleteGear, fetchGear } from "../api/api"
 import GearDisplay from "../components/GearDisplay"
+import LoadingCircle from "../components/LoadingCircle"
+import { deleteGear, fetchGear } from "../api"
 import { useBackpackerContext } from "../context/BackpackerContext"
-import ProgressSkeleton from "../components/ProgressSkeleton"
 
 const Gear = () => {
   const { dispatch } = useBackpackerContext()
@@ -39,7 +39,7 @@ const Gear = () => {
     getGear()
   }, [])
 
-  if (gear === undefined) return <ProgressSkeleton progress={gear} />
+  if (gear === undefined) return <LoadingCircle progress={gear} />
   else if (gear === null) return <h2>Gear not found!</h2>
 
   // async function editName(event) {

@@ -1,13 +1,14 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import { Navigate, Outlet } from "react-router-dom"
 import { useUserContext } from "../context/UserContext"
 import Messages from "./Messages"
+import { MessagesType } from "../types"
 
 const Authenticated = () => {
   const { userObject } = useUserContext()
   const [messages, setMessages] = useState({})
 
-  function displayMessage(message) {
+  function displayMessage(message: MessagesType) {
     setMessages(message)
   }
 

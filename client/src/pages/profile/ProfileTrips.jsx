@@ -8,7 +8,7 @@ import {
 } from "@mui/material"
 import { Link } from "react-router-dom"
 import { useBackpackerContext } from "../../context/BackpackerContext"
-import { timeFormat } from "../../utils/timeFormat"
+import { timeFormat } from "../../utils/formats"
 
 const styles = {
   container: `container my-6 m-auto flex flex-wrap justify-center gap-6`,

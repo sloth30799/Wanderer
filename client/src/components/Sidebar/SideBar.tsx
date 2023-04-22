@@ -1,19 +1,9 @@
-import React, { useState } from "react"
-import { NavLink, Outlet } from "react-router-dom"
+import { useState } from "react"
+import { Outlet } from "react-router-dom"
 import MuiDrawer from "@mui/material/Drawer"
-import MuiAppBar from "@mui/material/AppBar"
-import { styled, useTheme } from "@mui/material/styles"
-import {
-  Box,
-  Toolbar,
-  List,
-  Divider,
-  ListItemIcon,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  IconButton,
-} from "@mui/material"
+import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
+import { Box, Toolbar, List, Divider, IconButton } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
 import ChevronRightIcon from "@mui/icons-material/ChevronRight"
@@ -21,12 +11,13 @@ import FolderSharedOutlinedIcon from "@mui/icons-material/FolderSharedOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
-import AddTrip from "./AddTrip"
-import AddGear from "./AddGear"
+import OneList from "./OneList"
 import AddPost from "./AddPost"
+import AddGear from "./AddGear"
 import LogoutBtn from "./LogoutBtn"
-
+import AddTrip from "./AddTrip"
 import Messages from "../Messages"
+import { MessagesType } from "../../types"
 
 const styles = {
   logo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
@@ -38,7 +29,7 @@ const styles = {
 
 const drawerWidth = 240
 
-const openedMixin = (theme) => ({
+const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -47,7 +38,7 @@ const openedMixin = (theme) => ({
   overflowX: "hidden",
 })
 
-const closedMixin = (theme) => ({
+const closedMixin = (theme: Theme): CSSObject => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -68,9 +59,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }))
 
+interface AppBarProps extends MuiAppBarProps {
+  open?: boolean
+}
+
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})<AppBarProps>(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
@@ -103,44 +98,12 @@ const Drawer = styled(MuiDrawer, {
   }),
 }))
 
-const OneList = ({ text, icon, link }) => {
-  return (
-    <NavLink
-      to={link}
-      className={({ isActive }) =>
-        isActive ? styles.activeNavbar : styles.inactiveNavbar
-      }
-    >
-      <ListItem disablePadding sx={{ display: "block" }}>
-        <ListItemButton
-          sx={{
-            minHeight: 48,
-            justifyContent: open ? "initial" : "center",
-            px: 2.5,
-          }}
-        >
-          <ListItemIcon
-            sx={{
-              minWidth: 0,
-              mr: open ? 3 : "auto",
-              justifyContent: "center",
-            }}
-          >
-            {icon}
-          </ListItemIcon>
-          <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-        </ListItemButton>
-      </ListItem>
-    </NavLink>
-  )
-}
-
-export default function SideBarDrawer() {
+export default function SideBar() {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState({})
 
-  function displayMessage(message) {
+  function displayMessage(message: MessagesType): void {
     setMessages(message)
   }
 
@@ -183,6 +146,7 @@ export default function SideBarDrawer() {
       text={list.text}
       icon={list.icon}
       link={list.link}
+      sideBarOpen={open}
     />
   ))
 

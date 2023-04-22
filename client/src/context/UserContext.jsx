@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect } from "react"
 import { useState } from "react"
-import { fetchUser, postLogin, postLogout } from "../api/api"
+import { fetchUser, postLogin, postLogout } from "../api"
 
 export const UserContext = createContext({})
 
