@@ -6,15 +6,16 @@ import {
 } from "react-router-dom"
 import { UserProvider } from "./context/UserContext"
 import { BackpackerProvider } from "./context/BackpackerContext"
+import Messages from "./components/utils/Messages"
 import AuthRequired from "./components/AuthRequired"
-import Authenticated from "./components/Authenticated"
-import PostSkeleton from "./components/PostSkeleton"
+import PostSkeleton from "./components/utils/PostSkeleton"
 import { SideBar } from "./components/Sidebar"
 import ErrorPage from "./pages/ErrorPage"
 import HomePage from "./pages/HomePage"
-import Login, { action as loginAction } from "./pages/Login"
-import Signup, { action as signupAction } from "./pages/Signup"
-import Logout from "./pages/Logout"
+// import Login, { action as loginAction } from "./pages/Login"
+import Login, { action as loginAction } from "./pages/Auth/Login"
+import Signup, { action as signupAction } from "./pages/Auth/Signup"
+import Logout from "./pages/Auth/Logout"
 import Feed, { loader as feedLoader } from "./pages/Feed"
 import Trip from "./pages/Trip"
 import Gear from "./pages/Gear"
@@ -30,14 +31,11 @@ import {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<ErrorPage />}>
+    <Route path="/" errorElement={<ErrorPage />} element={<Messages />}>
       <Route index element={<HomePage />} />
 
-      <Route element={<Authenticated />}>
-        <Route path="login" element={<Login />} action={loginAction} />
-        <Route path="signup" element={<Signup />} action={signupAction} />
-      </Route>
-
+      <Route path="login" element={<Login />} action={loginAction} />
+      <Route path="signup" element={<Signup />} action={signupAction} />
       <Route path="logout" element={<Logout />} />
       <Route path="skeleton" element={<PostSkeleton />} />
 

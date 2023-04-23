@@ -11,7 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
 import GearDisplay from "../components/GearDisplay"
-import LoadingCircle from "../components/LoadingCircle"
+import LoadingCircle from "../components/utils/LoadingCircle"
 import { deleteGear, fetchGear } from "../api"
 import { useBackpackerContext } from "../context/BackpackerContext"
 

@@ -9,7 +9,7 @@ import {
   CardActionArea,
   CardContent,
 } from "@mui/material"
-import LoadingCircle from "./LoadingCircle"
+import LoadingCircle from "./utils/LoadingCircle"
 import { useBackpackerContext } from "../context/BackpackerContext"
 import { createTemplate, getAllTemplates } from "../api"
 import { GearType } from "../types"

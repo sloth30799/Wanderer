@@ -1,12 +1,12 @@
 import { Suspense, useState } from "react"
 import { Await, defer, useLoaderData } from "react-router-dom"
-import PostSkeleton from "../components/PostSkeleton"
+import PostSkeleton from "../components/utils/PostSkeleton"
 import { BlogCard } from "../components/BlogCard"
-import { PostType } from "../types"
+import { BlogType } from "../types"
 import { fetchFeed, postLike } from "../api"
 
 interface responseType {
-  posts: PostType[]
+  posts: BlogType[]
   success: boolean
 }
 
@@ -23,7 +23,7 @@ const Feed = () => {
     const handleLike = async (id: string) => {
       const data = await postLike(id)
 
-      const newPosts = await posts.map((post: PostType) => {
+      const newPosts = await posts.map((post: BlogType) => {
         if (post._id === id) {
           return { ...post, likes: data.data }
         }
@@ -32,7 +32,7 @@ const Feed = () => {
       setPosts(newPosts)
     }
 
-    const postsRender = posts.map((post: PostType) => {
+    const postsRender = posts.map((post: BlogType) => {
       return <BlogCard key={post._id} post={post} handleLike={handleLike} />
     })
     return postsRender

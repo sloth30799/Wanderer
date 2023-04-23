@@ -15,7 +15,7 @@ import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore
 import DeleteIcon from "@mui/icons-material/Delete"
 import { putGear } from "../api"
 import { useEffect } from "react"
-import { GearCategory, GearType, ItemType, DisplayMessageType } from "../types"
+import { GearCategory, GearType, ItemType, OutletContextProps } from "../types"
 
 type OneItemProps = {
   item: ItemType
@@ -106,9 +106,7 @@ const AddItem = ({ category, addGear }: AddItemProps) => {
 }
 
 const GearDisplay = ({ gearData }: GearDisplayProps) => {
-  const { displayMessage } = useOutletContext() as {
-    displayMessage: DisplayMessageType
-  }
+  const { displayMessage } = useOutletContext() as OutletContextProps
 
   const [gear, setGear] = useState(gearData)
   const { equipments, accessories, essentials } = gear

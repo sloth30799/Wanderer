@@ -61,7 +61,7 @@ const AddPost = ({ sideBarOpen }: AddPostProps) => {
   //     const data = await createPost(formData)
   //     if (data.post) navigate(`/post/${data.post._id}`)
   //     setOpen(false)
-  //     updateBackpackerData(data.post, "posts")
+  //     updateBackpackingContent(data.post, "posts")
   //   } catch (error) {
   //     console.error(error)
   //   }

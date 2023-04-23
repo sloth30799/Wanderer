@@ -1,45 +1,56 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import {
   Link,
   Form,
   useActionData,
-  useLocation,
-  useNavigate,
+  ActionFunctionArgs,
   useOutletContext,
+  useNavigate,
 } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import GoogleIcon from "@mui/icons-material/Google"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
-import { useUserContext } from "../context/UserContext"
+import { setUser } from "../../store/features/auth/authSlice"
+import { useLoginMutation } from "../../api/authApiSlice"
+import { OutletContextProps } from "../../types"
 
-export async function action({ request }) {
-  const formData = await request.formData()
-  const email = formData.get("email")
-  const password = formData.get("password")
-  try {
-    return { email, password }
-  } catch (error) {
-    console.log(error)
+export async function action({ request }: ActionFunctionArgs) {
+  const data = await request.formData()
+
+  const credentials = {
+    email: data.get("email"),
+    password: data.get("password"),
   }
+
+  return credentials
 }
 
 const Login = () => {
-  const { displayMessage } = useOutletContext()
-  const { userObject, loginUser } = useUserContext()
-  const formData = useActionData()
-  const location = useLocation()
+  const { displayMessage } = useOutletContext() as OutletContextProps
+  const credentials = useActionData()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
-  const from = location.state?.from || "/profile"
+
+  const [postLogin, { isLoading }] = useLoginMutation()
+
+  async function login() {
+    try {
+      const data = await postLogin(credentials).unwrap()
+      const { user, messages } = data
+      displayMessage(messages)
+      dispatch(setUser({ user }))
+      navigate("/profile")
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   useEffect(() => {
-    if (formData?.email && formData?.password) {
-      const { email, password } = formData
-      loginUser(email, password).then((data) => displayMessage(data.messages))
-    }
-    if (userObject?._id) navigate(from, { replace: true })
-  }, [formData, userObject])
+    if (credentials != null) login()
+  }, [credentials])
 
   function google() {
     window.open("http://wanderer.onrender.com/api/auth/google", "_self")
@@ -83,8 +94,9 @@ const Login = () => {
               variant="contained"
               className=" w-full m-auto bg-tealBlue"
               type="submit"
+              disabled={isLoading}
             >
-              Log In
+              {isLoading ? "Logging" : "Log In"}
             </Button>
           </FormControl>
         </Form>

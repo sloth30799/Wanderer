@@ -1,44 +1,55 @@
-import React, { useEffect } from "react"
+import { useEffect } from "react"
 import {
+  ActionFunctionArgs,
   Form,
   useActionData,
   useNavigate,
   useOutletContext,
 } from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
-import { useUserContext } from "../context/UserContext"
-import { postSignup } from "../api"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
+import { useDispatch } from "react-redux"
+import { useSignupMutation } from "../../api/authApiSlice"
+import { setUser } from "../../store/features/auth/authSlice"
+import { OutletContextProps } from "../../types"
 
-export async function action({ request }) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
-  const userName = formData.get("userName")
-  const email = formData.get("email")
-  const password = formData.get("password")
-  const confirmPassword = formData.get("confirmPassword")
-  try {
-    const data = await postSignup(userName, email, password, confirmPassword)
-    return data
-  } catch (error) {
-    console.log(error)
+  const credentials = {
+    userName: formData.get("userName"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    confirmPassword: formData.get("confirmPassword"),
   }
+
+  return credentials
 }
 
 const Signup = () => {
-  const { displayMessage } = useOutletContext()
-  const { changeUser } = useUserContext()
-  const data = useActionData()
+  const { displayMessage } = useOutletContext() as OutletContextProps
+  const credentials = useActionData()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  useEffect(() => {
-    if (data?.user) {
-      changeUser(data.user)
-      navigate("/profile", { replace: true })
+  const [postSignup, { isLoading }] = useSignupMutation()
+
+  async function signup() {
+    try {
+      const data = await postSignup(credentials).unwrap()
+      const { user, messages } = data
+      displayMessage(messages)
+      dispatch(setUser({ user }))
+      navigate("/profile")
+    } catch (error) {
+      console.log(error)
     }
-    if (data?.messages) displayMessage(data.messages)
-  }, [data?.user, data?.messages])
+  }
+
+  useEffect(() => {
+    if (credentials != null) signup()
+  }, [credentials])
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">
@@ -100,8 +111,9 @@ const Signup = () => {
               variant="contained"
               type="submit"
               className=" w-full m-auto bg-goldenYellow"
+              disabled={isLoading}
             >
-              Sign Up
+              {isLoading ? "Creating New Account" : "Sign Up"}
             </Button>
           </FormControl>
         </Form>

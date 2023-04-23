@@ -15,14 +15,14 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore"
 import { useNavigate } from "react-router-dom"
 import { fromNowFormat } from "../utils/formats"
 import { useState } from "react"
-import { PostType } from "../types"
+import { BlogType } from "../types"
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean
 }
 
 type BlogCardProps = {
-  post: PostType
+  post: BlogType
   handleLike: (id: string) => Promise<void>
 }
 

@@ -16,8 +16,6 @@ import AddPost from "./AddPost"
 import AddGear from "./AddGear"
 import LogoutBtn from "./LogoutBtn"
 import AddTrip from "./AddTrip"
-import Messages from "../Messages"
-import { MessagesType } from "../../types"
 
 const styles = {
   logo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
@@ -101,15 +99,6 @@ const Drawer = styled(MuiDrawer, {
 export default function SideBar() {
   const theme = useTheme()
   const [open, setOpen] = useState(false)
-  const [messages, setMessages] = useState({})
-
-  function displayMessage(message: MessagesType): void {
-    setMessages(message)
-  }
-
-  function resetMessage() {
-    setMessages({})
-  }
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -195,8 +184,7 @@ export default function SideBar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Messages messages={messages} resetMessage={resetMessage} />
-        <Outlet context={{ displayMessage }} />
+        <Outlet />
       </Box>
     </Box>
   )

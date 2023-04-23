@@ -18,13 +18,13 @@ export function BackpackerProvider({ children }: BackpackerProviderProps) {
   const { userObject } = useUserContext()
   const [state, dispatch] = useReducer(backpackerReducer, { backpacker: null })
 
-  async function getBackpackerData() {
+  async function getBackpackingContent() {
     const data = await fetchProfile()
     dispatch({ type: "SET_BACKPACKER", backpacker: data })
   }
 
   useEffect(() => {
-    getBackpackerData()
+    getBackpackingContent()
   }, [userObject])
 
   return (

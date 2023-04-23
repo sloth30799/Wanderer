@@ -1,22 +1,22 @@
 import {
-  BackpackerType,
-  BackpackerCategory,
-  BackpackerData,
-  BackpackerDataArray,
+  BackpackingData,
+  BackpackingCategory,
+  BackpackingContent,
+  BackpackingContentList,
 } from "../../types"
 
 interface BackpackerState {
-  backpacker: BackpackerType
+  backpacker: BackpackingData
 }
 
 type BackpackerAction =
-  | { type: "SET_BACKPACKER"; backpacker: BackpackerType }
+  | { type: "SET_BACKPACKER"; backpacker: BackpackingData }
   | {
       type: "UPDATE_BACKPACKER"
-      dataType: BackpackerCategory
-      data: BackpackerData
+      dataType: BackpackingCategory
+      data: BackpackingContent
     }
-  | { type: "DELETE_BACKPACKER"; dataType: BackpackerCategory; id: string }
+  | { type: "DELETE_BACKPACKER"; dataType: BackpackingCategory; id: string }
   | { type: "EMPTY_BACKPACKER" }
 
 export function backpackerReducer(
@@ -44,8 +44,10 @@ export function backpackerReducer(
     }
     case "DELETE_BACKPACKER": {
       const { dataType, id } = action
-      const dataList = state.backpacker[dataType] as BackpackerDataArray
-      const newList = dataList.filter((item: BackpackerData) => item._id !== id)
+      const dataList = state.backpacker[dataType] as BackpackingContentList
+      const newList = dataList.filter(
+        (item: BackpackingContent) => item._id !== id
+      )
       return {
         ...state,
         backpacker: {

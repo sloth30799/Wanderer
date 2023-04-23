@@ -5,7 +5,7 @@ export interface UserType {
   password: string
 }
 
-export interface PostType {
+export interface BlogType {
   _id: string
   title: string
   image: string
@@ -66,17 +66,17 @@ export interface GearType {
 
 export type GearCategory = "essentials" | "accessories" | "equipments"
 
-export interface BackpackerType {
-  gears: GearType[]
-  posts: PostType[]
+export interface BackpackingData {
   trips: TripType[]
+  gears: GearType[]
+  blogs: BlogType[]
 }
 
-export type BackpackerCategory = "gears" | "posts" | "trips"
+export type BackpackingCategory = "gears" | "blogs" | "trips"
 
-export type BackpackerDataArray = Array<GearType | PostType | TripType>
+export type BackpackingContentList = Array<GearType | BlogType | TripType>
 
-export type BackpackerData = GearType | PostType | TripType
+export type BackpackingContent = GearType | BlogType | TripType
 
 export interface Message {
   msg: string
@@ -88,4 +88,6 @@ export interface MessagesType {
   errors?: Message[]
 }
 
-export type DisplayMessageType = (message: MessagesType) => void
+export type OutletContextProps = {
+  displayMessage: (messages: MessagesType) => void
+}

@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client"
 import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
 import { CssBaseline } from "@mui/material"
 import { AnimatePresence } from "framer-motion"
+import { Provider } from "react-redux"
+import { store } from "./store/store.js"
 import { theme } from "./theme"
 import "./assets/main.css"
 import App from "./App.jsx"
@@ -13,14 +15,16 @@ if (rootElement !== null) {
 
   root.render(
     <React.StrictMode>
-      <StyledEngineProvider injectFirst>
-        <AnimatePresence>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </ThemeProvider>
-        </AnimatePresence>
-      </StyledEngineProvider>
+      <Provider store={store}>
+        <StyledEngineProvider injectFirst>
+          <AnimatePresence>
+            <ThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+            </ThemeProvider>
+          </AnimatePresence>
+        </StyledEngineProvider>
+      </Provider>
     </React.StrictMode>
   )
 }

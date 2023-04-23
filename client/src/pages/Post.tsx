@@ -11,15 +11,16 @@ import {
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
-import { useUserContext } from "../context/UserContext"
 import { fromNowFormat } from "../utils/formats"
 import { fetchPost, postDelete, postLike } from "../api"
 import { useBackpackerContext } from "../context/BackpackerContext"
-import PostSkeleton from "../components/PostSkeleton"
+import PostSkeleton from "../components/utils/PostSkeleton"
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "../api/authApiSlice"
 
 const Post = () => {
   const { dispatch } = useBackpackerContext()
-  const { userObject } = useUserContext()
+  const user = useSelector(selectCurrentUser)
   const navigate = useNavigate()
   const { id } = useParams()
 
@@ -78,7 +79,7 @@ const Post = () => {
             </IconButton>
             <span className="text-xl">{post.likes}</span>
           </div>
-          {post.user === userObject._id && (
+          {post.user === user._id && (
             <IconButton aria-label="delete" onClick={handleDelete}>
               <DeleteIcon className="text-black" />
             </IconButton>
