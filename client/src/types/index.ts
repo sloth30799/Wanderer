@@ -74,7 +74,7 @@ export interface BackpackerType {
 
 export type BackpackerCategory = "gears" | "posts" | "trips"
 
-export type BackpackerDataArray = GearType[] | PostType[] | TripType[]
+export type BackpackerDataArray = Array<GearType | PostType | TripType>
 
 export type BackpackerData = GearType | PostType | TripType
 

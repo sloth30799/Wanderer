@@ -42,27 +42,6 @@ export function backpackerReducer(
         },
       }
     }
-    // case "DELETE_BACKPACKER": {
-    //   const { dataType, id } = action
-    //   let newList: BackpackerDataArray
-    //   if (dataType === "gears") {
-    //     const dataList = state.backpacker[dataType] as GearType[]
-    //     newList = dataList.filter((item: GearType) => item._id !== id)
-    //   } else if (dataType === "posts") {
-    //     const dataList = state.backpacker[dataType] as PostType[]
-    //     newList = dataList.filter((item: PostType) => item._id !== id)
-    //   } else if (dataType === "trips") {
-    //     const dataList = state.backpacker[dataType] as TripType[]
-    //     newList = dataList.filter((item: TripType) => item._id !== id)
-    //   }
-    //   return {
-    //     ...state,
-    //     backpacker: {
-    //       ...state.backpacker,
-    //       [action.dataType]: newList,
-    //     },
-    //   }
-    // }
     case "DELETE_BACKPACKER": {
       const { dataType, id } = action
       const dataList = state.backpacker[dataType] as BackpackerDataArray
