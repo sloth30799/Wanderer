@@ -66,6 +66,18 @@ export interface GearType {
 
 export type GearCategory = "essentials" | "accessories" | "equipments"
 
+export interface BackpackerType {
+  gears: GearType[]
+  posts: PostType[]
+  trips: TripType[]
+}
+
+export type BackpackerCategory = "gears" | "posts" | "trips"
+
+export type BackpackerDataArray = GearType[] | PostType[] | TripType[]
+
+export type BackpackerData = GearType | PostType | TripType
+
 export interface Message {
   msg: string
 }

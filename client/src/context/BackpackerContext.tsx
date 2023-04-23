@@ -4,14 +4,17 @@ import { fetchProfile } from "../api"
 import { backpackerReducer } from "./reducer/backpackerReducer"
 import { useUserContext } from "./UserContext"
 
+type BackpackerProviderProps = {
+  children: React.ReactNode
+}
+
 export const BackpackerContext = createContext({})
 
-// eslint-disable-next-line react-refresh/only-export-components
 export function useBackpackerContext() {
   return useContext(BackpackerContext)
 }
 
-export function BackpackerProvider({ children }) {
+export function BackpackerProvider({ children }: BackpackerProviderProps) {
   const { userObject } = useUserContext()
   const [state, dispatch] = useReducer(backpackerReducer, { backpacker: null })
 
