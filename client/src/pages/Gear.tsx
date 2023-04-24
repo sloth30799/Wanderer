@@ -1,10 +1,5 @@
-import { useState, useEffect } from "react"
-import {
-  Link,
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   TextField,
   Dialog,
@@ -21,10 +16,8 @@ import { useDispatch } from "react-redux"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
 import { useFetchGearQuery } from "../api/gearApiSlice"
 import { useDeleteTemplateMutation } from "../api/templateApiSlice"
-import { OutletContextProps } from "../types"
 
 const Gear = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()

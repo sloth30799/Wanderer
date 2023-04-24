@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Outlet, useOutlet, useOutletContext } from "react-router-dom"
+import { Outlet, useOutletContext } from "react-router-dom"
 import MuiDrawer from "@mui/material/Drawer"
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
@@ -14,7 +14,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import OneList from "./OneList"
 import AddTrip from "./AddTrip"
 import AddGear from "./AddGear"
-import AddPost from "./AddPost"
+import AddBlog from "./AddBlog"
 import LogoutBtn from "./LogoutBtn"
 
 const styles = {
@@ -177,7 +177,7 @@ export default function SideBar() {
         <List>
           <AddTrip sideBarOpen={open} />
           <AddGear sideBarOpen={open} />
-          <AddPost sideBarOpen={open} />
+          <AddBlog sideBarOpen={open} />
         </List>
         <Divider />
         <LogoutBtn sideBarOpen={open} />

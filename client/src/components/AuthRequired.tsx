@@ -1,37 +1,23 @@
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
-import {
-  useLocation,
-  Navigate,
-  Outlet,
-  useOutletContext,
-} from "react-router-dom"
-import { OutletContextProps } from "../types"
+import { useLocation, Navigate, Outlet } from "react-router-dom"
 import { selectAuth } from "../services/store"
-
-const msg = {
-  info: [
-    {
-      msg: "Please Log in.",
-    },
-  ],
-}
+import { toast } from "react-hot-toast"
 
 const AuthRequired = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const { user, loading } = useSelector(selectAuth)
   const location = useLocation()
 
   useEffect(() => {
     if (!loading && user === null) {
-      displayMessage(msg)
+      toast("Please Log in.")
     }
   }, [loading, user])
 
   if (loading) return <h1>Loading...</h1>
 
   return user ? (
-    <Outlet context={useOutletContext()} />
+    <Outlet />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   )

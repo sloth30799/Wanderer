@@ -5,7 +5,7 @@ module.exports = {
     try {
       const gear = await Gear.findById(req.params.id).populate("user")
       if (!gear) {
-        res.status(404).json({ success: false, data: "Gear not found" })
+        res.status(404).json({ success: false, messages: "Gear not found" })
       }
 
       res.status(200).json({ success: true, gear: gear || null })
@@ -25,7 +25,7 @@ module.exports = {
       )
 
       if (!gear) {
-        res.status(404).json({ success: false, data: "Gear not Updated" })
+        res.status(404).json({ success: false, messages: "Gear not Updated" })
       }
       req.flash("success", {
         msg: "Success! Your Gear List has been updated.",
@@ -43,13 +43,13 @@ module.exports = {
       const gear = await Gear.findById(req.params.id)
 
       if (!gear) {
-        res.status(404).json({ success: false, data: "Gear not found" })
+        res.status(404).json({ success: false, messages: "Gear not found" })
       }
 
       // Delete gear from db
       await Gear.remove({ _id: req.params.id })
       console.log("Deleted Gear")
-      res.status(200).json({ success: true, data: "Deleted Gear" })
+      res.status(200).json({ success: true, messages: "Deleted Gear" })
     } catch (error) {
       console.log(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })

@@ -1,5 +1,4 @@
 import { useState, FormEvent, SyntheticEvent } from "react"
-import { useOutletContext } from "react-router-dom"
 import {
   Button,
   Checkbox,
@@ -13,9 +12,10 @@ import {
 } from "@mui/material"
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
-import { putGear } from "../api"
 import { useEffect } from "react"
-import { GearCategory, GearType, ItemType, OutletContextProps } from "../types"
+import { GearCategory, GearType, ItemType } from "../types"
+import { useUpdateGearMutation } from "../api/gearApiSlice"
+import { toast } from "react-hot-toast"
 
 type OneItemProps = {
   item: ItemType
@@ -107,10 +107,9 @@ const AddItem = ({ category, addGear }: AddItemProps) => {
 }
 
 const GearDisplay = ({ gearData }: GearDisplayProps) => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
-
   const [gear, setGear] = useState(gearData)
   const { equipments, accessories, essentials } = gear
+  const [updateGearList, { isLoading, isSuccess }] = useUpdateGearMutation()
 
   useEffect(() => {
     setGear(gearData)
@@ -189,8 +188,9 @@ const GearDisplay = ({ gearData }: GearDisplayProps) => {
   }
 
   async function updateGear() {
-    const data = await putGear(gear._id, gear)
-    if (data.messages) displayMessage(data.messages)
+    await updateGearList({ id: gear._id, gear: gear })
+    if (isLoading) toast.loading("Updating")
+    if (isSuccess) toast.success("Updated!")
   }
 
   const equipmentsLists = equipments.map((item) => {

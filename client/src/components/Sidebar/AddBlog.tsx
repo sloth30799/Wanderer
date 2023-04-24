@@ -17,11 +17,11 @@ import {
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined"
 import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 
-type AddPostProps = {
+type AddBlogProps = {
   sideBarOpen: boolean
 }
 
-const AddPost = ({ sideBarOpen }: AddPostProps) => {
+const AddBlog = ({ sideBarOpen }: AddBlogProps) => {
   const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
@@ -142,4 +142,4 @@ const AddPost = ({ sideBarOpen }: AddPostProps) => {
   )
 }
 
-export default AddPost
+export default AddBlog

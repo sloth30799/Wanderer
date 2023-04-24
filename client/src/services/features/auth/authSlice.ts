@@ -18,9 +18,11 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       const { user } = action.payload
       state.user = user
+      state.loading = false
     },
     logOutUser: (state, _) => {
       state.user = null
+      state.loading = true
     },
   },
   extraReducers: (builder) => {

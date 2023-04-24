@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate, useOutletContext } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import {
   Button,
   Dialog,
@@ -12,11 +12,12 @@ import {
 } from "@mui/material"
 import LoadingCircle from "./utils/LoadingCircle"
 import { addBackpackingContent } from "../services/features/profile/profileSlice"
-import { GearType, MessagesType, OutletContextProps } from "../types"
+import { GearType, MessagesType } from "../types"
 import {
   useAddTemplateMutation,
   useFetchAllTemplatesQuery,
 } from "../api/templateApiSlice"
+import { toast } from "react-hot-toast"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,
@@ -29,11 +30,10 @@ type TemplatesBoxProps = {
 }
 
 const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const { data, isLoading, isError } = useFetchAllTemplatesQuery()
 
   const templates = data?.templates
-  const [addTemplate] = useAddTemplateMutation()
+  const [addTemplate, { isSuccess }] = useAddTemplateMutation()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -41,13 +41,13 @@ const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
 
   async function addNewTemplate() {
     try {
-      const { gear, messages } = (await addTemplate().unwrap()) as {
+      const { gear } = (await addTemplate().unwrap()) as {
         gear: GearType
         messages: MessagesType
       }
       if (gear) navigate(`/gear/${gear._id}`)
       dispatch(addBackpackingContent({ category: "gears", content: gear }))
-      displayMessage(messages)
+      if (isSuccess) toast.success("Template Created!")
     } catch (error) {
       console.error(error)
     }
@@ -62,8 +62,8 @@ const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
   }
 
   if (isLoading) return <LoadingCircle progress={templates} />
-  if (templates === undefined) null
-  if (templates === null) return <h1>No Templates</h1>
+
+  if (isError) return <h1>Something went Wrong!</h1>
 
   const templateCards = templates.map((template: GearType) => {
     return (

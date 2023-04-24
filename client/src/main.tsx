@@ -8,6 +8,7 @@ import { store } from "./services/store.js"
 import { theme } from "./theme"
 import "./assets/main.css"
 import App from "./App.jsx"
+import { Toaster } from "react-hot-toast"
 
 const rootElement = document.getElementById("root")
 if (rootElement !== null) {
@@ -21,6 +22,7 @@ if (rootElement !== null) {
             <ThemeProvider theme={theme}>
               <CssBaseline />
               <App />
+              <Toaster />
             </ThemeProvider>
           </AnimatePresence>
         </StyledEngineProvider>

@@ -1,9 +1,9 @@
 import { useEffect } from "react"
-import { useNavigate, useOutletContext } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useLogoutMutation } from "../../api/authApiSlice"
 import { logOutUser } from "../../services/features/auth/authSlice"
 import { useDispatch } from "react-redux"
-import { OutletContextProps } from "../../types"
+import { toast } from "react-hot-toast"
 
 // const msg = {
 //   success: [
@@ -14,18 +14,18 @@ import { OutletContextProps } from "../../types"
 // }
 
 const Logout = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [postLogout, { isSuccess }] = useLogoutMutation()
+  const [postLogout] = useLogoutMutation()
 
   async function logout() {
     try {
-      const msg = await postLogout({}).unwrap()
+      await postLogout().unwrap()
       dispatch(logOutUser({}))
       navigate("/")
-      if (isSuccess) displayMessage(msg)
+
+      toast.success("Sad to see you go.")
     } catch (error) {
       console.error(error)
     }

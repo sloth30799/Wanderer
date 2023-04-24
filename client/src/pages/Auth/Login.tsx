@@ -4,7 +4,6 @@ import {
   Form,
   useActionData,
   ActionFunctionArgs,
-  useOutletContext,
   useNavigate,
 } from "react-router-dom"
 import { useDispatch } from "react-redux"
@@ -15,7 +14,7 @@ import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
 import { setUser } from "../../services/features/auth/authSlice"
 import { useLoginMutation } from "../../api/authApiSlice"
-import { OutletContextProps } from "../../types"
+import { toast } from "react-hot-toast"
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData()
@@ -29,20 +28,32 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 const Login = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const credentials = useActionData()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [postLogin, { isLoading }] = useLoginMutation()
+  const [postLogin, { isLoading, isError, isSuccess }] = useLoginMutation()
 
   async function login() {
     try {
       const data = await postLogin(credentials).unwrap()
       const { user, messages } = data
-      displayMessage(messages)
-      dispatch(setUser({ user }))
-      navigate("/profile")
+
+      if (isError) {
+        toast.error("Network Error")
+      }
+
+      if (isSuccess) {
+        if (messages.errors) {
+          messages.errors.map((message: any) => {
+            return toast.error(message.msg)
+          })
+        } else {
+          toast.success("Log in Successful!")
+          navigate("/profile")
+          dispatch(setUser({ user }))
+        }
+      }
     } catch (error) {
       console.error(error)
     }

@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux"
 import { selectAuth } from "../../store"
 import { mainApiSlice } from "../../../api/mainApiSlice"
+import { authApiSlice } from "../../../api/authApiSlice"
 
 const initialState: BackpackingData = {
   trips: [],
@@ -78,6 +79,14 @@ const profileSlice = createSlice({
         state.trips = action.payload.trips
         state.gears = action.payload.gears
         state.blogs = action.payload.blogs
+      }
+    )
+    builder.addMatcher(
+      authApiSlice.endpoints.logout.matchFulfilled,
+      (state) => {
+        state.trips = []
+        state.gears = []
+        state.blogs = []
       }
     )
   },

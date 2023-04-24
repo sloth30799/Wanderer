@@ -1,16 +1,11 @@
 import { useState, useEffect } from "react"
-import {
-  Link,
-  useNavigate,
-  useOutletContext,
-  useParams,
-} from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
 import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
 import Templates from "../components/TemplatesBox"
 import LoadingCircle from "../components/utils/LoadingCircle"
-import { GearType, OutletContextProps, TripType } from "../types"
+import { GearType, TripType } from "../types"
 import { timeFormat } from "../utils/formats"
 import { dollarFormat } from "../utils/formats"
 import { useDispatch } from "react-redux"
@@ -20,6 +15,7 @@ import {
   useDeleteTripMutation,
   useFetchTripQuery,
 } from "../api/tripApiSlice"
+import { toast } from "react-hot-toast"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
@@ -28,14 +24,14 @@ const styles = {
 }
 
 const Trip = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
 
   const { data, isLoading, isError, refetch } = useFetchTripQuery(id)
-  const [completedTrip] = useCompletedTripMutation()
-  const [deleteTrip] = useDeleteTripMutation()
+  const [completedTrip, { isSuccess: completedTripSuceess }] =
+    useCompletedTripMutation()
+  const [deleteTrip, { isSuccess: deleteSuccess }] = useDeleteTripMutation()
 
   const [gear, setGear] = useState<GearType>(data?.trip.gear)
   useEffect(() => {
@@ -48,16 +44,18 @@ const Trip = () => {
   const trip: TripType = data.trip
 
   async function handleCompleted() {
-    const data = await completedTrip({
+    await completedTrip({
       id: trip._id,
       completed: trip.completed,
     })
     await refetch()
+    if (completedTripSuceess) toast.success("Updated")
   }
 
   const handleDelete = async () => {
     await deleteTrip(trip._id) // api call
     dispatch(deleteBackpackingContent({ category: "trips", id: trip._id }))
+    if (deleteSuccess) toast.success("Deleted")
     navigate(-1)
   }
 

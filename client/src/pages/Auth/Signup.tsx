@@ -4,7 +4,6 @@ import {
   Form,
   useActionData,
   useNavigate,
-  useOutletContext,
 } from "react-router-dom"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import EmailIcon from "@mui/icons-material/Email"
@@ -13,7 +12,9 @@ import PersonPinIcon from "@mui/icons-material/PersonPin"
 import { useDispatch } from "react-redux"
 import { useSignupMutation } from "../../api/authApiSlice"
 import { setUser } from "../../services/features/auth/authSlice"
-import { OutletContextProps } from "../../types"
+import { toast } from "react-hot-toast"
+import { selectCurrentUser } from "../../services/store"
+import { useSelector } from "react-redux"
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
@@ -28,27 +29,40 @@ export async function action({ request }: ActionFunctionArgs) {
 }
 
 const Signup = () => {
-  const { displayMessage } = useOutletContext() as OutletContextProps
   const credentials = useActionData()
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [postSignup, { isLoading }] = useSignupMutation()
+  const [postSignup, { isLoading, isSuccess, isError }] = useSignupMutation()
 
   async function signup() {
     try {
       const data = await postSignup(credentials).unwrap()
       const { user, messages } = data
-      displayMessage(messages)
-      dispatch(setUser({ user }))
-      navigate("/profile")
+
+      if (isError) {
+        toast.error("Network Error")
+      }
+
+      if (isSuccess) {
+        if (messages.errors) {
+          messages.errors.map((message: any) => {
+            return toast.error(message.msg)
+          })
+        } else {
+          toast.success("Sign up Successful!")
+          dispatch(setUser({ user }))
+          navigate("/profile")
+        }
+      }
+      console.log(messages)
     } catch (error) {
       console.error(error)
     }
   }
 
   useEffect(() => {
-    if (credentials != null) signup()
+    if (credentials !== null) signup()
   }, [credentials])
 
   return (
