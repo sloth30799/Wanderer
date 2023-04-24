@@ -13,8 +13,6 @@ import { useDispatch } from "react-redux"
 import { useSignupMutation } from "../../api/authApiSlice"
 import { setUser } from "../../services/features/auth/authSlice"
 import { toast } from "react-hot-toast"
-import { selectCurrentUser } from "../../services/store"
-import { useSelector } from "react-redux"
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()

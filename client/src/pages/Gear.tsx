@@ -58,7 +58,7 @@ const Gear = () => {
   // }
 
   async function handleDelete() {
-    const data = await deleteGear(gear._id) // api call
+    await deleteGear(gear._id) // api call
     dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
     navigate(-1)
   }

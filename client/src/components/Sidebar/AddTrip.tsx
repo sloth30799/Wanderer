@@ -21,7 +21,6 @@ import BackpackOutlinedIcon from "@mui/icons-material/BackpackOutlined"
 import { useDispatch } from "react-redux"
 import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 import { useAddTripMutation } from "../../api/tripApiSlice"
-import { TripType } from "../../types"
 
 const styles = {
   formLabel: `font-medium text-purple`,

@@ -1,11 +1,4 @@
-import React from "react"
-import {
-  CardActionArea,
-  CardActions,
-  // CardMedia,
-  CardContent,
-  Card,
-} from "@mui/material"
+import { CardActionArea, CardActions, CardContent, Card } from "@mui/material"
 import { Link } from "react-router-dom"
 import { timeFormat } from "../../utils/formats"
 import { useSelector } from "react-redux"

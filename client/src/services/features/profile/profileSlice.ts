@@ -7,8 +7,6 @@ import {
   GearType,
   TripType,
 } from "../../../types"
-import { useSelector } from "react-redux"
-import { selectAuth } from "../../store"
 import { mainApiSlice } from "../../../api/mainApiSlice"
 import { authApiSlice } from "../../../api/authApiSlice"
 

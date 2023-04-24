@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 import { selectGears } from "../../services/store"
-import { GearType } from "../../types"
 
 const styles = {
   container: `container my-6 m-auto flex flex-col justify-center`,
