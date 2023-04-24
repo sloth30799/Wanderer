@@ -6,12 +6,13 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
