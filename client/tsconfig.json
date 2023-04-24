@@ -13,6 +13,7 @@
     "noEmit": true,
     "jsx": "preserve",
     "allowJs": true,
+    "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
