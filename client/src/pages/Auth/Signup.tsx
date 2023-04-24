@@ -43,7 +43,7 @@ const Signup = () => {
       dispatch(setUser({ user }))
       navigate("/profile")
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

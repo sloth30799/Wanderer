@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../../services/store"
+import { useFetchProfileQuery } from "../../api/mainApiSlice"
 
 const styles = {
   navBar: `flex gap-6`,
@@ -10,6 +11,9 @@ const styles = {
 
 const Profile = () => {
   const user = useSelector(selectCurrentUser)
+  const { isLoading } = useFetchProfileQuery()
+
+  if (isLoading) return <h1>Loading...</h1>
 
   return (
     <div>

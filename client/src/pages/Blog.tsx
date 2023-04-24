@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {
   IconButton,
@@ -12,42 +11,42 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import { fromNowFormat } from "../utils/formats"
-import { fetchPost, postDelete, postLike } from "../api"
 import PostSkeleton from "../components/utils/PostSkeleton"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../services/store"
 import { useDispatch } from "react-redux"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
+import {
+  useDeleteBlogMutation,
+  useFetchBlogQuery,
+  useLikeBlogMutation,
+} from "../api/blogApiSlice"
 
-const Post = () => {
-  const dispatch = useDispatch()
+const Blog = () => {
   const user = useSelector(selectCurrentUser)
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const [post, setPost] = useState()
+  const { data, isLoading, isError, refetch } = useFetchBlogQuery(id)
+  const [likeBlog] = useLikeBlogMutation()
+  const [deleteBlog] = useDeleteBlogMutation()
 
-  useEffect(() => {
-    const getPost = async () => {
-      const data = await fetchPost(id)
-      setPost(data.post)
-    }
-    getPost()
-  }, [])
+  if (isLoading) return <PostSkeleton />
+  else if (isError) return <h2>Post not found!</h2>
 
-  if (post === undefined) return <PostSkeleton />
-  else if (post === null) return <h2>Post not found!</h2>
+  const post = data.post
 
-  const handleLike = async () => {
-    const data = await postLike(post._id)
-    setPost({ ...post, likes: data.data })
+  async function handleLike() {
+    await likeBlog(post._id)
+    refetch()
   }
 
-  const handleDelete = async () => {
-    const data = await postDelete(post._id) // api call
+  async function handleDelete() {
+    await deleteBlog(post._id) // api call
     dispatch(deleteBackpackingContent({ category: "blogs", id: post._id }))
     navigate(-1)
-    return data
   }
 
   return (
@@ -80,7 +79,7 @@ const Post = () => {
             </IconButton>
             <span className="text-xl">{post.likes}</span>
           </div>
-          {post.user === user._id && (
+          {post.user === user?._id && (
             <IconButton aria-label="delete" onClick={handleDelete}>
               <DeleteIcon className="text-black" />
             </IconButton>
@@ -91,4 +90,4 @@ const Post = () => {
   )
 }
 
-export default Post
+export default Blog

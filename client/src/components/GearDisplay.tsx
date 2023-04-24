@@ -12,7 +12,7 @@ import {
   IconButton,
 } from "@mui/material"
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore"
-import DeleteIcon from "@mui/icons-material/Delete"
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import { putGear } from "../api"
 import { useEffect } from "react"
 import { GearCategory, GearType, ItemType, OutletContextProps } from "../types"
@@ -48,7 +48,7 @@ const OneItem = ({ item, category, checkGear, removeGear }: OneItemProps) => {
   return (
     <FormGroup className="flex w-full flex-row justify-between">
       <FormControlLabel
-        control={<Checkbox className="text-black" />}
+        control={<Checkbox color="secondary" />}
         label={name}
         onChange={(e: SyntheticEvent<Element, Event>) =>
           checkGear(e, category, item._id)
@@ -58,9 +58,10 @@ const OneItem = ({ item, category, checkGear, removeGear }: OneItemProps) => {
       <IconButton
         onClick={() => removeGear(category, item._id)}
         aria-label="delete"
-        className="text-black "
+        color="inherit"
+        size="small"
       >
-        <DeleteIcon />
+        <RemoveCircleOutlineIcon className="text-sm" />
       </IconButton>
     </FormGroup>
   )

@@ -7,8 +7,7 @@ import {
   useOutletContext,
 } from "react-router-dom"
 import { OutletContextProps } from "../types"
-import { selectAuth, store } from "../services/store"
-import { mainApiSlice } from "../api/mainApiSlice"
+import { selectAuth } from "../services/store"
 
 const msg = {
   info: [
@@ -23,16 +22,13 @@ const AuthRequired = () => {
   const { user, loading } = useSelector(selectAuth)
   const location = useLocation()
 
-  if (loading) return <h1>Loading...</h1>
-
-  if (!loading && user === null) {
-    useEffect(() => {
+  useEffect(() => {
+    if (!loading && user === null) {
       displayMessage(msg)
-    }, [])
-  }
+    }
+  }, [loading, user])
 
-  if (user != null)
-    store.dispatch(mainApiSlice.endpoints.fetchProfile.initiate({}))
+  if (loading) return <h1>Loading...</h1>
 
   return user ? (
     <Outlet context={useOutletContext()} />

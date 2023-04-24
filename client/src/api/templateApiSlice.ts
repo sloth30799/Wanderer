@@ -2,16 +2,16 @@ import { apiSlice } from "./apiSlice"
 
 const tempateApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    fetchAllTemplates: builder.query({
+    fetchAllTemplates: builder.query<any, void>({
       query: () => "template/AllTemplates",
     }),
-    addTemplate: builder.mutation({
+    addTemplate: builder.mutation<any, void>({
       query: () => ({
         url: "template/createGearTemplate",
         method: "POST",
       }),
     }),
-    deleteTemplate: builder.mutation({
+    deleteTemplate: builder.mutation<any, string>({
       query: (id) => ({
         url: `template/deleteGearTemplate/${id}`,
         method: "DELETE",

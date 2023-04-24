@@ -42,7 +42,7 @@ module.exports = {
 
       res
         .status(200)
-        .json({ success: true, template: [...userTemplates, ...templates] })
+        .json({ success: true, templates: [...userTemplates, ...templates] })
     } catch (error) {
       console.error(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })

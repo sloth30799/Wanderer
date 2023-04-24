@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Outlet, useOutletContext } from "react-router-dom"
+import { Outlet, useOutlet, useOutletContext } from "react-router-dom"
 import MuiDrawer from "@mui/material/Drawer"
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
@@ -12,10 +12,10 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
 import OneList from "./OneList"
-import AddPost from "./AddPost"
-import AddGear from "./AddGear"
-import LogoutBtn from "./LogoutBtn"
 import AddTrip from "./AddTrip"
+import AddGear from "./AddGear"
+import AddPost from "./AddPost"
+import LogoutBtn from "./LogoutBtn"
 
 const styles = {
   logo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,

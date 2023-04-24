@@ -12,7 +12,7 @@ export const tripApiSlice = apiSlice.injectEndpoints({
         body: formData,
       }),
     }),
-    completedTrip: builder.mutation({
+    completedTrip: builder.mutation<any, { id: string; completed: boolean }>({
       query: ({ id, completed }) => ({
         url: `trip/tripUpdate/${id}`,
         method: "PUT",

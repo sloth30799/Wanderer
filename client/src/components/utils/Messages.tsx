@@ -41,69 +41,72 @@ function Messages() {
   return (
     <>
       <Outlet context={{ displayMessage }} />
-      {messages.errors != null &&
-        messages.errors.map((el, index) => (
-          <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: index === 0 ? "left" : "right",
-            }}
-          >
-            <Alert
-              key={el.msg}
-              variant="filled"
-              severity="error"
+      {messages.errors != null
+        ? messages.errors.map((el, index) => (
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
               onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: index === 0 ? "left" : "right",
+              }}
             >
-              {el.msg}
-            </Alert>
-          </Snackbar>
-        ))}
-      {messages.success != null &&
-        messages.success.map((el, index) => (
-          <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: index === 0 ? "left" : "right",
-            }}
-          >
-            <Alert
-              key={el.msg}
-              variant="filled"
-              severity="success"
+              <Alert
+                key={el.msg}
+                variant="filled"
+                severity="error"
+                onClose={handleClose}
+              >
+                {el.msg}
+              </Alert>
+            </Snackbar>
+          ))
+        : null}
+      {messages.success != null
+        ? messages.success.map((el, index) => (
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
               onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: index === 0 ? "left" : "right",
+              }}
             >
-              {el.msg}
-            </Alert>
-          </Snackbar>
-        ))}
-      {messages.info != null &&
-        messages.info.map((el, index) => (
-          <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: index === 0 ? "left" : "right",
-            }}
-          >
-            <Alert
-              key={el.msg}
-              variant="filled"
-              severity="info"
+              <Alert
+                key={el.msg}
+                variant="filled"
+                severity="success"
+                onClose={handleClose}
+              >
+                {el.msg}
+              </Alert>
+            </Snackbar>
+          ))
+        : null}
+      {messages.info != null
+        ? messages.info.map((el, index) => (
+            <Snackbar
+              open={open}
+              autoHideDuration={6000}
               onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: index === 0 ? "left" : "right",
+              }}
             >
-              {el.msg}
-            </Alert>
-          </Snackbar>
-        ))}
+              <Alert
+                key={el.msg}
+                variant="filled"
+                severity="info"
+                onClose={handleClose}
+              >
+                {el.msg}
+              </Alert>
+            </Snackbar>
+          ))
+        : null}
     </>
   )
 }

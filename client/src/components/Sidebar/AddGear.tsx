@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import {
   ListItem,
   ListItemButton,
@@ -7,21 +7,30 @@ import {
   ListItemText,
 } from "@mui/material"
 import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined"
-import { createTemplate } from "../../api"
 import { addBackpackingContent } from "../../services/features/profile/profileSlice"
+import { useAddTemplateMutation } from "../../api/templateApiSlice"
+import { OutletContextProps } from "../../types"
 
 type AddGearProps = {
   sideBarOpen: boolean
 }
 
 const AddGear = ({ sideBarOpen }: AddGearProps) => {
+  const { displayMessage } = useOutletContext() as OutletContextProps
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  const [addTemplate] = useAddTemplateMutation()
+
   async function handleClick() {
-    const { gear } = await createTemplate()
-    if (gear) navigate(`/gear/${gear._id}`)
-    dispatch(addBackpackingContent({ category: "gears", content: gear }))
+    try {
+      const { gear, messages } = await addTemplate().unwrap()
+      if (gear) navigate(`/gear/${gear._id}`)
+      dispatch(addBackpackingContent({ category: "gears", content: gear }))
+      displayMessage(messages)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return (

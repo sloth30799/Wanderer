@@ -1,8 +1,9 @@
+import { UserType } from "../types"
 import { apiSlice } from "./apiSlice"
 
 export const authApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    fetchUser: builder.query({
+    fetchUser: builder.query<UserType, void>({
       query: () => "auth/getUser",
     }),
     login: builder.mutation({

@@ -1,7 +1,7 @@
-import { CardActionArea, CardMedia, CardContent, Card } from "@mui/material"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { selectBlogs, selectGears } from "../../services/store"
+import { CardActionArea, CardMedia, CardContent, Card } from "@mui/material"
+import { selectBlogs } from "../../services/store"
 
 const styles = {
   container: `container my-6 flex flex-wrap justify-center`,

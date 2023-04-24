@@ -1,38 +1,6 @@
 import { api } from "../lib/axios"
 
-// user / auth
-export async function fetchUser() {
-  const { data } = await api.get("api/auth/getUser")
-  return data
-}
-
-export async function postLogin(email, password) {
-  const { data } = await api.post("api/auth/login", { email, password })
-  return data
-}
-
-export async function postSignup(userName, email, password, confirmPassword) {
-  const { data } = await api.post("api/auth/signup", {
-    userName,
-    email,
-    password,
-    confirmPassword,
-  })
-  return data
-}
-
-export async function postLogout() {
-  const { data } = await api.get("/api/auth/logout")
-  return data
-}
-
 // get requests
-export async function fetchProfile() {
-  const { data } = await api.get("api/profile")
-  const { posts, trips, gears } = data
-  return { posts, trips, gears }
-}
-
 export async function fetchFeed() {
   const { data } = await api.get("/api/feed")
   return data
@@ -48,11 +16,6 @@ export async function fetchGear(gearId) {
   return data
 }
 
-export async function fetchPost(postId) {
-  const { data } = await api.get(`/api/post/${postId}`)
-  return data
-}
-
 // const fetchTemplates () {
 //   const { data } = await api.get(`/api/template/AllTemplates`)
 //   return data
@@ -63,17 +26,6 @@ export async function putGear(id, gear) {
   const { data } = await api.put(`/api/gear/updateGear/${id}`, {
     gear,
   })
-  return data
-}
-
-// template actions
-export async function getAllTemplates() {
-  const { data } = await api.get(`/api/template/AllTemplates`)
-  return data
-}
-
-export async function createTemplate() {
-  const { data } = await api.post(`/api/template/createGearTemplate`)
   return data
 }
 

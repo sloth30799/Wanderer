@@ -1,5 +1,10 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom"
 import {
   TextField,
   Dialog,
@@ -12,18 +17,21 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
 import GearDisplay from "../components/GearDisplay"
 import LoadingCircle from "../components/utils/LoadingCircle"
-import { deleteGear, fetchGear } from "../api"
 import { useDispatch } from "react-redux"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
-import { GearType } from "../types"
+import { useFetchGearQuery } from "../api/gearApiSlice"
+import { useDeleteTemplateMutation } from "../api/templateApiSlice"
+import { OutletContextProps } from "../types"
 
 const Gear = () => {
+  const { displayMessage } = useOutletContext() as OutletContextProps
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
 
+  const { data, isLoading, isError } = useFetchGearQuery(id)
+  const [deleteGear] = useDeleteTemplateMutation()
   const [open, setOpen] = useState(false)
-  const [gear, setGear] = useState<GearType>()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -33,16 +41,10 @@ const Gear = () => {
     setOpen(false)
   }
 
-  useEffect(() => {
-    const getGear = async () => {
-      const data = await fetchGear(id)
-      setGear(data.gear)
-    }
-    getGear()
-  }, [])
+  if (isLoading) return <LoadingCircle progress={data} />
+  else if (isError) return <h2>Gear not found!</h2>
 
-  if (gear === undefined) return <LoadingCircle progress={gear} />
-  else if (gear === null) return <h2>Gear not found!</h2>
+  const gear = data.gear
 
   // async function editName(event) {
   // 	event.preventDefault();
@@ -63,12 +65,9 @@ const Gear = () => {
   // }
 
   async function handleDelete() {
-    if (gear != undefined) {
-      const data = await deleteGear(gear._id) // api call
-      dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
-      navigate(-1)
-      return data
-    }
+    const data = await deleteGear(gear._id) // api call
+    dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
+    navigate(-1)
   }
 
   return (

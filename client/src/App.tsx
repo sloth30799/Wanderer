@@ -7,25 +7,24 @@ import {
 import Messages from "./components/utils/Messages"
 import AuthRequired from "./components/AuthRequired"
 import PostSkeleton from "./components/utils/PostSkeleton"
-import { SideBar } from "./components/Sidebar"
-import ErrorPage from "./pages/ErrorPage"
+import SideBar from "./components/sidebar/SideBar"
 import HomePage from "./pages/HomePage"
-// import Login, { action as loginAction } from "./pages/Login"
 import Login, { action as loginAction } from "./pages/Auth/Login"
 import Signup, { action as signupAction } from "./pages/Auth/Signup"
 import Logout from "./pages/Auth/Logout"
-import Feed, { loader as feedLoader } from "./pages/Feed"
-import Trip from "./pages/Trip"
-import Gear from "./pages/Gear"
-import Post from "./pages/Post"
-import Favorite from "./pages/Favorite"
-import Explore from "./pages/Explore"
 import {
   Profile,
   ProfileGears,
   ProfileBlogs,
   ProfileTrips,
 } from "./pages/Profile"
+import Feed, { loader as feedLoader } from "./pages/Feed"
+import Favorite from "./pages/Favorite"
+import Explore from "./pages/Explore"
+import Blog from "./pages/Blog"
+import Trip from "./pages/Trip"
+import Gear from "./pages/Gear"
+import ErrorPage from "./pages/ErrorPage"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,7 +47,7 @@ const router = createBrowserRouter(
           <Route path="favorite" element={<Favorite />} />
           <Route path="trip/:id" element={<Trip />} />
           <Route path="gear/:id" element={<Gear />} />
-          <Route path="post/:id" element={<Post />} />
+          <Route path="post/:id" element={<Blog />} />
         </Route>
       </Route>
       <Route path="*" element={<ErrorPage />} />

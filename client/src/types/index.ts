@@ -26,7 +26,7 @@ export interface TripType {
   accommodations: AccommodationsType
   transportation: TransportationType
   note: string
-  gear: string
+  gear: GearType
   completed: boolean
   createdAt: string
   __v: number

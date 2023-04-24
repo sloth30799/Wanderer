@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import {
   Button,
   Dialog,
@@ -12,8 +12,11 @@ import {
 } from "@mui/material"
 import LoadingCircle from "./utils/LoadingCircle"
 import { addBackpackingContent } from "../services/features/profile/profileSlice"
-import { createTemplate, getAllTemplates } from "../api"
-import { GearType } from "../types"
+import { GearType, MessagesType, OutletContextProps } from "../types"
+import {
+  useAddTemplateMutation,
+  useFetchAllTemplatesQuery,
+} from "../api/templateApiSlice"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,
@@ -21,20 +24,33 @@ const styles = {
   card: `md:w-1/2 rounded-lg shadow-md text-black bg-whiteSmoke hover:bg-tealBlue hover:text-white`,
 }
 
-type TemplatesProps = {
+type TemplatesBoxProps = {
   chooseTemplate: (template: GearType) => void
 }
 
-const Templates = ({ chooseTemplate }: TemplatesProps) => {
-  const [templates, setTemplates] = useState<GearType[]>([])
-  const [open, setOpen] = useState(false)
+const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
+  const { displayMessage } = useOutletContext() as OutletContextProps
+  const { data, isLoading, isError } = useFetchAllTemplatesQuery()
+
+  const templates = data?.templates
+  const [addTemplate] = useAddTemplateMutation()
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
 
-  async function newGear() {
-    const { gear } = await createTemplate()
-    if (gear) navigate(`/gear/${gear._id}`)
-    dispatch(addBackpackingContent({ category: "gears", content: gear }))
+  async function addNewTemplate() {
+    try {
+      const { gear, messages } = (await addTemplate().unwrap()) as {
+        gear: GearType
+        messages: MessagesType
+      }
+      if (gear) navigate(`/gear/${gear._id}`)
+      dispatch(addBackpackingContent({ category: "gears", content: gear }))
+      displayMessage(messages)
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   const handleClickOpen = () => {
@@ -45,18 +61,11 @@ const Templates = ({ chooseTemplate }: TemplatesProps) => {
     setOpen(false)
   }
 
-  useEffect(() => {
-    async function getTemplates() {
-      const data = await getAllTemplates()
-      setTemplates(data.template)
-    }
-    getTemplates()
-  }, [])
+  if (isLoading) return <LoadingCircle progress={templates} />
+  if (templates === undefined) null
+  if (templates === null) return <h1>No Templates</h1>
 
-  if (templates === undefined) return <LoadingCircle progress={templates} />
-  if (templates === null) return
-
-  const templateCards = templates.map((template) => {
+  const templateCards = templates.map((template: GearType) => {
     return (
       <Card
         className={styles.card}
@@ -95,7 +104,11 @@ const Templates = ({ chooseTemplate }: TemplatesProps) => {
         </DialogTitle>
         <DialogContent className="flex flex-col gap-3">
           <div className={styles.templateBox}>{templateCards}</div>
-          <Button variant="contained" onClick={newGear} className="bg-tealBlue">
+          <Button
+            variant="contained"
+            onClick={addNewTemplate}
+            className="bg-tealBlue"
+          >
             Make Your Own!
           </Button>
         </DialogContent>
@@ -104,4 +117,4 @@ const Templates = ({ chooseTemplate }: TemplatesProps) => {
   )
 }
 
-export default Templates
+export default TemplatesBox

@@ -1,4 +1,3 @@
-import React from "react"
 import { useState, useEffect } from "react"
 import {
   Link,
@@ -9,14 +8,18 @@ import {
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
 import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
-import Templates from "../components/Templates"
+import Templates from "../components/TemplatesBox"
 import LoadingCircle from "../components/utils/LoadingCircle"
-import { completedTrip, deleteTrip, fetchTrip } from "../api"
 import { GearType, OutletContextProps, TripType } from "../types"
 import { timeFormat } from "../utils/formats"
 import { dollarFormat } from "../utils/formats"
 import { useDispatch } from "react-redux"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
+import {
+  useCompletedTripMutation,
+  useDeleteTripMutation,
+  useFetchTripQuery,
+} from "../api/tripApiSlice"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
@@ -27,47 +30,47 @@ const styles = {
 const Trip = () => {
   const { displayMessage } = useOutletContext() as OutletContextProps
   const dispatch = useDispatch()
-  const { id } = useParams()
   const navigate = useNavigate()
+  const { id } = useParams()
 
-  const [trip, setTrip] = useState<TripType>()
-  const [gear, setGear] = useState<GearType>()
+  const { data, isLoading, isError, refetch } = useFetchTripQuery(id)
+  const [completedTrip] = useCompletedTripMutation()
+  const [deleteTrip] = useDeleteTripMutation()
 
+  const [gear, setGear] = useState<GearType>(data?.trip.gear)
   useEffect(() => {
-    const getTrip = async () => {
-      const data = await fetchTrip(id)
-      setTrip(data.trip)
-      setGear(data.trip.gear)
-    }
-    getTrip()
-  }, [id])
+    if (data !== null) setGear(data?.trip.gear)
+  }, [data])
 
-  if (trip === undefined) return <LoadingCircle progress={trip} />
-  else if (trip === null) return <h2>Trip not found!</h2>
+  if (isLoading) return <LoadingCircle progress={data} />
+  else if (isError) return <h2>Trip not found!</h2>
 
-  const handleCompleted = async (e) => {
-    e.preventDefault()
-    const data = await completedTrip(trip._id, trip.completed)
-    if (data.messages) displayMessage(data.messages)
-    setTrip((prevTrip) => ({ ...prevTrip, completed: !prevTrip.completed }))
+  const trip: TripType = data.trip
+
+  async function handleCompleted() {
+    const data = await completedTrip({
+      id: trip._id,
+      completed: trip.completed,
+    })
+    await refetch()
   }
 
   const handleDelete = async () => {
-    const data = await deleteTrip(trip._id) // api call
+    await deleteTrip(trip._id) // api call
     dispatch(deleteBackpackingContent({ category: "trips", id: trip._id }))
     navigate(-1)
-    return data
   }
 
   const chooseTemplate = (template: GearType) => {
-    setGear((prevGear) => {
-      return {
-        ...prevGear,
-        equipments: template.equipments || [],
-        essentials: template.essentials || [],
-        accessories: template.accessories || [],
-      }
-    })
+    if (gear !== null)
+      setGear((prevGear: GearType) => {
+        return {
+          ...prevGear,
+          equipments: template.equipments || [],
+          essentials: template.essentials || [],
+          accessories: template.accessories || [],
+        }
+      })
   }
 
   return (
@@ -150,7 +153,7 @@ const Trip = () => {
       <div className="flex flex-col justify-between mt-3">
         <h3 className="text-center">Gear List</h3>
         <Templates chooseTemplate={chooseTemplate} />
-        <GearDisplay gearData={gear} />
+        {gear && <GearDisplay gearData={gear} />}
       </div>
     </div>
   )

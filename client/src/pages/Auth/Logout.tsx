@@ -27,7 +27,7 @@ const Logout = () => {
       navigate("/")
       if (isSuccess) displayMessage(msg)
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

@@ -8,7 +8,6 @@ import { store } from "./services/store.js"
 import { theme } from "./theme"
 import "./assets/main.css"
 import App from "./App.jsx"
-import { authApiSlice } from "./api/authApiSlice.js"
 
 const rootElement = document.getElementById("root")
 if (rootElement !== null) {
