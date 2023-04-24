@@ -10,12 +10,6 @@ import HomePage from "./pages/HomePage"
 import Login, { action as loginAction } from "./pages/Auth/Login"
 import Signup, { action as signupAction } from "./pages/Auth/Signup"
 import Logout from "./pages/Auth/Logout"
-import {
-  ProfileGears,
-  ProfileBlogs,
-  ProfileTrips,
-  Profile,
-} from "./pages/Profile"
 import Feed, { loader as feedLoader } from "./pages/Feed"
 import Favorite from "./pages/Favorite"
 import Explore from "./pages/Explore"
@@ -23,7 +17,11 @@ import Blog from "./pages/Blog"
 import Trip from "./pages/Trip"
 import Gear from "./pages/Gear"
 import ErrorPage from "./pages/ErrorPage"
-import SideBar from "./components/sidebar/SideBar"
+import SideBar from "./components/sidebar/SideBar.tsx"
+import Profile from "./pages/Profile/Profile.tsx"
+import ProfileTrips from "./pages/Profile/ProfileTrips.tsx"
+import ProfileGears from "./pages/Profile/ProfileGears.tsx"
+import ProfileBlogs from "./pages/Profile/ProfileBlogs.tsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
