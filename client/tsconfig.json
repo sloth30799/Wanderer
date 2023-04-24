@@ -17,6 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "useUnknownInCatchVariables": true,
+    "baseUrl": "./src",
 
     /* Linting */
     "strict": true,
