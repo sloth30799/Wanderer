@@ -3,11 +3,21 @@ import { Await, defer, useLoaderData } from "react-router-dom"
 import PostSkeleton from "../components/utils/PostSkeleton"
 import { BlogCard } from "../components/BlogCard"
 import { BlogType } from "../types"
-import { fetchFeed, postLike } from "../api"
+import { api } from "../lib/axios"
 
 interface responseType {
   posts: BlogType[]
   success: boolean
+}
+
+async function fetchFeed() {
+  const { data } = await api.get("/api/feed")
+  return data
+}
+
+async function postLike(id: string) {
+  const { data } = await api.put(`/api/post/likePost/${id}`)
+  return data
 }
 
 export function loader() {
