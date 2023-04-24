@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
   Button,
@@ -14,14 +15,14 @@ import {
   ListItem,
 } from "@mui/material"
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined"
-import { useBackpackerContext } from "../../context/BackpackerContext"
+import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 
 type AddPostProps = {
   sideBarOpen: boolean
 }
 
 const AddPost = ({ sideBarOpen }: AddPostProps) => {
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -33,7 +34,7 @@ const AddPost = ({ sideBarOpen }: AddPostProps) => {
     setOpen(false)
   }
 
-  async function makePost(event: React.FormEvent<HTMLFormElement>) {
+  async function addBlog(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const response = await fetch(form.action, {
@@ -42,11 +43,7 @@ const AddPost = ({ sideBarOpen }: AddPostProps) => {
     })
     const json = await response.json()
     if (json.post) {
-      dispatch({
-        type: "UPDATE_BACKPACKER",
-        dataType: "posts",
-        data: json.post,
-      })
+      dispatch(addBackpackingContent({ category: "blogs", content: json.post }))
       setOpen(false)
       navigate(`/post/${json.post._id}`)
     }
@@ -103,7 +100,7 @@ const AddPost = ({ sideBarOpen }: AddPostProps) => {
             action="/api/post/createPost"
             encType="multipart/form-data"
             method="POST"
-            onSubmit={makePost}
+            onSubmit={addBlog}
             className="flex flex-col gap-6 p-1"
           >
             <TextField

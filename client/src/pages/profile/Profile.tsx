@@ -1,6 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../../api/authApiSlice"
+import { selectCurrentUser } from "../../services/store"
 
 const styles = {
   navBar: `flex gap-6`,
@@ -14,7 +14,7 @@ const Profile = () => {
   return (
     <div>
       <div>
-        <h2>Welcome back {user.userName}!</h2>
+        <h2>Welcome back {user!.userName}!</h2>
         <nav className={styles.navBar}>
           <NavLink
             to="trip"

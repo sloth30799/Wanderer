@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
   Button,
@@ -10,7 +11,7 @@ import {
   CardContent,
 } from "@mui/material"
 import LoadingCircle from "./utils/LoadingCircle"
-import { useBackpackerContext } from "../context/BackpackerContext"
+import { addBackpackingContent } from "../services/features/profile/profileSlice"
 import { createTemplate, getAllTemplates } from "../api"
 import { GearType } from "../types"
 
@@ -27,13 +28,13 @@ type TemplatesProps = {
 const Templates = ({ chooseTemplate }: TemplatesProps) => {
   const [templates, setTemplates] = useState<GearType[]>([])
   const [open, setOpen] = useState(false)
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   async function newGear() {
     const { gear } = await createTemplate()
     if (gear) navigate(`/gear/${gear._id}`)
-    dispatch({ type: "UPDATE_BACKPACKER", dataType: "gears", data: gear })
+    dispatch(addBackpackingContent({ category: "gears", content: gear }))
   }
 
   const handleClickOpen = () => {

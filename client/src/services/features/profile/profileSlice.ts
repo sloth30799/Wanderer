@@ -7,6 +7,9 @@ import {
   GearType,
   TripType,
 } from "../../../types"
+import { useSelector } from "react-redux"
+import { selectAuth } from "../../store"
+import { mainApiSlice } from "../../../api/mainApiSlice"
 
 const initialState: BackpackingData = {
   trips: [],
@@ -67,6 +70,16 @@ const profileSlice = createSlice({
       state.gears = []
       state.blogs = []
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      mainApiSlice.endpoints.fetchProfile.matchFulfilled,
+      (state, action) => {
+        state.trips = action.payload.trips
+        state.gears = action.payload.gears
+        state.blogs = action.payload.blogs
+      }
+    )
   },
 })
 

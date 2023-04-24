@@ -103,7 +103,7 @@ const Hero = () => {
                 Developer
               </Link>
             </div>
-            <Link to="login" className="no-underline">
+            <Link to="login" className="no-underline hidden">
               <Button
                 variant="contained"
                 color="primary"
@@ -154,7 +154,7 @@ const Hero = () => {
                   Developer
                 </Link>
               </div>
-              <Link to="login" className="no-underline">
+              <Link to="login" className="no-underline hidden">
                 <Button
                   variant="contained"
                   className="shadow-3xl hidden bg-white text-black hover:bg-gray-200 lg:block"

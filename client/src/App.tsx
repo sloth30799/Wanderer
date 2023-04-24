@@ -4,8 +4,6 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom"
-import { UserProvider } from "./context/UserContext"
-import { BackpackerProvider } from "./context/BackpackerContext"
 import Messages from "./components/utils/Messages"
 import AuthRequired from "./components/AuthRequired"
 import PostSkeleton from "./components/utils/PostSkeleton"
@@ -25,7 +23,7 @@ import Explore from "./pages/Explore"
 import {
   Profile,
   ProfileGears,
-  ProfilePosts,
+  ProfileBlogs,
   ProfileTrips,
 } from "./pages/Profile"
 
@@ -33,7 +31,6 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" errorElement={<ErrorPage />} element={<Messages />}>
       <Route index element={<HomePage />} />
-
       <Route path="login" element={<Login />} action={loginAction} />
       <Route path="signup" element={<Signup />} action={signupAction} />
       <Route path="logout" element={<Logout />} />
@@ -44,7 +41,7 @@ const router = createBrowserRouter(
           <Route path="profile" element={<Profile />}>
             <Route path="trip" element={<ProfileTrips />} />
             <Route path="gear" element={<ProfileGears />} />
-            <Route path="post" element={<ProfilePosts />} />
+            <Route path="post" element={<ProfileBlogs />} />
           </Route>
           <Route path="feed" element={<Feed />} loader={feedLoader} />
           <Route path="explore" element={<Explore />} />
@@ -60,13 +57,7 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return (
-    <UserProvider>
-      <BackpackerProvider>
-        <RouterProvider router={router} />
-      </BackpackerProvider>
-    </UserProvider>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default App

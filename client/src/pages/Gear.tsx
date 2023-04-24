@@ -13,15 +13,17 @@ import EditIcon from "@mui/icons-material/Edit"
 import GearDisplay from "../components/GearDisplay"
 import LoadingCircle from "../components/utils/LoadingCircle"
 import { deleteGear, fetchGear } from "../api"
-import { useBackpackerContext } from "../context/BackpackerContext"
+import { useDispatch } from "react-redux"
+import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
+import { GearType } from "../types"
 
 const Gear = () => {
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
 
   const [open, setOpen] = useState(false)
-  const [gear, setGear] = useState()
+  const [gear, setGear] = useState<GearType>()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -61,10 +63,12 @@ const Gear = () => {
   // }
 
   async function handleDelete() {
-    const data = await deleteGear(gear._id) // api call
-    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "gears" })
-    navigate(-1)
-    return data
+    if (gear != undefined) {
+      const data = await deleteGear(gear._id) // api call
+      dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
+      navigate(-1)
+      return data
+    }
   }
 
   return (
@@ -83,7 +87,6 @@ const Gear = () => {
       </div>
       <div className="flex justify-end">
         <IconButton
-          variant="outlined"
           className="text-black"
           aria-label="edit"
           onClick={handleClickOpen}

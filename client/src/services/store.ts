@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit"
 import { apiSlice } from "../api/apiSlice"
 import authReducer from "./features/auth/authSlice"
 import profileReducer from "./features/profile/profileSlice"
+import { authApiSlice } from "../api/authApiSlice"
+import { mainApiSlice } from "../api/mainApiSlice"
 
 export const store = configureStore({
   reducer: {
@@ -14,10 +16,13 @@ export const store = configureStore({
   devTools: true,
 })
 
+store.dispatch(authApiSlice.endpoints.fetchUser.initiate({}))
+
 export type RootState = ReturnType<typeof store.getState>
 
 export type AppDispatch = typeof store.dispatch
 
+export const selectAuth = (state: RootState) => state.auth
 export const selectCurrentUser = (state: RootState) => state.auth.user
 
 export const selectProfileData = (state: RootState) => state.profile

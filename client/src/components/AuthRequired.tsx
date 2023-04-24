@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import {
   useLocation,
@@ -5,9 +6,9 @@ import {
   Outlet,
   useOutletContext,
 } from "react-router-dom"
-import { selectCurrentUser } from "../api/authApiSlice"
 import { OutletContextProps } from "../types"
-import { useEffect } from "react"
+import { selectAuth, store } from "../services/store"
+import { mainApiSlice } from "../api/mainApiSlice"
 
 const msg = {
   info: [
@@ -19,15 +20,22 @@ const msg = {
 
 const AuthRequired = () => {
   const { displayMessage } = useOutletContext() as OutletContextProps
-  const user = useSelector(selectCurrentUser)
+  const { user, loading } = useSelector(selectAuth)
   const location = useLocation()
 
-  useEffect(() => {
-    if (user === null) displayMessage(msg)
-  }, [])
+  if (loading) return <h1>Loading...</h1>
+
+  if (!loading && user === null) {
+    useEffect(() => {
+      displayMessage(msg)
+    }, [])
+  }
+
+  if (user != null)
+    store.dispatch(mainApiSlice.endpoints.fetchProfile.initiate({}))
 
   return user ? (
-    <Outlet />
+    <Outlet context={useOutletContext()} />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />
   )

@@ -4,10 +4,11 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
 import { CssBaseline } from "@mui/material"
 import { AnimatePresence } from "framer-motion"
 import { Provider } from "react-redux"
-import { store } from "./store/store.js"
+import { store } from "./services/store.js"
 import { theme } from "./theme"
 import "./assets/main.css"
 import App from "./App.jsx"
+import { authApiSlice } from "./api/authApiSlice.js"
 
 const rootElement = document.getElementById("root")
 if (rootElement !== null) {

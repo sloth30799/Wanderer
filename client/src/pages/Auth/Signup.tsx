@@ -12,7 +12,7 @@ import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
 import { useDispatch } from "react-redux"
 import { useSignupMutation } from "../../api/authApiSlice"
-import { setUser } from "../../store/features/auth/authSlice"
+import { setUser } from "../../services/features/auth/authSlice"
 import { OutletContextProps } from "../../types"
 
 export async function action({ request }: ActionFunctionArgs) {

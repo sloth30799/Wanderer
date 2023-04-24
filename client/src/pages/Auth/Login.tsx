@@ -13,9 +13,11 @@ import GoogleIcon from "@mui/icons-material/Google"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import PersonPinIcon from "@mui/icons-material/PersonPin"
-import { setUser } from "../../store/features/auth/authSlice"
+import { setUser } from "../../services/features/auth/authSlice"
 import { useLoginMutation } from "../../api/authApiSlice"
 import { OutletContextProps } from "../../types"
+import { useSelector } from "react-redux"
+import { selectCurrentUser } from "../../services/store"
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData()
@@ -33,6 +35,8 @@ const Login = () => {
   const credentials = useActionData()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector(selectCurrentUser)
+  console.log(user)
 
   const [postLogin, { isLoading }] = useLoginMutation()
 

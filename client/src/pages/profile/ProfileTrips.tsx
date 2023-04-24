@@ -7,8 +7,9 @@ import {
   Card,
 } from "@mui/material"
 import { Link } from "react-router-dom"
-import { useBackpackerContext } from "../../context/BackpackerContext"
 import { timeFormat } from "../../utils/formats"
+import { useSelector } from "react-redux"
+import { selectTrips } from "../../services/store"
 
 const styles = {
   container: `container my-6 m-auto flex flex-wrap justify-center gap-6`,
@@ -19,12 +20,10 @@ const styles = {
 }
 
 const ProfileTrips = () => {
-  const { state } = useBackpackerContext()
+  const trips = useSelector(selectTrips)
 
-  if (state.backpacker === undefined) return null
-  else if (state.backpacker === null) return <h2>Data not found!</h2>
-
-  const trips = state.backpacker.trips
+  if (trips === undefined) return null
+  else if (trips === null) return <h2>Data not found!</h2>
 
   if (trips.length < 1) return <h2>Start an adventure!</h2>
 

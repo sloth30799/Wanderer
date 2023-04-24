@@ -11,11 +11,12 @@ import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
 import Templates from "../components/Templates"
 import LoadingCircle from "../components/utils/LoadingCircle"
-import { useBackpackerContext } from "../context/BackpackerContext"
 import { completedTrip, deleteTrip, fetchTrip } from "../api"
-import { GearType, TripType } from "../types"
+import { GearType, OutletContextProps, TripType } from "../types"
 import { timeFormat } from "../utils/formats"
 import { dollarFormat } from "../utils/formats"
+import { useDispatch } from "react-redux"
+import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
@@ -24,8 +25,8 @@ const styles = {
 }
 
 const Trip = () => {
-  const { dispatch } = useBackpackerContext()
-  const { displayMessage } = useOutletContext()
+  const { displayMessage } = useOutletContext() as OutletContextProps
+  const dispatch = useDispatch()
   const { id } = useParams()
   const navigate = useNavigate()
 
@@ -53,13 +54,12 @@ const Trip = () => {
 
   const handleDelete = async () => {
     const data = await deleteTrip(trip._id) // api call
-    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "trips" })
+    dispatch(deleteBackpackingContent({ category: "trips", id: trip._id }))
     navigate(-1)
     return data
   }
 
   const chooseTemplate = (template: GearType) => {
-    console.log(template)
     setGear((prevGear) => {
       return {
         ...prevGear,

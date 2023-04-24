@@ -1,3 +1,4 @@
+import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import {
   ListItem,
@@ -7,24 +8,20 @@ import {
 } from "@mui/material"
 import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined"
 import { createTemplate } from "../../api"
-import { useBackpackerContext } from "../../context/BackpackerContext"
+import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 
 type AddGearProps = {
   sideBarOpen: boolean
 }
 
 const AddGear = ({ sideBarOpen }: AddGearProps) => {
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   async function handleClick() {
     const { gear } = await createTemplate()
     if (gear) navigate(`/gear/${gear._id}`)
-    dispatch({
-      type: "UPDATE_BACKPACKER",
-      dataType: "gears",
-      data: gear,
-    })
+    dispatch(addBackpackingContent({ category: "gears", content: gear }))
   }
 
   return (

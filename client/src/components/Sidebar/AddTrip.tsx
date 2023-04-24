@@ -19,7 +19,8 @@ import {
 } from "@mui/material"
 import BackpackOutlinedIcon from "@mui/icons-material/BackpackOutlined"
 import { createTrip } from "../../api"
-import { useBackpackerContext } from "../../context/BackpackerContext"
+import { useDispatch } from "react-redux"
+import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 
 const styles = {
   formLabel: `font-medium text-purple`,
@@ -31,7 +32,7 @@ type AddTripProps = {
 }
 
 const AddTrip = ({ sideBarOpen }: AddTripProps) => {
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const [open, setOpen] = useState(false)
   const navigate = useNavigate()
 
@@ -67,21 +68,17 @@ const AddTrip = ({ sideBarOpen }: AddTripProps) => {
   //   }
   // }
 
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function addTrip(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
     const data = new FormData(form)
-    const formData = new URLSearchParams(data)
+    const formData = new URLSearchParams(data as any)
 
     try {
       const { trip } = await createTrip(formData)
       if (trip) navigate(`/trip/${trip._id}`)
       setOpen(false)
-      dispatch({
-        type: "UPDATE_BACKPACKER",
-        dataType: "trips",
-        data: trip,
-      })
+      dispatch(addBackpackingContent({ category: "trips", content: trip }))
     } catch (error) {
       console.error(error)
     }
@@ -121,7 +118,7 @@ const AddTrip = ({ sideBarOpen }: AddTripProps) => {
           </DialogContentText>
           <form
             method="POST"
-            onSubmit={handleSubmit}
+            onSubmit={addTrip}
             className="flex flex-col gap-3 p-1"
           >
             <TextField

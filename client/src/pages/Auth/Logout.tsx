@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useOutletContext } from "react-router-dom"
 import { useLogoutMutation } from "../../api/authApiSlice"
-import { logOutUser } from "../../store/features/auth/authSlice"
+import { logOutUser } from "../../services/features/auth/authSlice"
 import { useDispatch } from "react-redux"
 import { OutletContextProps } from "../../types"
 

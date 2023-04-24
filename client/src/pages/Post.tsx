@@ -13,13 +13,14 @@ import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import { fromNowFormat } from "../utils/formats"
 import { fetchPost, postDelete, postLike } from "../api"
-import { useBackpackerContext } from "../context/BackpackerContext"
 import PostSkeleton from "../components/utils/PostSkeleton"
 import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../api/authApiSlice"
+import { selectCurrentUser } from "../services/store"
+import { useDispatch } from "react-redux"
+import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
 
 const Post = () => {
-  const { dispatch } = useBackpackerContext()
+  const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -44,7 +45,7 @@ const Post = () => {
 
   const handleDelete = async () => {
     const data = await postDelete(post._id) // api call
-    dispatch({ type: "DELETE_BACKPACKER", id, dataType: "posts" })
+    dispatch(deleteBackpackingContent({ category: "blogs", id: post._id }))
     navigate(-1)
     return data
   }

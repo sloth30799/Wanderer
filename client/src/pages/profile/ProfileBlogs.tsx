@@ -1,7 +1,7 @@
-import React from "react"
 import { CardActionArea, CardMedia, CardContent, Card } from "@mui/material"
+import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { useBackpackerContext } from "../../context/BackpackerContext"
+import { selectBlogs, selectGears } from "../../services/store"
 
 const styles = {
   container: `container my-6 flex flex-wrap justify-center`,
@@ -10,17 +10,15 @@ const styles = {
   postTitle: `font-medium font-pally`,
 }
 
-const ProfileGears = () => {
-  const { state } = useBackpackerContext()
+const ProfileBlogs = () => {
+  const blogs = useSelector(selectBlogs)
 
-  if (state.backpacker === undefined) return null
-  else if (state.backpacker === null) return <h2>Data not found!</h2>
+  if (blogs === undefined) return null
+  else if (blogs === null) return <h2>Data not found!</h2>
 
-  const posts = state.backpacker.posts
+  if (blogs.length < 1) return <h2>Add A Blog!</h2>
 
-  if (posts.length < 1) return <h2>Add A Blog!</h2>
-
-  const postsRender = posts.map((post) => {
+  const blogsRender = blogs.map((post) => {
     return (
       <Link to={`/post/${post._id}`} key={post._id} className="no-underline">
         <Card className={styles.card}>
@@ -40,7 +38,7 @@ const ProfileGears = () => {
     )
   })
 
-  return <div className={styles.container}>{postsRender}</div>
+  return <div className={styles.container}>{blogsRender}</div>
 }
 
-export default ProfileGears
+export default ProfileBlogs

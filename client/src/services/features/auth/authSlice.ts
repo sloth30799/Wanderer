@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { UserType } from "../../../types"
-
+import { authApiSlice } from "../../../api/authApiSlice"
 interface UserState {
   user: UserType | null
+  loading: boolean
 }
 
 const initialState: UserState = {
   user: null,
+  loading: true,
 }
 
 const authSlice = createSlice({
@@ -20,6 +22,15 @@ const authSlice = createSlice({
     logOutUser: (state, _) => {
       state.user = null
     },
+  },
+  extraReducers: (builder) => {
+    builder.addMatcher(
+      authApiSlice.endpoints.fetchUser.matchFulfilled,
+      (state, action) => {
+        state.user = action.payload
+        state.loading = false
+      }
+    )
   },
 })
 
