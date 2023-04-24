@@ -4,19 +4,17 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom"
-import Messages from "./components/utils/Messages"
 import AuthRequired from "./components/AuthRequired"
 import PostSkeleton from "./components/utils/PostSkeleton"
-import SideBar from "./components/sidebar/SideBar"
 import HomePage from "./pages/HomePage"
 import Login, { action as loginAction } from "./pages/Auth/Login"
 import Signup, { action as signupAction } from "./pages/Auth/Signup"
 import Logout from "./pages/Auth/Logout"
 import {
-  Profile,
   ProfileGears,
   ProfileBlogs,
   ProfileTrips,
+  Profile,
 } from "./pages/Profile"
 import Feed, { loader as feedLoader } from "./pages/Feed"
 import Favorite from "./pages/Favorite"
@@ -25,10 +23,11 @@ import Blog from "./pages/Blog"
 import Trip from "./pages/Trip"
 import Gear from "./pages/Gear"
 import ErrorPage from "./pages/ErrorPage"
+import SideBar from "./components/sidebar/SideBar"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" errorElement={<ErrorPage />} element={<Messages />}>
+    <Route path="/" errorElement={<ErrorPage />}>
       <Route index element={<HomePage />} />
       <Route path="login" element={<Login />} action={loginAction} />
       <Route path="signup" element={<Signup />} action={signupAction} />

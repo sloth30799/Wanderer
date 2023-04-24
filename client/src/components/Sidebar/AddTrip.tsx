@@ -21,6 +21,7 @@ import BackpackOutlinedIcon from "@mui/icons-material/BackpackOutlined"
 import { useDispatch } from "react-redux"
 import { addBackpackingContent } from "../../services/features/profile/profileSlice"
 import { useAddTripMutation } from "../../api/tripApiSlice"
+import { TripType } from "../../types"
 
 const styles = {
   formLabel: `font-medium text-purple`,
@@ -76,8 +77,8 @@ const AddTrip = ({ sideBarOpen }: AddTripProps) => {
     const formData = new URLSearchParams(data as any)
 
     try {
-      const data = await createTrip(formData)
-      const trip = data?.trip
+      const data: any = await createTrip(formData)
+      const trip = data.trip
       setOpen(false)
       dispatch(addBackpackingContent({ category: "trips", content: trip }))
       navigate(`/trip/${trip._id}`)

@@ -5,7 +5,7 @@ export const tripApiSlice = apiSlice.injectEndpoints({
     fetchTrip: builder.query({
       query: (tripId) => `trip/${tripId}`,
     }),
-    addTrip: builder.mutation({
+    addTrip: builder.mutation<any, any>({
       query: (formData) => ({
         url: "trip/postTrip",
         method: "POST",
