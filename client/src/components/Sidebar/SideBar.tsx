@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { Outlet, useOutletContext } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import MuiDrawer from "@mui/material/Drawer"
 import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
