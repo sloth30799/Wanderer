@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server",
     "dev": "nodemon server/server",
-    "postinstall": "npm --prefix client install"
+    "postinstall": "npm --prefix client install",
+    "build": "npm --prefix client run build"
   },
   "author": "Han Ye Htun",
   "license": "ISC",
