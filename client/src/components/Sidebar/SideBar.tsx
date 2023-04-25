@@ -184,7 +184,7 @@ export default function SideBar() {
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />
-        <Outlet context={useOutletContext()} />
+        <Outlet />
       </Box>
     </Box>
   )
