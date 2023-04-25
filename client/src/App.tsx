@@ -4,24 +4,23 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom"
-import AuthRequired from "./components/AuthRequired"
-import PostSkeleton from "./components/utils/PostSkeleton"
-import HomePage from "./pages/HomePage"
-import Login, { action as loginAction } from "./pages/Auth/Login"
-import Signup, { action as signupAction } from "./pages/Auth/Signup"
-import Logout from "./pages/Auth/Logout"
-import Feed, { loader as feedLoader } from "./pages/Feed"
-import Favorite from "./pages/Favorite"
-import Explore from "./pages/Explore"
-import Blog from "./pages/Blog"
-import Trip from "./pages/Trip"
-import Gear from "./pages/Gear"
-import ErrorPage from "./pages/ErrorPage"
-import SideBar from "./components/sidebar/SideBar.tsx"
-import Profile from "./pages/Profile/Profile.tsx"
-import ProfileTrips from "./pages/Profile/ProfileTrips.tsx"
-import ProfileGears from "./pages/Profile/ProfileGears.tsx"
-import ProfileBlogs from "./pages/Profile/ProfileBlogs.tsx"
+import HomePage from "pages/HomePage"
+import Login, { action as loginAction } from "pages/Auth/Login"
+import Signup, { action as signupAction } from "pages/Auth/Signup"
+import Logout from "pages/Auth/Logout"
+import Feed, { loader as feedLoader } from "pages/Feed"
+import ErrorPage from "pages/ErrorPage"
+import Profile from "pages/Profile/Profile"
+import SideBar from "components/sidebar/SideBar"
+import ProfileTrips from "pages/Profile/ProfileTrips"
+import ProfileGears from "pages/Profile/ProfileGears"
+import ProfileBlogs from "pages/Profile/ProfileBlogs"
+import Favorite from "pages/Favorite"
+import Explore from "pages/Explore"
+import Trip from "pages/Trip"
+import Gear from "pages/Gear"
+import Blog from "pages/Blog"
+import AuthRequired from "components/AuthRequired"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,7 +29,6 @@ const router = createBrowserRouter(
       <Route path="login" element={<Login />} action={loginAction} />
       <Route path="signup" element={<Signup />} action={signupAction} />
       <Route path="logout" element={<Logout />} />
-      <Route path="skeleton" element={<PostSkeleton />} />
 
       <Route element={<AuthRequired />}>
         <Route element={<SideBar />}>
