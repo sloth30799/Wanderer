@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   resolve: {
     extensions: [".tsx", ".ts", ".jsx", ".js"],
-    alias: [{ find: "@", replacement: "/src" }],
+    // alias: [{ find: "@", replacement: "/src" }],
   },
   server: {
     port: 3000,
