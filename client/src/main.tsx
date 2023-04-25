@@ -5,10 +5,10 @@ import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
 import { CssBaseline } from "@mui/material"
 import { AnimatePresence } from "framer-motion"
 import { Toaster } from "react-hot-toast"
-import App from "App.js"
+import App from "@/App.js"
 import "assets/main.css"
-import { theme } from "theme"
-import { store } from "services/store"
+import { theme } from "@/theme"
+import { store } from "@/services/store"
 
 const rootElement = document.getElementById("root")
 if (rootElement !== null) {
