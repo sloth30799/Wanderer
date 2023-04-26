@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cd frontend && npm install && npm run build && cd ../backend && npm install",
-    "start": "TG_ALLOW_MIXED=ALLOW  node backend/index.js"
+    "start": "TG_ALLOW_MIXED=ALLOW  node backend/src/index.js"
   },
   "devDependencies": {
     "commitizen": "^4.3.0",
