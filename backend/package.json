@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Trip Planning App",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node src/index",
+    "dev": "nodemon src/index"
   },
   "author": "Han Ye Htun",
   "license": "ISC",
@@ -28,13 +28,6 @@
     "validator": "^13.9.0"
   },
   "devDependencies": {
-    "commitizen": "^4.3.0",
-    "cz-conventional-changelog": "^3.3.0",
     "nodemon": "^2.0.20"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
   }
 }

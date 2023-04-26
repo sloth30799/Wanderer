@@ -16,7 +16,7 @@ const tripsRoutes = require("./routes/trips")
 const templatesRoutes = require("./routes/templates")
 
 //Use .env file in config folder
-require("dotenv").config({ path: "./config/.env" })
+require("dotenv").config({ path: "./src/config/.env" })
 
 // Passport config
 require("./config/passport")(passport)
@@ -25,7 +25,7 @@ require("./config/passport")(passport)
 connectDB()
 
 //Static Folder
-app.use(express.static("client/dist"))
+app.use(express.static("frontend/dist"))
 
 //Body Parsing
 app.use(express.urlencoded({ extended: true }))
@@ -60,7 +60,7 @@ app.use("/api/gear", gearsRoutes)
 app.use("/api/template", templatesRoutes)
 
 app.use("*", (_, res) => {
-  res.sendFile(path.join(__dirname, "../client/dist/index.html"))
+  res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"))
 })
 
 const PORT = process.env.PORT || 5000
