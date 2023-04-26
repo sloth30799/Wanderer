@@ -4,7 +4,7 @@
   "description": "Explore new places with Wanderer - the ultimate backpacker app that lets you plan your travels, share your experiences, and connect with like-minded travelers from all around the world.",
   "main": "index.js",
   "scripts": {
-    "build": "cd server && npm install && cd ../client && npm install && npm run build",
+    "build": "cd client && npm install && npm run build && cd ../server && npm install && npm run build",
     "start": "TG_ALLOW_MIXED=ALLOW  node backend/build/index.js"
   },
   "devDependencies": {
