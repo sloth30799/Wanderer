@@ -31,7 +31,7 @@ const Signup = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [postSignup, { isLoading, isSuccess, isError }] = useSignupMutation()
+  const [postSignup, { isLoading, isError }] = useSignupMutation()
 
   async function signup() {
     try {
@@ -42,18 +42,15 @@ const Signup = () => {
         toast.error("Network Error")
       }
 
-      if (isSuccess) {
-        if (messages.errors) {
-          messages.errors.map((message: any) => {
-            return toast.error(message.msg)
-          })
-        } else {
-          toast.success("Sign up Successful!")
-          dispatch(setUser({ user }))
-          navigate("/profile")
-        }
+      if (messages.errors) {
+        messages.errors.map((message: any) => {
+          return toast.error(message.msg)
+        })
+      } else if (user != null) {
+        toast.success("Sign up Successful!")
+        dispatch(setUser({ user }))
+        navigate("/profile")
       }
-      console.log(messages)
     } catch (error) {
       console.error(error)
     }
