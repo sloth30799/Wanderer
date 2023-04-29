@@ -1,13 +1,14 @@
-# Wanderer-App: [Visit Here](https://wanderer.onrender.com/)
+# Wanderer: [Visit Here](https://wanderer.onrender.com/)
 
 Explore new places with Wanderer - the ultimate backpacker app that lets you plan your travels, share your experiences, and connect with like-minded travelers from all around the world.
 
-![Imgur](https://i.imgur.com/zhY50vE.png)
+![Imgur](https://imgur.com/WVfK018.png)
 
 ## How It's Made:
 
 Tech Used:
 
+![TypeScript](https://img.shields.io/badge/-TypeScript-%23007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
