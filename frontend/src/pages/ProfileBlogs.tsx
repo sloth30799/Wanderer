@@ -14,7 +14,7 @@ const styles = {
 const ProfileBlogs = () => {
   const blogs: BlogType[] = useSelector(selectBlogs)
 
-  if (blogs === undefined) return null
+  if (blogs.length < 1) return <h2>Share Your Experience with others!</h2>
   else if (blogs === null) return <h2>Share Your Experience with others!</h2>
 
   const blogsRender = blogs?.map((blog: BlogType) => {

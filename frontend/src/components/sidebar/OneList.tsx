@@ -7,8 +7,8 @@ import {
 import { NavLink } from "react-router-dom"
 
 const styles = {
-  activeNavbar: `no-underline text-purple`,
-  inactiveNavbar: `no-underline text-black`,
+  activeNavbar: `no-underline text-deepBlue font-extrabold`,
+  inactiveNavbar: `no-underline text-black hover:font-semibold`,
 }
 
 type OneListProps = {
@@ -26,19 +26,27 @@ const OneList = ({ text, icon, link, sideBarOpen }: OneListProps) => {
         isActive ? styles.activeNavbar : styles.inactiveNavbar
       }
     >
-      <ListItem disablePadding sx={{ display: "block" }}>
+      <ListItem
+        disablePadding
+        className="block hover:bg-white hover:text-deepBlue"
+      >
         <ListItemButton
           sx={{
-            minHeight: 48,
+            minHeight: 30,
             justifyContent: sideBarOpen ? "initial" : "center",
-            px: 2.5,
+            py: 0.5,
+            px: 2,
+            ":hover": {
+              backgroundColor: "#fff",
+            },
           }}
         >
           <ListItemIcon
             sx={{
               minWidth: 0,
-              mr: sideBarOpen ? 3 : "auto",
+              mr: sideBarOpen ? 2 : "auto",
               justifyContent: "center",
+              fontSize: "1.5rem",
             }}
           >
             {icon}

@@ -4,9 +4,9 @@ import { selectCurrentUser } from "../services/store"
 import { useFetchProfileQuery } from "../api/mainApiSlice"
 
 const styles = {
-  navBar: `flex gap-6`,
-  navLink: `no-underline text-purple`,
-  activeLink: `no-underline font-bold text-purple`,
+  navBar: `rounded-lg flex items-center justify-center gap-6 bg-deepBlue font-title p-3 w-48`,
+  navLink: `no-underline text-white`,
+  activeLink: `font-extrabold text-white`,
 }
 
 const Profile = () => {
@@ -18,7 +18,7 @@ const Profile = () => {
   return (
     <div>
       <div>
-        <h2>Welcome back {user!.userName}!</h2>
+        <h2 className="font-title">Welcome back {user?.userName}!</h2>
         <nav className={styles.navBar}>
           <NavLink
             to="trip"

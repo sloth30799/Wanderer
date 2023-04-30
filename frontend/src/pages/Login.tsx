@@ -48,7 +48,7 @@ const Login = () => {
         })
       } else if (user != null) {
         toast.success("Log in Successful!")
-        navigate("/profile")
+        navigate("/profile", { replace: true })
         dispatch(setUser({ user }))
       }
     } catch (error) {
@@ -61,7 +61,7 @@ const Login = () => {
   }, [credentials])
 
   function google() {
-    window.open("http://wanderer.onrender.com/api/auth/google", "_self")
+    window.open("https://wanderer.onrender.com/api/auth/google", "_self")
   }
 
   return (

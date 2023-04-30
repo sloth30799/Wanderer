@@ -36,6 +36,15 @@ export const theme = createTheme({
         container: rootElement,
       },
     },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontSize: "inherit",
+          color: "inherit",
+          fontWeight: "inherit",
+        },
+      },
+    },
   },
   typography: {
     fontFamily: ["Archivo", "Pilcrow Rounded", "sans-serif"].join(","),

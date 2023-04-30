@@ -12,7 +12,7 @@ module.exports = {
         user: req.user.id,
         template: true,
       }).lean()
-      res.status(200).json({ success: true, posts, trips, gears })
+      res.status(200).json({ success: true, blogs: posts, trips, gears })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })

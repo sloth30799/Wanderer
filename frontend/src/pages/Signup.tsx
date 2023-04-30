@@ -50,7 +50,7 @@ const Signup = () => {
       } else if (user != null) {
         toast.success("Sign up Successful!")
         dispatch(setUser({ user }))
-        navigate("/profile")
+        navigate("/profile", { replace: true })
       }
     } catch (error) {
       console.error(error)

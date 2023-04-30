@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       fontFamily: {
         title: "Pilcrow Rounded",
+        body: "Archivo",
       },
       boxShadow: {
         "3xl": "4px 4px 0px 0px rgba(0,0,0,1);",
@@ -32,19 +33,19 @@ module.exports = {
         },
       },
       colors: {
-        whiteSmoke: "#edede9",
-        grey: "f0f0f0",
         brightYellow: "#ffeb3b",
         goldenYellow: "#e9a42d",
-        tealBlue: "#59a9a1",
-        scarletRed: "#e81200",
         brightGreen: "#4caf50",
         paleGreen: "#a3c382",
         purple: "#9c27b0",
         palePurple: "#ab47bc",
         // new colors
+        whiteSmoke: "#edede9",
+        grey: "f0f0f0",
+        scarletRed: "#e81200",
         goldenOrange: "#e6a02d",
         brightOrange: "#ff9900",
+        tealBlue: "#59a9a1",
         deepBlue: "#0a3d62",
         oliveGreen: "#556b2f",
         warmBrown: "#8b4513",

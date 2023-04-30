@@ -14,7 +14,7 @@ const styles = {
 const ProfileGears = () => {
   const gears: GearType[] = useSelector(selectGears)
 
-  if (gears === undefined) return null
+  if (gears.length < 1) return <h2>Make Your Own Gear List!</h2>
   else if (gears === null) return <h2>Make Your Own Gear List!</h2>
 
   const gearsRender = gears.map((gear: GearType) => {

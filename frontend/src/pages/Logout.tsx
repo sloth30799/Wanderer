@@ -15,7 +15,7 @@ const Logout = () => {
     try {
       await postLogout().unwrap()
       dispatch(logOutUser({}))
-      navigate("/")
+      navigate("/", { replace: true })
 
       if (isSuccess) toast.success("Sad to see you go.")
     } catch (error) {

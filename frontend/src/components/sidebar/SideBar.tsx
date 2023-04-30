@@ -1,12 +1,11 @@
 import { useState } from "react"
 import { Outlet } from "react-router-dom"
 import MuiDrawer from "@mui/material/Drawer"
-import { styled, useTheme, Theme, CSSObject } from "@mui/material/styles"
+import { styled, Theme, CSSObject } from "@mui/material/styles"
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar"
 import { Box, Toolbar, List, Divider, IconButton } from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft"
-import ChevronRightIcon from "@mui/icons-material/ChevronRight"
 import FolderSharedOutlinedIcon from "@mui/icons-material/FolderSharedOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined"
@@ -18,8 +17,8 @@ import AddBlog from "./AddBlog"
 import LogoutBtn from "./LogoutBtn"
 
 const styles = {
-  logo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
-  drawerLogo: `text-xl font-extrabold tracking-tighter text-black cursor-default`,
+  logo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
+  drawerLogo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
   activeNavbar: `no-underline text-purple`,
   inactiveNavbar: `no-underline text-black`,
   logoutBtn: `text-scarletRed border-scarletRed rounded-lg`,
@@ -97,7 +96,6 @@ const Drawer = styled(MuiDrawer, {
 }))
 
 export default function SideBar() {
-  const theme = useTheme()
   const [open, setOpen] = useState(false)
 
   const handleDrawerOpen = () => {
@@ -111,22 +109,42 @@ export default function SideBar() {
   const renderLinks = [
     {
       text: "Profile",
-      icon: <FolderSharedOutlinedIcon className="text-black" />,
+      icon: (
+        <FolderSharedOutlinedIcon
+          fontSize="inherit"
+          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
+        />
+      ),
       link: "profile",
     },
     {
       text: "Feed",
-      icon: <FeedOutlinedIcon className="text-black" />,
+      icon: (
+        <FeedOutlinedIcon
+          fontSize="inherit"
+          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
+        />
+      ),
       link: "feed",
     },
     {
       text: "Explore",
-      icon: <TravelExploreOutlinedIcon className="text-black" />,
+      icon: (
+        <TravelExploreOutlinedIcon
+          fontSize="inherit"
+          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
+        />
+      ),
       link: "explore",
     },
     {
       text: "Favorite",
-      icon: <FavoriteBorderOutlinedIcon className="text-black" />,
+      icon: (
+        <FavoriteBorderOutlinedIcon
+          fontSize="inherit"
+          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
+        />
+      ),
       link: "favorite",
     },
   ].map((list) => (
@@ -142,18 +160,18 @@ export default function SideBar() {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar className="bg-white">
+        <Toolbar className="bg-white text-black">
           <IconButton
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
             sx={{
-              marginRight: 5,
+              marginRight: 4,
               ...(open && { display: "none" }),
             }}
           >
-            <MenuIcon className="text-black" />
+            <MenuIcon fontSize="small" />
           </IconButton>
           <span className={open ? "hidden" : `${styles.logo}`}>#Wanderer</span>
         </Toolbar>
@@ -164,15 +182,11 @@ export default function SideBar() {
             #WANDERER
           </span>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "rtl" ? (
-              <ChevronRightIcon />
-            ) : (
-              <ChevronLeftIcon />
-            )}
+            <ChevronLeftIcon />
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>{renderLinks}</List>
+        <List className="text-sm">{renderLinks}</List>
         <Divider />
         <List>
           <AddTrip sideBarOpen={open} />

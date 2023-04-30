@@ -16,7 +16,7 @@ const styles = {
 const ProfileTrips = () => {
   const trips: TripType[] = useSelector(selectTrips)
 
-  if (trips === undefined) return null
+  if (trips.length < 1) return <h2>Start an adventure!</h2>
   else if (trips === null) return <h2>Start an adventure!</h2>
 
   const tripsRender = trips.map((trip: TripType) => {
