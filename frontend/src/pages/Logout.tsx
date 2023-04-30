@@ -5,19 +5,11 @@ import { logOutUser } from "../services/features/auth/authSlice"
 import { useDispatch } from "react-redux"
 import { toast } from "react-hot-toast"
 
-// const msg = {
-//   success: [
-//     {
-//       msg: "Successful Logout.",
-//     },
-//   ],
-// }
-
 const Logout = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [postLogout] = useLogoutMutation()
+  const [postLogout, { isSuccess }] = useLogoutMutation()
 
   async function logout() {
     try {
@@ -25,7 +17,7 @@ const Logout = () => {
       dispatch(logOutUser({}))
       navigate("/")
 
-      toast.success("Sad to see you go.")
+      if (isSuccess) toast.success("Sad to see you go.")
     } catch (error) {
       console.error(error)
     }

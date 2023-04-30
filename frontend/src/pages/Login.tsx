@@ -11,7 +11,6 @@ import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
 import GoogleIcon from "@mui/icons-material/Google"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
-import PersonPinIcon from "@mui/icons-material/PersonPin"
 import { setUser } from "../services/features/auth/authSlice"
 import { useLoginMutation } from "../api/authApiSlice"
 import { toast } from "react-hot-toast"
@@ -67,10 +66,10 @@ const Login = () => {
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">
-      <div className="mx-6 p-6 shadow-md rounded-lg bg-white md:mx-0 md:w-1/2 md:p-12">
-        <div className="text-center text-tealBlue">
-          <PersonPinIcon fontSize="large" />
-        </div>
+      <div className="bg-white m-3 p-3 md:p-12 rounded-xl text-sm shadow-2xl">
+        <h1 className="text-center font-extrabold text-3xl font-title uppercase tracking-tighter cursor-default mt-0 mb-6 text-deepBlue">
+          #WANDERER
+        </h1>
         <Form action="/login" method="post">
           <FormControl className="flex flex-col gap-3 mb-6">
             <TextField
@@ -78,26 +77,28 @@ const Login = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailIcon className="text-tealBlue" />
+                    <EmailIcon className="text-tealBlue" fontSize="small" />
                   </InputAdornment>
                 ),
               }}
               name="email"
               type="email"
               label="Email address"
+              color="secondary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon className="text-tealBlue" />
+                    <KeyIcon className="text-tealBlue" fontSize="small" />
                   </InputAdornment>
                 ),
               }}
               name="password"
               type="password"
               label="Password"
+              color="secondary"
             />
             <Button
               variant="contained"
@@ -114,7 +115,7 @@ const Login = () => {
           <Button
             variant="contained"
             className="w-full bg-scarletRed"
-            startIcon={<GoogleIcon />}
+            startIcon={<GoogleIcon fontSize="small" />}
             onClick={google}
           >
             Log in with Google
@@ -125,7 +126,7 @@ const Login = () => {
           <Link
             to="/signup"
             replace={true}
-            className="font-extrabold text-goldenYellow"
+            className="font-extrabold text-goldenOrange"
           >
             Sign up for free
           </Link>

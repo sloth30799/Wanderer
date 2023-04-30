@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux"
 import { useSignupMutation } from "../api/authApiSlice"
 import { setUser } from "../services/features/auth/authSlice"
 import { toast } from "react-hot-toast"
+import { Link } from "react-router-dom"
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
@@ -62,7 +63,10 @@ const Signup = () => {
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">
-      <div className="mx-6 p-6 shadow-md rounded-lg bg-white md:mx-0 md:w-1/2 md:p-12">
+      <div className="bg-white p-3 m-3 md:p-12 text-sm rounded-xl shadow-2xl w-96">
+        <h1 className="text-center font-extrabold text-4xl font-title uppercase tracking-tighter cursor-default mt-0 mb-6 text-deepBlue">
+          #WANDERER
+        </h1>
         <Form action="/signup" method="post">
           <FormControl className="flex flex-col gap-3 mb-6">
             <TextField
@@ -70,62 +74,73 @@ const Signup = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonPinIcon className="text-goldenYellow" />
+                    <PersonPinIcon />
                   </InputAdornment>
                 ),
               }}
               label="Username"
               name="userName"
+              color="secondary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailIcon className="text-goldenYellow" />
+                    <EmailIcon />
                   </InputAdornment>
                 ),
               }}
               name="email"
               type="email"
               label="Email address"
+              color="secondary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon className="text-goldenYellow" />
+                    <KeyIcon />
                   </InputAdornment>
                 ),
               }}
               name="password"
               type="password"
               label="Password"
+              color="secondary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon className="text-goldenYellow" />
+                    <KeyIcon />
                   </InputAdornment>
                 ),
               }}
               name="confirmPassword"
               type="password"
               label="Confirm Password"
+              color="secondary"
             />
             <Button
               variant="contained"
+              className="shadow-3xl text-white hover:bg-gray-200"
               type="submit"
-              className=" w-full m-auto bg-goldenYellow"
+              color="secondary"
               disabled={isLoading}
             >
               {isLoading ? "Creating New Account" : "Sign Up"}
             </Button>
           </FormControl>
         </Form>
+        <p className="text-center mx-3">
+          Already has an account?{" "}
+          <Link to="/login" replace={true} className="font-bold text-tealBlue">
+            Log in
+          </Link>
+        </p>
       </div>
     </main>
   )
