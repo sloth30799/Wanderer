@@ -1,35 +1,33 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import { CardActionArea, CardMedia, CardContent, Card } from "@mui/material"
+import {
+  CardActionArea,
+  CardMedia,
+  CardContent,
+  Card,
+  Button,
+  Chip,
+} from "@mui/material"
 import { BlogType } from "../types"
 import { selectBlogs } from "../services/store"
-
-const styles = {
-  container: `container my-6 flex flex-wrap justify-center`,
-  card: `max-w-sm m-3 rounded-lg`,
-  img: `h-64`,
-  postTitle: `font-medium font-pally`,
-}
 
 const ProfileBlogs = () => {
   const blogs: BlogType[] = useSelector(selectBlogs)
 
-  if (blogs.length < 1) return <h2>Share Your Experience with others!</h2>
-  else if (blogs === null) return <h2>Share Your Experience with others!</h2>
-
-  const blogsRender = blogs?.map((blog: BlogType) => {
+  const blogsRender = blogs.map((blog: BlogType) => {
     return (
-      <Link to={`/post/${blog._id}`} key={blog._id} className="no-underline">
-        <Card className={styles.card}>
+      <Link to={`/blog/${blog._id}`} key={blog._id} className="no-underline">
+        <Card className="max-w-sm shadow-none">
           <CardActionArea>
             <CardMedia
               component="img"
-              className={styles.img}
+              className="h-48"
               image={blog.image}
               alt={blog.title}
             />
             <CardContent>
-              <h3>{blog.title}</h3>
+              <h3 className="font-bold font-title">{blog.title}</h3>
+              <Chip label={blog.tag} color="primary" size="small" />
             </CardContent>
           </CardActionArea>
         </Card>
@@ -37,7 +35,22 @@ const ProfileBlogs = () => {
     )
   })
 
-  return <div className={styles.container}>{blogsRender}</div>
+  return (
+    <main className="flex flex-col my-6 gap-6">
+      <Link to="/addBlog" className="place-self-end">
+        <Button variant="contained">Make Blog</Button>
+      </Link>
+      {blogs.length < 1 ? (
+        <>
+          <h3>Share Your Experience with others!</h3>
+        </>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {blogsRender}
+        </div>
+      )}
+    </main>
+  )
 }
 
 export default ProfileBlogs

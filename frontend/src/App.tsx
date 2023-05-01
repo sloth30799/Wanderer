@@ -21,6 +21,8 @@ import Favorite from "./pages/Favorite"
 import Trip from "./pages/Trip"
 import Gear from "./pages/Gear"
 import Blog from "./pages/Blog"
+import AddTrip from "./pages/AddTrip"
+import AddBlog from "./pages/AddBlog"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,14 +37,16 @@ const router = createBrowserRouter(
           <Route path="profile" element={<Profile />}>
             <Route path="trip" element={<ProfileTrips />} />
             <Route path="gear" element={<ProfileGears />} />
-            <Route path="post" element={<ProfileBlogs />} />
+            <Route path="blog" element={<ProfileBlogs />} />
           </Route>
           <Route path="feed" element={<Feed />} loader={feedLoader} />
           <Route path="explore" element={<Explore />} />
           <Route path="favorite" element={<Favorite />} />
+          <Route path="addTrip" element={<AddTrip />} />
+          <Route path="addBlog" element={<AddBlog />} />
           <Route path="trip/:id" element={<Trip />} />
           <Route path="gear/:id" element={<Gear />} />
-          <Route path="post/:id" element={<Blog />} />
+          <Route path="blog/:id" element={<Blog />} />
         </Route>
       </Route>
       <Route path="*" element={<ErrorPage />} />

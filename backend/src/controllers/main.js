@@ -1,18 +1,18 @@
 const Gear = require("../models/Gear")
-const Post = require("../models/Post")
+const Blog = require("../models/Blog")
 const Trip = require("../models/Trip")
 
 module.exports = {
   getProfile: async (req, res) => {
     try {
       if (!req.user) res.status(200).json(null)
-      const posts = await Post.find({ user: req.user.id }).lean()
+      const blogs = await Blog.find({ user: req.user.id }).lean()
       const trips = await Trip.find({ user: req.user.id }).lean()
       const gears = await Gear.find({
         user: req.user.id,
         template: true,
       }).lean()
-      res.status(200).json({ success: true, blogs: posts, trips, gears })
+      res.status(200).json({ success: true, blogs: blogs, trips, gears })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })
@@ -20,11 +20,11 @@ module.exports = {
   },
   getFeed: async (req, res) => {
     try {
-      const posts = await Post.find()
+      const blogs = await Blog.find()
         .sort({ createdAt: "descending" })
         .lean()
         .populate("user")
-      res.status(200).json({ success: true, posts })
+      res.status(200).json({ success: true, blogs })
     } catch (error) {
       console.log(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })

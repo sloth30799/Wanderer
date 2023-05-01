@@ -46,6 +46,42 @@ const profileSlice = createSlice({
           break
       }
     },
+    updateBackpackingContent: (
+      state,
+      action: PayloadAction<{
+        category: BackpackingCategory
+        content: BackpackingContent
+      }>
+    ) => {
+      const { category, content } = action.payload
+
+      switch (category) {
+        case "trips":
+          state.trips = state.trips.map((trip) => {
+            if (trip._id === content._id) {
+              trip = content as TripType
+            }
+            return trip
+          })
+          break
+        case "gears":
+          state.gears = state.gears.map((gear) => {
+            if (gear._id === content._id) {
+              gear = content as GearType
+            }
+            return gear
+          })
+          break
+        case "blogs":
+          state.blogs = state.blogs.map((blog) => {
+            if (blog._id === content._id) {
+              blog = content as BlogType
+            }
+            return blog
+          })
+          break
+      }
+    },
     deleteBackpackingContent: (
       state,
       action: PayloadAction<{ category: BackpackingCategory; id: string }>
@@ -95,6 +131,7 @@ export const {
   addBackpackingContent,
   deleteBackpackingContent,
   emptyProfileData,
+  updateBackpackingContent,
 } = profileSlice.actions
 
 export default profileSlice.reducer

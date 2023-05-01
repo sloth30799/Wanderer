@@ -8,6 +8,7 @@ export interface UserType {
 export interface BlogType {
   _id: string
   title: string
+  tag: string
   image: string
   cloudinaryId: string
   caption: string

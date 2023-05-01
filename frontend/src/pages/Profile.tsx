@@ -1,17 +1,25 @@
 import { NavLink, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
-import { selectCurrentUser } from "../services/store"
+import { selectCurrentUser, selectProfileData } from "../services/store"
 import { useFetchProfileQuery } from "../api/mainApiSlice"
+import { useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { fetchProfileData } from "../services/features/profile/profileSlice"
 
 const styles = {
-  navBar: `rounded-lg flex items-center justify-center gap-6 bg-deepBlue font-title p-3 w-48`,
-  navLink: `no-underline text-white`,
-  activeLink: `font-extrabold text-white`,
+  navBar: `flex gap-6 p-2 items-center`,
+  navLink: `no-underline text-black p-1`,
+  activeLink: `no-underline text-sm text-white bg-goldenOrange p-1 rounded-lg`,
 }
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
-  const { isLoading } = useFetchProfileQuery()
+  const { data, isLoading } = useFetchProfileQuery()
+
+  useEffect(() => {
+    dispatch(fetchProfileData(data))
+  }, [data, dispatch])
 
   if (isLoading) return <h1>Loading...</h1>
 
@@ -37,7 +45,7 @@ const Profile = () => {
             Gears
           </NavLink>
           <NavLink
-            to="post"
+            to="blog"
             className={({ isActive }) =>
               isActive ? styles.activeLink : styles.navLink
             }

@@ -1,4 +1,10 @@
-import { CardActionArea, CardActions, CardContent, Card } from "@mui/material"
+import {
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Card,
+  Button,
+} from "@mui/material"
 import { Link } from "react-router-dom"
 import { timeFormat } from "../utils/formats"
 import { useSelector } from "react-redux"
@@ -6,18 +12,13 @@ import { selectTrips } from "../services/store"
 import { TripType } from "../types"
 
 const styles = {
-  container: `container my-6 m-auto flex flex-wrap justify-center gap-6`,
-  card: `w-60 bg-purple rounded-lg shadow-lg text-whiteSmoke hover:bg-palePurple`,
-  timeText: `text-xs font-pally text-tealBlue`,
-  completedText: `text-sm text-brightGreen`,
-  inCompletedText: `text-sm text-goldenYellow`,
+  card: `bg-whiteSmoke rounded-lg text-black`,
+  completedText: `text-sm text-brightGreen font-bold font-title`,
+  inCompletedText: `text-sm text-brightOrange font-bold font-title`,
 }
 
 const ProfileTrips = () => {
   const trips: TripType[] = useSelector(selectTrips)
-
-  if (trips.length < 1) return <h2>Start an adventure!</h2>
-  else if (trips === null) return <h2>Start an adventure!</h2>
 
   const tripsRender = trips.map((trip: TripType) => {
     return (
@@ -25,28 +26,41 @@ const ProfileTrips = () => {
         <Card className={styles.card}>
           <CardActionArea>
             <CardContent className="flex flex-col gap-6">
-              <h2 className="my-0 font-pally">{trip.destination}</h2>
-              <span className={styles.timeText}>
+              <h2 className="my-0 font-title">{trip.destination}</h2>
+              <span className="text-sm font-title text-tealBlue font-bold">
                 {timeFormat(trip.startDate, "LL")} -{" "}
                 {timeFormat(trip.endDate, "LL")}
               </span>
+              <span
+                className={
+                  trip.completed ? styles.completedText : styles.inCompletedText
+                }
+              >
+                {trip.completed ? "Journey complete" : "Journey in progress"}
+              </span>
             </CardContent>
           </CardActionArea>
-          <CardActions className="flex justify-between p-3">
-            <span
-              className={
-                trip.completed ? styles.completedText : styles.inCompletedText
-              }
-            >
-              {trip.completed ? "Journey complete" : "Journey in progress"}
-            </span>
-          </CardActions>
         </Card>
       </Link>
     )
   })
 
-  return <main className={styles.container}>{tripsRender}</main>
+  return (
+    <main className="flex flex-col my-6 gap-6">
+      <Link to="/addTrip" className="place-self-end">
+        <Button variant="contained">Start Trip</Button>
+      </Link>
+      {trips.length < 1 ? (
+        <>
+          <h3>Start Your Adventure!</h3>
+        </>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {tripsRender}
+        </div>
+      )}
+    </main>
+  )
 }
 
 export default ProfileTrips

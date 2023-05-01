@@ -22,7 +22,7 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 type BlogCardProps = {
-  post: BlogType
+  blog: BlogType
   handleLike: (id: string) => Promise<void>
 }
 
@@ -38,7 +38,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   }),
 }))
 
-export const BlogCard = ({ post, handleLike }: BlogCardProps) => {
+export const BlogCard = ({ blog, handleLike }: BlogCardProps) => {
   const [expanded, setExpanded] = useState(false)
   const navigate = useNavigate()
 
@@ -51,41 +51,41 @@ export const BlogCard = ({ post, handleLike }: BlogCardProps) => {
       <CardHeader
         avatar={
           <Avatar className="bg-scarletRed" aria-label="recipe">
-            {post.user.userName[0]}
+            {blog.user.userName[0]}
           </Avatar>
         }
-        title={post.user.userName}
-        subheader={fromNowFormat(post.createdAt)}
-        onClick={() => navigate(`/post/${post._id}`)}
+        title={blog.user.userName}
+        subheader={fromNowFormat(blog.createdAt)}
+        onClick={() => navigate(`/blog/${blog._id}`)}
         className="hover:cursor-pointer"
       />
       <CardMedia
         component="img"
-        image={post.image}
-        alt={post.title}
-        onClick={() => navigate(`/post/${post._id}`)}
+        image={blog.image}
+        alt={blog.title}
+        onClick={() => navigate(`/blog/${blog._id}`)}
         className="hover:cursor-pointer rounded-lg  md:h-[500px] object-contain"
       />
       <CardContent>
-        <h3 className="my-0">{post.title}</h3>
+        <h3 className="my-0">{blog.title}</h3>
         <span className={`${expanded ? "hidden" : ""} font-body`}>
-          {post.caption.split(".", 1)[0]}...
+          {blog.caption.split(".", 1)[0]}...
         </span>
       </CardContent>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <span className="font-body">{post.caption}</span>
+          <span className="font-body">{blog.caption}</span>
         </CardContent>
       </Collapse>
       <CardActions>
         <div>
           <IconButton
             aria-label="add to favorites"
-            onClick={() => handleLike(post._id)}
+            onClick={() => handleLike(blog._id)}
           >
             <ThumbUpIcon className="text-black" />
           </IconButton>
-          <span>{post.likes}</span>
+          <span>{blog.likes}</span>
         </div>
         <ExpandMore
           expand={expanded}

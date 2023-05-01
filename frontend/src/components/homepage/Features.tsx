@@ -28,9 +28,9 @@ type CardProps = {
 
 const Card = ({ title, body, image }: CardProps) => {
   return (
-    <div className="w-60 p-5 shadow-3xl rounded-lg bg-white">
+    <div className="w-60 p-5 shadow-black rounded-lg bg-white">
       <div className="h-1/4 mb-6">
-        <h5 className="font-title font-bold text-goldenYellow">{title}</h5>
+        <h5 className="font-title font-bold text-brightOrange">{title}</h5>
         <p className="text-xs">{body}</p>
       </div>
       <img src={image} alt="" className="w-full h-3/4 pointer-events-none" />

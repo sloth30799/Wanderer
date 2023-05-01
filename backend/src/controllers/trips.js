@@ -36,6 +36,7 @@ module.exports = {
         accessories: [],
         essentials: [],
       })
+
       if (!gear) {
         return res
           .status(404)
@@ -59,6 +60,7 @@ module.exports = {
         user: req.user.id,
         note,
       })
+
       if (!trip) {
         res.status(404).json({ success: false, data: "Failed to create trip" })
       }

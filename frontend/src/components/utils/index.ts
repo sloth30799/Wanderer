@@ -1,2 +1,2 @@
 export { default as LoadingCircle } from "./LoadingCircle"
-export { default as PostSkeleton } from "./PostSkeleton"
+export { default as BlogSkeleton } from "./BlogSkeleton"

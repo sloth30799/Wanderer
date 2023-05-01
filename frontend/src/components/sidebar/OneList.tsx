@@ -7,7 +7,7 @@ import {
 import { NavLink } from "react-router-dom"
 
 const styles = {
-  activeNavbar: `no-underline text-deepBlue font-extrabold`,
+  activeNavbar: `no-underline text-goldenOrange font-extrabold`,
   inactiveNavbar: `no-underline text-black hover:font-semibold`,
 }
 
@@ -28,7 +28,7 @@ const OneList = ({ text, icon, link, sideBarOpen }: OneListProps) => {
     >
       <ListItem
         disablePadding
-        className="block hover:bg-white hover:text-deepBlue"
+        className="block hover:bg-white hover:text-brightOrange"
       >
         <ListItemButton
           sx={{

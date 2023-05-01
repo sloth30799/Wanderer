@@ -10,7 +10,7 @@ import bg from "../../assets/hero-bg.png"
 
 const styles = {
   navbar: `bg-goldenOrange text-white shadow-lg`,
-  link: `no-underline font-bold text-black hover:text-goldenOrange text-xs`,
+  link: `no-underline font-extrabold text-black hover:text-brightOrange text-xs`,
   triggerLink: `no-underline font-bold text-white hover:text-tealBlue text-xs`,
   dropdownLink: `no-underline font-bold text-white text-xs pt-2 uppercase tracking-tight`,
 }
@@ -53,7 +53,7 @@ const Hero = () => {
   })
 
   return (
-    <section className="h-[650px] scroll-smooth">
+    <section id="hero" className="h-[650px] scroll-smooth">
       <img
         src={bg}
         alt="background"
@@ -66,7 +66,14 @@ const Hero = () => {
               {open ? (
                 <img src={logoWhite} className="h-6" alt="logo" />
               ) : (
-                <img src={logo} className="h-6" alt="logo" />
+                <>
+                  <img src={logo} className="h-6 block lg:hidden" alt="logo" />
+                  <img
+                    src={logoWhite}
+                    className="h-6 hidden lg:block"
+                    alt="logo"
+                  />
+                </>
               )}
             </Link>
             {open ? (
@@ -89,9 +96,9 @@ const Hero = () => {
               </IconButton>
             )}
             <div className="hidden lg:flex justify-center items-center gap-8">
-              <Link to="#hero" className={styles.link}>
+              <a href="#hero" className={styles.link}>
                 Home
-              </Link>
+              </a>
               <a href="#features" className={styles.link}>
                 Features
               </a>
@@ -100,7 +107,7 @@ const Hero = () => {
                 target={"_blank"}
                 className={styles.link}
               >
-                Developer
+                Contact
               </Link>
             </div>
             <Link to="login" className="no-underline hidden">
@@ -140,9 +147,9 @@ const Hero = () => {
                 </IconButton>
               )}
               <div className="hidden lg:flex justify-center items-center gap-8">
-                <Link to="#" className={styles.triggerLink}>
+                <a href="#hero" className={styles.triggerLink}>
                   Home
-                </Link>
+                </a>
                 <a href="#features" className={styles.triggerLink}>
                   Features
                 </a>
@@ -151,13 +158,13 @@ const Hero = () => {
                   target={"_blank"}
                   className={styles.triggerLink}
                 >
-                  Developer
+                  Contact
                 </Link>
               </div>
               <Link to="login" className="no-underline hidden">
                 <Button
                   variant="contained"
-                  className="shadow-3xl hidden bg-white text-black hover:bg-gray-200 lg:block"
+                  className="shadow-black hidden bg-white text-black hover:bg-gray-200 lg:block"
                 >
                   Get Started
                 </Button>
@@ -167,23 +174,23 @@ const Hero = () => {
         ) : null}
 
         <motion.div
-          className="fixed w-full z-20 bg-goldenOrange flex flex-col gap-2 px-3 pb-3 md:px-10 divide-y-2 divide-solid divide-x-0 lg:hidden"
+          className="fixed w-full z-20 bg-brightOrange flex flex-col gap-2 px-3 pb-3 md:px-10 divide-y-2 divide-solid divide-x-0 lg:hidden"
           variants={dropdown}
           initial="closed"
           animate={open ? "open" : "closed"}
         >
-          <Link to="#" className={styles.dropdownLink}>
+          <a href="#hero" className={styles.dropdownLink}>
             Home
-          </Link>
-          <Link to="feed" className={styles.dropdownLink}>
+          </a>
+          <a href="#features" className={styles.dropdownLink}>
             Features
-          </Link>
+          </a>
           <Link
             to="https://hanyehtun.netlify.app/"
             target={"_blank"}
             className={styles.dropdownLink}
           >
-            Developer
+            Contact
           </Link>
           <Link to="login" className={styles.dropdownLink}>
             Get Started
@@ -201,7 +208,7 @@ const Hero = () => {
               the app now and start planning your next big adventure.
             </p>
             <Link to="login" className="no-underline">
-              <Button variant="contained" className="shadow-3xl">
+              <Button variant="contained" className="shadow-black">
                 Get Started
               </Button>
             </Link>

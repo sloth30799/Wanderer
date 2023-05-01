@@ -1,9 +1,12 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
-const PostSchema = new mongoose.Schema({
+const BlogSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
+  },
+  tag: {
+    type: String,
   },
   image: {
     type: String,
@@ -27,7 +30,7 @@ const PostSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-});
+})
 
-//MongoDB Collection named here - will give lowercase plural of name 
-module.exports = mongoose.model("Post", PostSchema);
+//MongoDB Collection named here - will give lowercase plural of name
+module.exports = mongoose.model("Blog", BlogSchema)

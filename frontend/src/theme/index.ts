@@ -5,7 +5,7 @@ const rootElement = document.getElementById("root")
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#e6a02d",
+      main: "#f39811",
       light: "#e6a02d",
       dark: "#a1701f",
       contrastText: "#fff",
@@ -14,7 +14,7 @@ export const theme = createTheme({
       main: "#59a9a1",
       light: "#8ddad5",
       dark: "#1f766f",
-      contrastText: "#000",
+      contrastText: "#fff",
     },
   },
   components: {
@@ -23,6 +23,32 @@ export const theme = createTheme({
         root: {
           padding: "py-1 px-4",
           fontSize: "0.75rem",
+        },
+      },
+    },
+    MuiTextField: {
+      defaultProps: {
+        inputProps: {
+          style: {
+            fontSize: "0.8rem",
+            fontFamily: "Pilcrow rounded",
+          },
+        },
+        InputLabelProps: {
+          style: {
+            fontSize: "0.9rem",
+            padding: 0,
+            color: "#000",
+            fontFamily: "Pilcrow rounded",
+          },
+        },
+      },
+    },
+    MuiOutlinedInput: {
+      defaultProps: {
+        style: {
+          fontSize: "0.8rem",
+          fontFamily: "Pilcrow rounded",
         },
       },
     },

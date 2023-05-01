@@ -70,7 +70,7 @@ const Login = () => {
         <h1 className="text-center font-extrabold text-3xl font-title uppercase tracking-tighter cursor-default mt-0 mb-6 text-deepBlue">
           #WANDERER
         </h1>
-        <Form action="/login" method="post">
+        <Form action="/login" method="POST">
           <FormControl className="flex flex-col gap-3 mb-6">
             <TextField
               variant="standard"
@@ -102,7 +102,8 @@ const Login = () => {
             />
             <Button
               variant="contained"
-              className=" w-full m-auto bg-tealBlue"
+              color="secondary"
+              className="shadow-black"
               type="submit"
               disabled={isLoading}
             >
@@ -114,7 +115,8 @@ const Login = () => {
         <div>
           <Button
             variant="contained"
-            className="w-full bg-scarletRed"
+            color="error"
+            className="w-full shadow-black"
             startIcon={<GoogleIcon fontSize="small" />}
             onClick={google}
           >
@@ -126,7 +128,7 @@ const Login = () => {
           <Link
             to="/signup"
             replace={true}
-            className="font-extrabold text-goldenOrange"
+            className="font-extrabold text-brightOrange"
           >
             Sign up for free
           </Link>

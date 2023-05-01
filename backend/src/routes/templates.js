@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const { ensureAuth } = require("../middleware/auth")
-const gearTemplateController = require("../controllers/template")
+const gearTemplateController = require("../controllers/templates")
 
 router.post(
   "/createGearTemplate",

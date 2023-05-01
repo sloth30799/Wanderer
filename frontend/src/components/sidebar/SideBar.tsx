@@ -11,17 +11,12 @@ import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
 import OneList from "./OneList"
-import AddTrip from "./AddTrip"
-import AddGear from "./AddGear"
-import AddBlog from "./AddBlog"
 import LogoutBtn from "./LogoutBtn"
 
 const styles = {
   logo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
   drawerLogo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
-  activeNavbar: `no-underline text-purple`,
-  inactiveNavbar: `no-underline text-black`,
-  logoutBtn: `text-scarletRed border-scarletRed rounded-lg`,
+  icon: `bg-goldenOrange text-white hover:bg-brightOrange p-1 rounded-lg`,
 }
 
 const drawerWidth = 240
@@ -110,30 +105,19 @@ export default function SideBar() {
     {
       text: "Profile",
       icon: (
-        <FolderSharedOutlinedIcon
-          fontSize="inherit"
-          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
-        />
+        <FolderSharedOutlinedIcon fontSize="inherit" className={styles.icon} />
       ),
       link: "profile",
     },
     {
       text: "Feed",
-      icon: (
-        <FeedOutlinedIcon
-          fontSize="inherit"
-          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
-        />
-      ),
+      icon: <FeedOutlinedIcon fontSize="inherit" className={styles.icon} />,
       link: "feed",
     },
     {
       text: "Explore",
       icon: (
-        <TravelExploreOutlinedIcon
-          fontSize="inherit"
-          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
-        />
+        <TravelExploreOutlinedIcon fontSize="inherit" className={styles.icon} />
       ),
       link: "explore",
     },
@@ -142,7 +126,7 @@ export default function SideBar() {
       icon: (
         <FavoriteBorderOutlinedIcon
           fontSize="inherit"
-          className="bg-deepBlue text-white hover:bg-tealBlue p-1 rounded-lg"
+          className={styles.icon}
         />
       ),
       link: "favorite",
@@ -187,12 +171,6 @@ export default function SideBar() {
         </DrawerHeader>
         <Divider />
         <List className="text-sm">{renderLinks}</List>
-        <Divider />
-        <List>
-          <AddTrip sideBarOpen={open} />
-          <AddGear sideBarOpen={open} />
-          <AddBlog sideBarOpen={open} />
-        </List>
         <Divider />
         <LogoutBtn sideBarOpen={open} />
       </Drawer>

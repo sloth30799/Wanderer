@@ -9,7 +9,10 @@ import { GearType, TripType } from "../types"
 import { timeFormat } from "../utils/formats"
 import { dollarFormat } from "../utils/formats"
 import { useDispatch } from "react-redux"
-import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
+import {
+  deleteBackpackingContent,
+  updateBackpackingContent,
+} from "../services/features/profile/profileSlice"
 import {
   useCompletedTripMutation,
   useDeleteTripMutation,
@@ -19,7 +22,7 @@ import { toast } from "react-hot-toast"
 
 const styles = {
   timeText: `text-xs font-pally font-thin text-tealBlue`,
-  incompleteTextColor: `text-purple`,
+  incompleteTextColor: `text-brightOrange`,
   completedTextColor: `text-brightGreen`,
 }
 
@@ -29,7 +32,7 @@ const Trip = () => {
   const { id } = useParams()
 
   const { data, isLoading, isError, refetch } = useFetchTripQuery(id)
-  const [completedTrip, { isSuccess: completedTripSuceess }] =
+  const [completedTrip, { isSuccess: completedTripSuccess }] =
     useCompletedTripMutation()
   const [deleteTrip, { isSuccess: deleteSuccess }] = useDeleteTripMutation()
 
@@ -49,7 +52,9 @@ const Trip = () => {
       completed: trip.completed,
     })
     await refetch()
-    if (completedTripSuceess) toast.success("Updated")
+    dispatch(updateBackpackingContent({ category: "trips", content: trip }))
+    console.log(trip)
+    if (completedTripSuccess) toast.success("Updated")
   }
 
   const handleDelete = async () => {
@@ -70,6 +75,7 @@ const Trip = () => {
         }
       })
   }
+  console.log(trip.completed)
 
   return (
     <div>

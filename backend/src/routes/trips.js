@@ -1,14 +1,14 @@
-const express = require("express");
-const router = express.Router();
-const { ensureAuth } = require("../middleware/auth");
-const tripController = require("../controllers/trip");
+const express = require("express")
+const router = express.Router()
+const { ensureAuth } = require("../middleware/auth")
+const tripController = require("../controllers/trips")
 
-router.get("/:id", ensureAuth, tripController.getTrips);
+router.get("/:id", ensureAuth, tripController.getTrips)
 
-router.post("/postTrip", ensureAuth, tripController.createTrip);
+router.post("/postTrip", ensureAuth, tripController.createTrip)
 
 router.put("/tripUpdate/:id", ensureAuth, tripController.tripUpdate)
 
-router.delete("/deleteTrip/:id", tripController.deleteTrip);
+router.delete("/deleteTrip/:id", tripController.deleteTrip)
 
-module.exports = router;
+module.exports = router

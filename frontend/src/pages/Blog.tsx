@@ -11,7 +11,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
 import { fromNowFormat } from "../utils/formats"
-import PostSkeleton from "../components/utils/PostSkeleton"
+import BlogSkeleton from "../components/utils/BlogSkeleton"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../services/store"
 import { useDispatch } from "react-redux"
@@ -33,26 +33,26 @@ const Blog = () => {
   const [likeBlog] = useLikeBlogMutation()
   const [deleteBlog] = useDeleteBlogMutation()
 
-  if (isLoading) return <PostSkeleton />
-  else if (isError) return <h2>Post not found!</h2>
+  if (isLoading) return <BlogSkeleton />
+  else if (isError) return <h2>Blog not found!</h2>
 
-  const post = data.post
+  const blog = data.blog
 
   async function handleLike() {
-    await likeBlog(post._id)
+    await likeBlog(blog._id)
     refetch()
   }
 
   async function handleDelete() {
-    await deleteBlog(post._id) // api call
-    dispatch(deleteBackpackingContent({ category: "blogs", id: post._id }))
+    await deleteBlog(blog._id) // api call
+    dispatch(deleteBackpackingContent({ category: "blogs", id: blog._id }))
     navigate(-1)
   }
 
   return (
     <div className="flex flex-col gap-3">
       <Link
-        to="/profile/post"
+        to="/profile/blog"
         relative="path"
         className="no-underline text-black"
       >
@@ -65,21 +65,21 @@ const Blog = () => {
               W
             </Avatar>
           }
-          title={post.title}
-          subheader={fromNowFormat(post.createdAt)}
+          title={blog.title}
+          subheader={fromNowFormat(blog.createdAt)}
         />
-        <CardMedia component="img" image={post.image} alt={post.title} />
+        <CardMedia component="img" image={blog.image} alt={blog.title} />
         <CardContent>
-          <p className="font-body">{post.caption}</p>
+          <p className="font-body">{blog.caption}</p>
         </CardContent>
         <CardActions className="flex justify-between">
           <div className="flex place-items-center gap-2">
             <IconButton aria-label="add to favorites" onClick={handleLike}>
               <ThumbUpIcon className="text-black" />
             </IconButton>
-            <span className="text-xl">{post.likes}</span>
+            <span className="text-xl">{blog.likes}</span>
           </div>
-          {post.user === user?._id && (
+          {blog.user === user?._id && (
             <IconButton aria-label="delete" onClick={handleDelete}>
               <DeleteIcon className="text-black" />
             </IconButton>

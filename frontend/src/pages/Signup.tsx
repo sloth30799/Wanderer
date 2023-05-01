@@ -67,68 +67,68 @@ const Signup = () => {
         <h1 className="text-center font-extrabold text-4xl font-title uppercase tracking-tighter cursor-default mt-0 mb-6 text-deepBlue">
           #WANDERER
         </h1>
-        <Form action="/signup" method="post">
+        <Form action="/signup" method="POST">
           <FormControl className="flex flex-col gap-3 mb-6">
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <PersonPinIcon />
+                    <PersonPinIcon color="primary" />
                   </InputAdornment>
                 ),
               }}
               label="Username"
               name="userName"
-              color="secondary"
+              color="primary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <EmailIcon />
+                    <EmailIcon color="primary" />
                   </InputAdornment>
                 ),
               }}
               name="email"
               type="email"
               label="Email address"
-              color="secondary"
+              color="primary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon />
+                    <KeyIcon color="primary" />
                   </InputAdornment>
                 ),
               }}
               name="password"
               type="password"
               label="Password"
-              color="secondary"
+              color="primary"
             />
             <TextField
               variant="standard"
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <KeyIcon />
+                    <KeyIcon color="primary" />
                   </InputAdornment>
                 ),
               }}
               name="confirmPassword"
               type="password"
               label="Confirm Password"
-              color="secondary"
+              color="primary"
             />
             <Button
               variant="contained"
-              className="shadow-3xl text-white hover:bg-gray-200"
+              className="shadow-black"
               type="submit"
-              color="secondary"
+              color="primary"
               disabled={isLoading}
             >
               {isLoading ? "Creating New Account" : "Sign Up"}

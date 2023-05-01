@@ -39,24 +39,6 @@ const Gear = () => {
 
   const gear = data.gear
 
-  // async function editName(event) {
-  // 	event.preventDefault();
-  // 	const name = await event.target.name.value;
-  // 	setGear({
-  //     ...gear,
-  // 		name,
-  // 	});
-  // };
-
-  // async function editNote(e) {
-  //   e.preventDefault()
-  //   const note = await e.target.note.value;
-  //   setGear({
-  //     ...gear,
-  // 		 note,
-  // 	});
-  // }
-
   async function handleDelete() {
     await deleteGear(gear._id) // api call
     dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
@@ -64,7 +46,7 @@ const Gear = () => {
   }
 
   return (
-    <div className="container m-auto flex flex-col">
+    <div className="flex flex-col">
       <Link
         to="/profile/gear"
         relative="path"

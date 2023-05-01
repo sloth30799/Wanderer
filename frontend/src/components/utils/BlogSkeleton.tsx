@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, Skeleton } from "@mui/material"
 
-const PostSkeleton = () => {
+const BlogSkeleton = () => {
   return (
     <Card>
       <CardHeader
@@ -33,4 +33,4 @@ const PostSkeleton = () => {
   )
 }
 
-export default PostSkeleton
+export default BlogSkeleton

@@ -5,9 +5,9 @@ import EmailIcon from "@mui/icons-material/Email"
 
 const styles = {
   bold: `font-title font-extrabold text-xl my-3 uppercase`,
-  linkWithIcon: `text-xs font-bold text-white hover:text-goldenOrange no-underline flex items-center justify-center md:justify-start gap-1 mb-1`,
+  linkWithIcon: `text-xs font-bold text-white hover:text-brightOrange no-underline flex items-center justify-center md:justify-start gap-1 mb-1`,
   normal: `text-xs font-whiteSmoke my-0`,
-  link: `text-xs text-white hover:text-goldenOrange no-underline`,
+  link: `text-xs text-white hover:text-brightOrange no-underline`,
 }
 
 const Footer = () => {

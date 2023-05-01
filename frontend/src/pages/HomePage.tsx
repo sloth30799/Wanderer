@@ -1,10 +1,11 @@
-import { Hero, Features, Footer } from "../components/homepage"
+import { Hero, Features, Footer, Cta } from "../components/homepage"
 
 const HomePage = () => {
   return (
     <>
       <Hero />
       <Features />
+      <Cta />
       <Footer />
     </>
   )
