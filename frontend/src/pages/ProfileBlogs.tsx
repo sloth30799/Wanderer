@@ -1,13 +1,6 @@
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import {
-  CardActionArea,
-  CardMedia,
-  CardContent,
-  Card,
-  Button,
-  Chip,
-} from "@mui/material"
+import { Button } from "@mui/material"
 import { BlogType } from "../types"
 import { selectBlogs } from "../services/store"
 import { BlogCard } from "../components/BlogCard"
@@ -33,7 +26,7 @@ const ProfileBlogs = () => {
           <h3>Share Your Experience with others!</h3>
         </>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {blogsRender}
         </div>
       )}

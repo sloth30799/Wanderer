@@ -13,15 +13,18 @@ const ProfileGears = () => {
   const gears: GearType[] = useSelector(selectGears)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-
-  const [addTemplate, { isSuccess }] = useAddTemplateMutation()
+  console.log(gears)
+  const [addTemplate] = useAddTemplateMutation()
 
   async function addGear() {
     try {
       const { gear } = await addTemplate().unwrap()
-      if (gear) navigate(`/gear/${gear._id}`)
-      dispatch(addBackpackingContent({ category: "gears", content: gear }))
-      if (isSuccess) toast.success("Template Created!")
+
+      if (gear) {
+        toast.success("Template Created!")
+        dispatch(addBackpackingContent({ category: "gears", content: gear }))
+        // navigate(`/gear/${gear._id}`)
+      }
     } catch (error) {
       console.error(error)
     }
@@ -45,7 +48,7 @@ const ProfileGears = () => {
           <h3>Share Your Experience with others!</h3>
         </>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {gearsRender}
         </div>
       )}

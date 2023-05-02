@@ -14,6 +14,7 @@ import KeyIcon from "@mui/icons-material/Key"
 import { setUser } from "../services/features/auth/authSlice"
 import { useLoginMutation } from "../api/authApiSlice"
 import { toast } from "react-hot-toast"
+import { useFetchProfileQuery } from "../api/mainApiSlice"
 
 export async function action({ request }: ActionFunctionArgs) {
   const data = await request.formData()
@@ -32,6 +33,7 @@ const Login = () => {
   const navigate = useNavigate()
 
   const [postLogin, { isLoading, isError }] = useLoginMutation()
+  const { refetch } = useFetchProfileQuery()
 
   async function login() {
     try {
@@ -50,6 +52,7 @@ const Login = () => {
         toast.success("Log in Successful!")
         navigate("/profile", { replace: true })
         dispatch(setUser({ user }))
+        refetch()
       }
     } catch (error) {
       console.error(error)
@@ -111,8 +114,8 @@ const Login = () => {
             </Button>
           </FormControl>
         </Form>
-        <p className="text-center mx-3">Or Login with</p>
-        <div>
+        {/* <p className="text-center mx-3">Or Login with</p> */}
+        {/* <div>
           <Button
             variant="contained"
             color="error"
@@ -122,7 +125,7 @@ const Login = () => {
           >
             Log in with Google
           </Button>
-        </div>
+        </div> */}
         <p className="text-center mx-3">
           Don't have an account?{" "}
           <Link

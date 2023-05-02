@@ -14,6 +14,7 @@ import { useSignupMutation } from "../api/authApiSlice"
 import { setUser } from "../services/features/auth/authSlice"
 import { toast } from "react-hot-toast"
 import { Link } from "react-router-dom"
+import { useFetchProfileQuery } from "../api/mainApiSlice"
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData()
@@ -33,6 +34,7 @@ const Signup = () => {
   const navigate = useNavigate()
 
   const [postSignup, { isLoading, isError }] = useSignupMutation()
+  const { refetch } = useFetchProfileQuery()
 
   async function signup() {
     try {
@@ -51,6 +53,7 @@ const Signup = () => {
         toast.success("Sign up Successful!")
         dispatch(setUser({ user }))
         navigate("/profile", { replace: true })
+        refetch()
       }
     } catch (error) {
       console.error(error)

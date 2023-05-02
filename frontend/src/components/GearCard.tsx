@@ -11,7 +11,7 @@ const GearCard = ({ gear }: GearCardProps) => {
       <div className="bg-deepBlue text-white rounded-t-lg p-3">
         <h3 className="font-bold my-0">{gear.name}</h3>
       </div>
-      <div className="bg-whiteSmoke text-deepBlue font-bold grid grid-cols-3 gap-3 py-3">
+      <div className="bg-whiteSmoke text-deepBlue font-bold grid grid-cols-1 md:grid-cols-3 gap-3 py-3">
         <span className="flex flex-col gap-2 items-center text-sm">
           Equipments
           <Chip label={gear.equipments.length} color="info" size="small" />

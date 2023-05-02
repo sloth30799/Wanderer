@@ -10,7 +10,7 @@ import {
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
-import { fromNowFormat } from "../utils/formats"
+import { fromNowFormat, timeFormat } from "../utils/formats"
 import BlogSkeleton from "../components/utils/BlogSkeleton"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../services/store"
@@ -58,34 +58,39 @@ const Blog = () => {
       >
         &larr; <span>Back to Blogs</span>
       </Link>
-      <Card className="shadow-none">
-        <CardHeader
-          avatar={
-            <Avatar className="bg-scarletRed" aria-label="recipe">
-              W
+      <div className="grid lg:grid-cols-2 justify-items-stretch my-6 gap-6">
+        <div>
+          <span className="text-grey text-xs uppercase">
+            PUBLISHED {timeFormat(blog.createdAt, "MMM Do YY")}
+          </span>
+          <h1 className="font-title font-bold text-4xl">{blog.title}</h1>
+          <div className="flex gap-3 items-center">
+            <Avatar className="bg-goldenOrange" aria-label="recipe">
+              {blog.user.userName[0].toUpperCase()}
             </Avatar>
-          }
-          title={blog.title}
-          subheader={fromNowFormat(blog.createdAt)}
-        />
-        <CardMedia component="img" image={blog.image} alt={blog.title} />
-        <CardContent>
-          <p className="">{blog.caption}</p>
-        </CardContent>
-        <CardActions className="flex justify-between">
-          <div className="flex place-items-center gap-2">
-            <IconButton aria-label="add to favorites" onClick={handleLike}>
-              <ThumbUpIcon className="text-black" />
-            </IconButton>
-            <span className="text-xl">{blog.likes}</span>
+            <h1 className="text-sm font-bold">{blog.user.userName}</h1>
           </div>
-          {blog.user === user?._id && (
+        </div>
+        <img src={blog.image} alt={blog.title} className="h-96" />
+      </div>
+      <div className="flex flex-col gap-6">
+        <p className="">{blog.caption}</p>
+        <div className="flex justify-between">
+          <IconButton
+            aria-label="add to favorites"
+            onClick={handleLike}
+            className="flex gap-3 text-black"
+          >
+            <ThumbUpIcon />
+            <span className="text-xl">{blog.likes}</span>
+          </IconButton>
+          {blog.user._id === user?._id && (
             <IconButton aria-label="delete" onClick={handleDelete}>
               <DeleteIcon className="text-black" />
             </IconButton>
           )}
-        </CardActions>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

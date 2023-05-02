@@ -114,8 +114,8 @@ module.exports = {
       }
 
       // Delete trip from db
-      await Trip.remove({ _id: req.params.id })
-      if (gear.template === false) await Gear.remove({ _id: gearId })
+      await Trip.deleteOne({ _id: req.params.id })
+      if (gear.template === false) await Gear.deleteOne({ _id: gearId })
       console.log("Deleted Trip")
       res.status(200).json({ success: true, data: "Deleted Trip" })
     } catch (err) {

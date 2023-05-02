@@ -53,8 +53,7 @@ const Trip = () => {
     })
     await refetch()
     dispatch(updateBackpackingContent({ category: "trips", content: trip }))
-    console.log(trip)
-    if (completedTripSuccess) toast.success("Updated")
+    toast.success("Updated")
   }
 
   const handleDelete = async () => {

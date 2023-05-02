@@ -4,7 +4,7 @@ const Blog = require("../models/Blog")
 module.exports = {
   getBlog: async (req, res) => {
     try {
-      const blog = await Blog.findById(req.params.id)
+      const blog = await Blog.findById(req.params.id).populate("user")
       if (!blog) {
         res.status(404).json({ success: false, data: "Blog not found" })
       }
@@ -70,7 +70,7 @@ module.exports = {
       // Delete image from cloudinary
       await cloudinary.uploader.destroy(blog.cloudinaryId)
       // Delete blog from db
-      await Blog.remove({ _id: req.params.id })
+      await Blog.deleteOne({ _id: req.params.id })
       console.log("Deleted Blog")
       res.status(200).json({ success: true, data: "Deleted Blog" })
     } catch (err) {

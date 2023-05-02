@@ -58,7 +58,7 @@ module.exports = {
       }
 
       // Delete gear from db
-      await Gear.remove({ _id: req.params.id })
+      await Gear.deleteOne({ _id: req.params.id })
       console.log("Deleted Gear")
       res.status(200).json({ success: true, data: "Deleted Gear" })
     } catch (error) {

@@ -3,6 +3,7 @@ import { useSelector } from "react-redux"
 import { useLocation, Navigate, Outlet } from "react-router-dom"
 import { selectAuth } from "../services/store"
 import { toast } from "react-hot-toast"
+import { LoadingCircle } from "./utils"
 
 const AuthRequired = () => {
   const { user, loading } = useSelector(selectAuth)
@@ -14,7 +15,7 @@ const AuthRequired = () => {
     }
   }, [loading, user])
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <LoadingCircle />
 
   return user ? (
     <Outlet />

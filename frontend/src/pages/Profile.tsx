@@ -2,9 +2,7 @@ import { NavLink, Outlet } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../services/store"
 import { useFetchProfileQuery } from "../api/mainApiSlice"
-import { useEffect } from "react"
-import { useDispatch } from "react-redux"
-import { fetchProfileData } from "../services/features/profile/profileSlice"
+import { LoadingCircle } from "../components/utils"
 
 const styles = {
   navLink: `no-underline text-black font-title`,
@@ -12,15 +10,10 @@ const styles = {
 }
 
 const Profile = () => {
-  const dispatch = useDispatch()
   const user = useSelector(selectCurrentUser)
-  const { data, isLoading } = useFetchProfileQuery()
+  const { isLoading } = useFetchProfileQuery()
 
-  useEffect(() => {
-    if (data) dispatch(fetchProfileData(data))
-  }, [data, dispatch])
-
-  if (isLoading) return <h1>Loading...</h1>
+  if (isLoading) return <LoadingCircle />
 
   return (
     <div>

@@ -23,7 +23,7 @@ const Feed = () => {
   const loaderData = useLoaderData() as Awaited<ReturnType<typeof fetchFeed>>
 
   function RenderFeed(res: responseType) {
-    const [blogs, setBlogs] = useState(res.blogs)
+    const blogs = res.blogs
 
     const blogsRender = blogs.map((blog: BlogType) => {
       return <BlogCard key={blog._id} blog={blog} />

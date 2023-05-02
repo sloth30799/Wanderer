@@ -90,13 +90,13 @@ const profileSlice = createSlice({
 
       switch (category) {
         case "trips":
-          state.trips = state.trips.filter((data: TripType) => data._id !== id)
+          state.trips = state.trips.filter((trip: TripType) => trip._id !== id)
           break
         case "gears":
-          state.gears = state.gears.filter((data: GearType) => data._id !== id)
+          state.gears = state.gears.filter((gear: GearType) => gear._id !== id)
           break
         case "blogs":
-          state.blogs = state.blogs.filter((data: BlogType) => data._id !== id)
+          state.blogs = state.blogs.filter((blog: BlogType) => blog._id !== id)
           break
       }
     },

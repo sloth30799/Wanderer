@@ -1,10 +1,10 @@
-import { CircularProgress } from "@mui/material"
+import { Box, CircularProgress } from "@mui/material"
 
 const LoadingCircle = ({ progress }: any) => {
   return (
-    <div className="flex items-center justify-center h-full">
-      <CircularProgress variant="determinate" value={progress} />
-    </div>
+    <Box className="flex justify-center items-center h-screen">
+      <CircularProgress />
+    </Box>
   )
 }
 
