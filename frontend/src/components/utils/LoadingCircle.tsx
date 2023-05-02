@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from "@mui/material"
 
-const LoadingCircle = ({ progress }: any) => {
+const LoadingCircle = () => {
   return (
     <Box className="flex justify-center items-center h-screen">
       <CircularProgress />

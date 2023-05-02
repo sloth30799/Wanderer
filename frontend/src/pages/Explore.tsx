@@ -1,5 +1,3 @@
-import { LoadingCircle } from "../components/utils"
-
 const Explore = () => {
   return (
     <div>

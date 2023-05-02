@@ -8,7 +8,7 @@ import {
 } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { Button, FormControl, InputAdornment, TextField } from "@mui/material"
-import GoogleIcon from "@mui/icons-material/Google"
+// import GoogleIcon from "@mui/icons-material/Google"
 import EmailIcon from "@mui/icons-material/Email"
 import KeyIcon from "@mui/icons-material/Key"
 import { setUser } from "../services/features/auth/authSlice"
@@ -63,9 +63,9 @@ const Login = () => {
     if (credentials != null) login()
   }, [credentials])
 
-  function google() {
-    window.open("https://wanderer.onrender.com/api/auth/google", "_self")
-  }
+  // function google() {
+  //   window.open("https://wanderer.onrender.com/api/auth/google", "_self")
+  // }
 
   return (
     <main className="h-screen flex justify-center items-center bg-whiteSmoke">

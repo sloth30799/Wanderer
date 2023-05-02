@@ -1,16 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router-dom"
-import {
-  IconButton,
-  Card,
-  CardActions,
-  CardMedia,
-  CardHeader,
-  CardContent,
-  Avatar,
-} from "@mui/material"
+import { IconButton, Avatar } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import ThumbUpIcon from "@mui/icons-material/ThumbUp"
-import { fromNowFormat, timeFormat } from "../utils/formats"
+import { timeFormat } from "../utils/formats"
 import BlogSkeleton from "../components/utils/BlogSkeleton"
 import { useSelector } from "react-redux"
 import { selectCurrentUser } from "../services/store"

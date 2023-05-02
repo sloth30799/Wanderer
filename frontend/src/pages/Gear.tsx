@@ -34,7 +34,7 @@ const Gear = () => {
     setOpen(false)
   }
 
-  if (isLoading) return <LoadingCircle progress={data} />
+  if (isLoading) return <LoadingCircle />
   else if (isError) return <h2>Gear not found!</h2>
 
   const gear = data.gear

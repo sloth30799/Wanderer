@@ -13,7 +13,7 @@ const ProfileGears = () => {
   const gears: GearType[] = useSelector(selectGears)
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  console.log(gears)
+
   const [addTemplate] = useAddTemplateMutation()
 
   async function addGear() {
@@ -23,7 +23,7 @@ const ProfileGears = () => {
       if (gear) {
         toast.success("Template Created!")
         dispatch(addBackpackingContent({ category: "gears", content: gear }))
-        // navigate(`/gear/${gear._id}`)
+        navigate(`/gear/${gear._id}`)
       }
     } catch (error) {
       console.error(error)

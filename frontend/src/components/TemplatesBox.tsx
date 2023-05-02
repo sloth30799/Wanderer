@@ -61,7 +61,7 @@ const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
     setOpen(false)
   }
 
-  if (isLoading) return <LoadingCircle progress={templates} />
+  if (isLoading) return <LoadingCircle />
 
   if (isError) return <h1>Something went Wrong!</h1>
 

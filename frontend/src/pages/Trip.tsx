@@ -32,8 +32,7 @@ const Trip = () => {
   const { id } = useParams()
 
   const { data, isLoading, isError, refetch } = useFetchTripQuery(id)
-  const [completedTrip, { isSuccess: completedTripSuccess }] =
-    useCompletedTripMutation()
+  const [completedTrip] = useCompletedTripMutation()
   const [deleteTrip, { isSuccess: deleteSuccess }] = useDeleteTripMutation()
 
   const [gear, setGear] = useState<GearType>(data?.trip.gear)
@@ -41,7 +40,7 @@ const Trip = () => {
     if (data !== null) setGear(data?.trip.gear)
   }, [data])
 
-  if (isLoading) return <LoadingCircle progress={data} />
+  if (isLoading) return <LoadingCircle />
   else if (isError) return <h2>Trip not found!</h2>
 
   const trip: TripType = data.trip
