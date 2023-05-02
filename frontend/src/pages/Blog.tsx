@@ -70,7 +70,7 @@ const Blog = () => {
         />
         <CardMedia component="img" image={blog.image} alt={blog.title} />
         <CardContent>
-          <p className="font-body">{blog.caption}</p>
+          <p className="">{blog.caption}</p>
         </CardContent>
         <CardActions className="flex justify-between">
           <div className="flex place-items-center gap-2">

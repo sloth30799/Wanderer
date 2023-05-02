@@ -144,7 +144,7 @@ export default function SideBar() {
   return (
     <Box sx={{ display: "flex" }}>
       <AppBar position="fixed" open={open}>
-        <Toolbar className="bg-white text-black">
+        <Toolbar className="bg-white shadow-none text-black">
           <IconButton
             color="inherit"
             aria-label="open drawer"

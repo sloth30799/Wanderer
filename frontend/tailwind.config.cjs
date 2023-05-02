@@ -35,7 +35,7 @@ module.exports = {
       },
       colors: {
         whiteSmoke: "#edede9",
-        grey: "f0f0f0",
+        grey: "505a6c",
         scarletRed: "#e81200",
         goldenOrange: "#e6a02d",
         brightOrange: "#ff9900",

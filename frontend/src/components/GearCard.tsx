@@ -1,4 +1,4 @@
-import { Card, CardActionArea, CardContent, Chip } from "@mui/material"
+import { Chip } from "@mui/material"
 import { GearType } from "../types"
 
 type GearCardProps = {

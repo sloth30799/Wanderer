@@ -10,6 +10,7 @@ import {
 } from "@mui/material"
 import { BlogType } from "../types"
 import { selectBlogs } from "../services/store"
+import { BlogCard } from "../components/BlogCard"
 
 const ProfileBlogs = () => {
   const blogs: BlogType[] = useSelector(selectBlogs)
@@ -17,20 +18,7 @@ const ProfileBlogs = () => {
   const blogsRender = blogs.map((blog: BlogType) => {
     return (
       <Link to={`/blog/${blog._id}`} key={blog._id} className="no-underline">
-        <Card className="max-w-sm shadow-none">
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              className="h-48"
-              image={blog.image}
-              alt={blog.title}
-            />
-            <CardContent>
-              <h3 className="font-bold font-title">{blog.title}</h3>
-              <Chip label={blog.tag} color="primary" size="small" />
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <BlogCard blog={blog} />
       </Link>
     )
   })

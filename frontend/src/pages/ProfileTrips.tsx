@@ -25,9 +25,9 @@ const ProfileTrips = () => {
       <Link to={`/trip/${trip._id}`} key={trip._id} className="no-underline">
         <Card className={styles.card}>
           <CardActionArea>
-            <CardContent className="flex flex-col gap-6">
+            <CardContent className="flex flex-col gap-3">
               <h2 className="my-0 font-title">{trip.destination}</h2>
-              <span className="text-sm font-title text-tealBlue font-bold">
+              <span className="text-xs font-title text-tealBlue font-bold">
                 {timeFormat(trip.startDate, "LL")} -{" "}
                 {timeFormat(trip.endDate, "LL")}
               </span>

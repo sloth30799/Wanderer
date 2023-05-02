@@ -15,11 +15,6 @@ async function fetchFeed() {
   return data
 }
 
-async function postLike(id: string) {
-  const { data } = await api.put(`/api/blog/likeBlog/${id}`)
-  return data
-}
-
 export function loader() {
   return defer({ feed: fetchFeed() })
 }
@@ -30,30 +25,25 @@ const Feed = () => {
   function RenderFeed(res: responseType) {
     const [blogs, setBlogs] = useState(res.blogs)
 
-    const handleLike = async (id: string) => {
-      const data = await postLike(id)
-
-      const newBlogs = await blogs.map((blog: BlogType) => {
-        if (blog._id === id) {
-          return { ...blog, likes: data.data }
-        }
-        return blog
-      })
-      setBlogs(newBlogs)
-    }
-
     const blogsRender = blogs.map((blog: BlogType) => {
-      return <BlogCard key={blog._id} blog={blog} handleLike={handleLike} />
+      return <BlogCard key={blog._id} blog={blog} />
     })
     return blogsRender
   }
 
   return (
-    <div className="container m-auto flex flex-col">
-      <Suspense fallback={<BlogSkeleton />}>
-        <Await resolve={loaderData.feed}>{RenderFeed}</Await>
-      </Suspense>
-    </div>
+    <>
+      {/* <div className="flex gap-3 items-center border-solid border-0 border-whiteSmoke border-b-2 p-1 mb-6">
+        <span className="tracking-wider text-sm text-grey">Filter By City</span>
+        <nav className=""></nav>
+      </div> */}
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
+        <Suspense fallback={<BlogSkeleton />}>
+          <Await resolve={loaderData.feed}>{RenderFeed}</Await>
+        </Suspense>
+      </div>
+    </>
   )
 }
 
