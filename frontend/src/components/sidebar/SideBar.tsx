@@ -10,16 +10,16 @@ import FolderSharedOutlinedIcon from "@mui/icons-material/FolderSharedOutlined"
 import FeedOutlinedIcon from "@mui/icons-material/FeedOutlined"
 import TravelExploreOutlinedIcon from "@mui/icons-material/TravelExploreOutlined"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined"
 import OneList from "./OneList"
-import LogoutBtn from "./LogoutBtn"
 
 const styles = {
   logo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
   drawerLogo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
-  icon: `bg-goldenOrange text-white hover:bg-brightOrange p-1 rounded-lg`,
+  icon: `bg-brightOrange text-white p-1 rounded-lg`,
 }
 
-const drawerWidth = 240
+const drawerWidth = 180
 
 const openedMixin = (theme: Theme): CSSObject => ({
   width: drawerWidth,
@@ -104,31 +104,22 @@ export default function SideBar() {
   const renderLinks = [
     {
       text: "Profile",
-      icon: (
-        <FolderSharedOutlinedIcon fontSize="inherit" className={styles.icon} />
-      ),
+      icon: <FolderSharedOutlinedIcon className={styles.icon} />,
       link: "profile",
     },
     {
       text: "Feed",
-      icon: <FeedOutlinedIcon fontSize="inherit" className={styles.icon} />,
+      icon: <FeedOutlinedIcon className={styles.icon} />,
       link: "feed",
     },
     {
       text: "Explore",
-      icon: (
-        <TravelExploreOutlinedIcon fontSize="inherit" className={styles.icon} />
-      ),
+      icon: <TravelExploreOutlinedIcon className={styles.icon} />,
       link: "explore",
     },
     {
       text: "Favorite",
-      icon: (
-        <FavoriteBorderOutlinedIcon
-          fontSize="inherit"
-          className={styles.icon}
-        />
-      ),
+      icon: <FavoriteBorderOutlinedIcon className={styles.icon} />,
       link: "favorite",
     },
   ].map((list) => (
@@ -172,7 +163,17 @@ export default function SideBar() {
         <Divider />
         <List className="text-sm">{renderLinks}</List>
         <Divider />
-        <LogoutBtn sideBarOpen={open} />
+        <OneList
+          key="Log Out"
+          icon={
+            <LogoutOutlinedIcon className="bg-red text-white p-1 rounded-lg" />
+          }
+          listColor="red"
+          link="logout
+        "
+          text="Log Out"
+          sideBarOpen={open}
+        />
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <DrawerHeader />

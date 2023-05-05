@@ -253,7 +253,7 @@ const GearDisplay = ({ gearData }: GearDisplayProps) => {
           variant="text"
           startIcon={<SettingsBackupRestoreIcon />}
           color="error"
-          className="hover:bg-scarletRed hover:text-white"
+          className="hover:bg-red hover:text-white"
           onClick={resetGear}
         >
           Reset
