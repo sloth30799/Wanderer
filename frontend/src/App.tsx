@@ -4,25 +4,26 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom"
-import Login, { action as loginAction } from "./pages/Login"
-import Signup, { action as signupAction } from "./pages/Signup"
-import Feed, { loader as feedLoader } from "./pages/Feed"
-import ErrorPage from "./pages/ErrorPage"
-import HomePage from "./pages/HomePage"
-import Logout from "./pages/Logout"
 import AuthRequired from "./components/AuthRequired"
 import SideBar from "./components/sidebar/SideBar"
+import { Preloader } from "./components/utils/Preloader"
+import HomePage from "./pages/HomePage"
+import ErrorPage from "./pages/ErrorPage"
+import Login, { action as loginAction } from "./pages/Login"
+import Signup, { action as signupAction } from "./pages/Signup"
+import Logout from "./pages/Logout"
 import Profile from "./pages/Profile"
+import Feed, { loader as feedLoader } from "./pages/Feed"
 import ProfileTrips from "./pages/ProfileTrips"
 import ProfileGears from "./pages/ProfileGears"
 import ProfileBlogs from "./pages/ProfileBlogs"
-import Explore from "./pages/Explore"
-import Favorite from "./pages/Favorite"
+import AddBlog from "./pages/AddBlog"
+import AddTrip from "./pages/AddTrip"
 import Trip from "./pages/Trip"
 import Gear from "./pages/Gear"
 import Blog from "./pages/Blog"
-import AddTrip from "./pages/AddTrip"
-import AddBlog from "./pages/AddBlog"
+import Explore from "./pages/Explore"
+import Favorite from "./pages/Favorite"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,7 +56,11 @@ const router = createBrowserRouter(
 )
 
 function App() {
-  return <RouterProvider router={router} />
+  return (
+    <Preloader backgroundColor="bg-grey" color="#ff9900" size={80}>
+      <RouterProvider router={router} />
+    </Preloader>
+  )
 }
 
 export default App

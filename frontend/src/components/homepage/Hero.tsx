@@ -9,7 +9,7 @@ import logoWhite from "../../assets/logo-white.svg"
 import bg from "../../assets/hero-bg.png"
 
 const styles = {
-  navbar: `bg-goldenOrange text-white shadow-lg`,
+  navbar: `bg-brightOrange text-white shadow-lg`,
   link: `no-underline font-extrabold text-black hover:text-brightOrange text-xs`,
   triggerLink: `no-underline font-bold text-white hover:text-tealBlue text-xs`,
   dropdownLink: `no-underline font-bold text-white text-xs pt-2 uppercase tracking-tight`,
@@ -122,7 +122,7 @@ const Hero = () => {
           </div>
         </nav>
         {trigger ? (
-          <nav className="fixed top-0 w-full z-20 bg-goldenOrange text-white shadow-lg">
+          <nav className="fixed top-0 w-full z-20 bg-brightOrange text-white shadow-lg">
             <div className="container flex py-3 justify-between items-center">
               <Link to="#hero">
                 <img src={logoWhite} className="h-6" alt="logo" />
