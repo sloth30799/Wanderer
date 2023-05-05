@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import {
   TextField,
   Dialog,
@@ -11,11 +12,10 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
 import GearDisplay from "../components/GearDisplay"
-import LoadingCircle from "../components/utils/LoadingCircle"
-import { useDispatch } from "react-redux"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
 import { useFetchGearQuery } from "../api/gearApiSlice"
 import { useDeleteTemplateMutation } from "../api/templateApiSlice"
+import LoadingScreen from "../components/loading/LoadingScreen"
 
 const Gear = () => {
   const dispatch = useDispatch()
@@ -34,7 +34,7 @@ const Gear = () => {
     setOpen(false)
   }
 
-  if (isLoading) return <LoadingCircle />
+  if (isLoading) return <LoadingScreen />
   else if (isError) return <h2>Gear not found!</h2>
 
   const gear = data.gear

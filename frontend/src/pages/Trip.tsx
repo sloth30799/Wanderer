@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
+import { useDispatch } from "react-redux"
 import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
-import GearDisplay from "../components/GearDisplay"
 import DeleteIcon from "@mui/icons-material/Delete"
 import Templates from "../components/TemplatesBox"
-import LoadingCircle from "../components/utils/LoadingCircle"
+import GearDisplay from "../components/GearDisplay"
+import LoadingScreen from "../components/loading/LoadingScreen"
 import { GearType, TripType } from "../types"
 import { timeFormat } from "../utils/formats"
 import { dollarFormat } from "../utils/formats"
-import { useDispatch } from "react-redux"
 import {
   deleteBackpackingContent,
   updateBackpackingContent,
@@ -40,7 +40,7 @@ const Trip = () => {
     if (data !== null) setGear(data?.trip.gear)
   }, [data])
 
-  if (isLoading) return <LoadingCircle />
+  if (isLoading) return <LoadingScreen />
   else if (isError) return <h2>Trip not found!</h2>
 
   const trip: TripType = data.trip

@@ -6,7 +6,7 @@ import {
 } from "react-router-dom"
 import AuthRequired from "./components/AuthRequired"
 import SideBar from "./components/sidebar/SideBar"
-import { Preloader } from "./components/utils/Preloader"
+import { Preloader } from "./components/loading"
 import HomePage from "./pages/HomePage"
 import ErrorPage from "./pages/ErrorPage"
 import Login, { action as loginAction } from "./pages/Login"

@@ -1,6 +1,6 @@
 import { Suspense } from "react"
 import { Await, defer, useLoaderData } from "react-router-dom"
-import BlogSkeleton from "../components/utils/BlogSkeleton"
+import BlogSkeleton from "../components/loading/BlogSkeleton"
 import { BlogCard } from "../components/BlogCard"
 import { BlogType } from "../types"
 import { api } from "../lib/axios"

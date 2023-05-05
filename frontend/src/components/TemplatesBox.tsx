@@ -10,7 +10,6 @@ import {
   CardActionArea,
   CardContent,
 } from "@mui/material"
-import LoadingCircle from "./utils/LoadingCircle"
 import { addBackpackingContent } from "../services/features/profile/profileSlice"
 import { GearType, MessagesType } from "../types"
 import {
@@ -18,6 +17,7 @@ import {
   useFetchAllTemplatesQuery,
 } from "../api/templateApiSlice"
 import { toast } from "react-hot-toast"
+import LoadingScreen from "./loading/LoadingScreen"
 
 const styles = {
   button: `bg-brightGreen rounded-lg`,
@@ -61,7 +61,7 @@ const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
     setOpen(false)
   }
 
-  if (isLoading) return <LoadingCircle />
+  if (isLoading) return <LoadingScreen />
 
   if (isError) return <h1>Something went Wrong!</h1>
 

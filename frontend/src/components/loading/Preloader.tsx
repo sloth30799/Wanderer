@@ -1,7 +1,7 @@
 import useLoader from "../../hooks/useLoader"
 import { Spinner } from "./Spinner"
 
-export const Preloader = ({
+const Preloader = ({
   backgroundColor,
   children,
   ...rest
@@ -15,9 +15,12 @@ export const Preloader = ({
   if (!loader) return children
   return (
     <div
-      className={`loader ${backgroundColor} fixed top-0 left-0 w-full h-screen flex justify-center items-center`}
+      className={`loader ${backgroundColor} fixed top-0 left-0 w-full h-screen flex gap-3 justify-center items-center`}
     >
+      <h1 className="font-title text-brightOrange text-xl">Wandering...</h1>
       <Spinner {...rest} />
     </div>
   )
 }
+
+export default Preloader
