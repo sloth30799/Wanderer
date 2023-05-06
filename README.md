@@ -18,7 +18,7 @@ Tech Used:
 
 ## Optimizations
 
-More features to come!!! Have only before the trip features for now.
+More features to come!!! Have only before the trip features for now. Changing backend code to Typescript.
 
 ## Lessons Learned:
 
