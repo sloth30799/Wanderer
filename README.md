@@ -1,4 +1,4 @@
-# Wanderer: [Visit Here](https://wanderer.onrender.com/)
+# Wanderer: [Visit Here](https://wanderer-backpack.vercel.app/)
 
 Explore new places with Wanderer - the ultimate backpacker app that lets you plan your travels, share your experiences, and connect with like-minded travelers from all around the world.
 
@@ -18,11 +18,11 @@ Tech Used:
 
 ## Optimizations
 
-More features to come!!! Have only one feature, planning the trip for now.
+More features to come!!! Have only before the trip features for now. Changing backend code to Typescript.
 
 ## Lessons Learned:
 
-Getting better with MERN stack, mainly React // Refactored the code with better file structure!
+Making a good user interface and getting better with all techs.
 
 ## How to Use
 
