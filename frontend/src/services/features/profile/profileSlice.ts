@@ -105,6 +105,21 @@ const profileSlice = createSlice({
       state.gears = []
       state.blogs = []
     },
+    chooseTemplate: (
+      state,
+      action: PayloadAction<{ id: string; template: GearType }>
+    ) => {
+      const { id, template } = action.payload
+
+      state.trips = state.trips.map((trip) => {
+        if (trip._id === id) {
+          trip.gear.equipments = template.equipments
+          trip.gear.accessories = template.accessories
+          trip.gear.essentials = template.essentials
+        }
+        return trip
+      })
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -129,9 +144,10 @@ const profileSlice = createSlice({
 export const {
   fetchProfileData,
   addBackpackingContent,
+  updateBackpackingContent,
   deleteBackpackingContent,
   emptyProfileData,
-  updateBackpackingContent,
+  chooseTemplate,
 } = profileSlice.actions
 
 export default profileSlice.reducer

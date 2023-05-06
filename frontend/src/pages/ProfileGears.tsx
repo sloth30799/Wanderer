@@ -5,16 +5,16 @@ import { selectGears } from "../services/store"
 import { GearType } from "../types"
 import { addBackpackingContent } from "../services/features/profile/profileSlice"
 import { useDispatch } from "react-redux"
-import { useAddTemplateMutation } from "../api/templateApiSlice"
 import { toast } from "react-hot-toast"
 import GearCard from "../components/GearCard"
+import { useAddGearMutation } from "../api/gearApiSlice"
 
 const ProfileGears = () => {
   const gears: GearType[] = useSelector(selectGears)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [addTemplate] = useAddTemplateMutation()
+  const [addTemplate] = useAddGearMutation()
 
   async function addGear() {
     try {

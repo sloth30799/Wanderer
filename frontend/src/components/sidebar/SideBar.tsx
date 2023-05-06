@@ -15,8 +15,7 @@ import OneList from "./OneList"
 
 const styles = {
   logo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
-  drawerLogo: `text-xl font-extrabold font-title tracking-tighter cursor-default`,
-  icon: `bg-brightOrange text-white p-1 rounded-lg`,
+  icon: `bg-deepBlue text-white p-1 rounded-lg`,
 }
 
 const drawerWidth = 180
@@ -153,9 +152,7 @@ export default function SideBar() {
       </AppBar>
       <Drawer variant="permanent" open={open}>
         <DrawerHeader>
-          <span className={open ? `${styles.drawerLogo}` : "hidden"}>
-            #WANDERER
-          </span>
+          <span className={open ? `${styles.logo}` : "hidden"}>#WANDERER</span>
           <IconButton onClick={handleDrawerClose}>
             <ChevronLeftIcon />
           </IconButton>

@@ -11,19 +11,22 @@ import {
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import EditIcon from "@mui/icons-material/Edit"
-import GearDisplay from "../components/GearDisplay"
+import GearList from "../components/GearList"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
-import { useFetchGearQuery } from "../api/gearApiSlice"
-import { useDeleteTemplateMutation } from "../api/templateApiSlice"
-import LoadingScreen from "../components/loading/LoadingScreen"
+import { useDeleteGearMutation } from "../api/gearApiSlice"
+import { useSelector } from "react-redux"
+import { selectGears } from "../services/store"
 
 const Gear = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const { data, isLoading, isError } = useFetchGearQuery(id)
-  const [deleteGear] = useDeleteTemplateMutation()
+  const gears = useSelector(selectGears)
+
+  const gear = gears.find((gear) => gear._id === id)
+
+  const [deleteGear] = useDeleteGearMutation()
   const [open, setOpen] = useState(false)
 
   const handleClickOpen = () => {
@@ -34,15 +37,14 @@ const Gear = () => {
     setOpen(false)
   }
 
-  if (isLoading) return <LoadingScreen />
-  else if (isError) return <h2>Gear not found!</h2>
-
-  const gear = data.gear
+  if (gear === undefined) return <h1>Gear Not Found!</h1>
 
   async function handleDelete() {
-    await deleteGear(gear._id) // api call
-    dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
-    navigate(-1)
+    if (gear !== undefined) {
+      await deleteGear(gear._id) // api call
+      dispatch(deleteBackpackingContent({ category: "gears", id: gear._id }))
+      navigate(-1)
+    }
   }
 
   return (
@@ -93,7 +95,7 @@ const Gear = () => {
           </DialogContent>
         </Dialog>
       </div>
-      <GearDisplay gearData={gear} />
+      <GearList gearData={gear} />
     </div>
   )
 }

@@ -1,25 +1,75 @@
 const Gear = require("../models/Gear")
 
 module.exports = {
-  getTemplate: async (req, res) => {
+  getGear: async (req, res) => {
     try {
       const gear = await Gear.findById(req.params.id).populate("user")
       if (!gear) {
-        res.status(404).json({ success: false, messages: "Gear not found" })
+        return res
+          .status(404)
+          .json({ success: false, messages: "Gear not found" })
       }
 
-      res.status(200).json({ success: true, gear: gear || null })
+      return res.status(200).json({ success: true, gear: gear || null })
     } catch (error) {
       console.log(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })
     }
   },
+  getTemplates: async (req, res) => {
+    try {
+      const userTemplates = await Gear.find({
+        user: req.user.id,
+        template: true,
+      }).lean()
+
+      const templates = await Gear.find({
+        createdBy: "Admin",
+        template: true,
+      }).lean()
+
+      return res
+        .status(200)
+        .json({ success: true, templates: [...userTemplates, ...templates] })
+    } catch (error) {
+      console.error(error)
+      res.status(400).json({ success: false, error: "Internal Server Error" })
+    }
+  },
+  createGear: async (req, res) => {
+    try {
+      const gear = await Gear.create({
+        name: req.user.userName,
+        user: req.user.id,
+        equipments: [],
+        accessories: [],
+        essentials: [],
+        createdBy: req.user.userName,
+      })
+
+      if (!gear) {
+        res
+          .status(404)
+          .json({ success: false, data: "Failed to create gear template" })
+      }
+      req.flash("success", {
+        msg: "Success! Your Gear Template has been created.",
+      })
+
+      res.status(200).json({ success: true, gear: gear, messages: req.flash() })
+    } catch (error) {
+      console.error(error)
+      res.status(400).json({ success: false, error: "Internal Server Error" })
+    }
+  },
   updateGear: async (req, res) => {
     try {
-      const updatedGear = req.body.gear
+      const updatedGear = req.body
+
+      console.log(updatedGear)
       const gear = await Gear.findOneAndReplace(
         {
-          _id: req.params.id,
+          _id: updatedGear._id,
         },
         { ...updatedGear, updatedAt: Date.now() }
       )
@@ -27,11 +77,12 @@ module.exports = {
       if (!gear) {
         res.status(404).json({ success: false, messages: "Gear not Updated" })
       }
+
       req.flash("success", {
         msg: "Success! Your Gear List has been updated.",
       })
 
-      res.status(200).json({ success: true, messages: req.flash() })
+      res.status(200).json({ success: true, messages: req.flash(), gear })
     } catch (error) {
       console.log(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })

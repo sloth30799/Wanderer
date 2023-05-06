@@ -100,6 +100,7 @@ module.exports = {
     }
   },
   deleteTrip: async (req, res) => {
+    console.log(req.params.id)
     try {
       // Find trip by id
       let trip = await Trip.findById({ _id: req.params.id }).populate("gear")

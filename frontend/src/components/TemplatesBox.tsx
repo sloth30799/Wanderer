@@ -1,47 +1,39 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import {
-  Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Card,
-  CardActionArea,
-  CardContent,
-} from "@mui/material"
-import { addBackpackingContent } from "../services/features/profile/profileSlice"
-import { GearType, MessagesType } from "../types"
-import {
-  useAddTemplateMutation,
-  useFetchAllTemplatesQuery,
-} from "../api/templateApiSlice"
-import { toast } from "react-hot-toast"
+import GearCard from "./GearCard"
 import LoadingScreen from "./loading/LoadingScreen"
-
-const styles = {
-  button: `bg-brightGreen rounded-lg`,
-  templateBox: `flex flex-col md:h-96 md:flex-wrap gap-3`,
-  card: `md:w-1/2 rounded-lg shadow-md text-black bg-whiteSmoke hover:bg-tealBlue hover:text-white`,
-}
+import { Button, Dialog, DialogTitle, DialogContent } from "@mui/material"
+import { addBackpackingContent } from "../services/features/profile/profileSlice"
+import { useAddGearMutation, useFetchTemplatesQuery } from "../api/gearApiSlice"
+import { GearType, MessagesType } from "../types"
+import { toast } from "react-hot-toast"
 
 type TemplatesBoxProps = {
-  chooseTemplate: (template: GearType) => void
+  loadTemplate: (template: GearType) => void
 }
 
-const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
-  const { data, isLoading, isError } = useFetchAllTemplatesQuery()
+const TemplatesBox = ({ loadTemplate }: TemplatesBoxProps) => {
+  const { data, isLoading, isError } = useFetchTemplatesQuery()
 
   const templates = data?.templates
-  const [addTemplate, { isSuccess }] = useAddTemplateMutation()
+  const [addGear, { isSuccess }] = useAddGearMutation()
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [open, setOpen] = useState(false)
 
+  function handleOpen() {
+    setOpen(true)
+  }
+
+  function handleClose() {
+    setOpen(false)
+  }
+
   async function addNewTemplate() {
     try {
-      const { gear } = (await addTemplate().unwrap()) as {
+      const { gear } = (await addGear().unwrap()) as {
         gear: GearType
         messages: MessagesType
       }
@@ -53,62 +45,32 @@ const TemplatesBox = ({ chooseTemplate }: TemplatesBoxProps) => {
     }
   }
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
   if (isLoading) return <LoadingScreen />
 
   if (isError) return <h1>Something went Wrong!</h1>
 
   const templateCards = templates.map((template: GearType) => {
     return (
-      <Card
-        className={styles.card}
-        key={template._id}
-        onClick={() => chooseTemplate(template)}
-      >
-        <CardActionArea>
-          <CardContent className="flex flex-col gap-3">
-            <div className="flex justify-between">
-              <h3 className="m-0 font-pally">{template.name}</h3>
-              <p>By {template.createdBy}</p>
-            </div>
-            <div className="flex flex-col md:flex-row gap-3">
-              <span>Equipments: {template.equipments.length}</span>
-              <span>Essentials: {template.essentials.length}</span>
-              <span>Accessories: {template.accessories.length}</span>
-            </div>
-          </CardContent>
-        </CardActionArea>
-      </Card>
+      <GearCard
+        gear={template}
+        templateBox={true}
+        loadTemplate={() => loadTemplate(template)}
+      />
     )
   })
 
   return (
     <main>
-      <Button
-        variant="contained"
-        onClick={handleClickOpen}
-        className={styles.button}
-      >
+      <Button variant="contained" onClick={handleOpen}>
         Templates
       </Button>
-      <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"lg"}>
-        <DialogTitle className="">
+      <Dialog open={open} onClose={handleClose} fullWidth maxWidth={"md"}>
+        <DialogTitle className="font-title font-bold">
           Start with existing template or Make Your Own
         </DialogTitle>
-        <DialogContent className="flex flex-col gap-3">
-          <div className={styles.templateBox}>{templateCards}</div>
-          <Button
-            variant="contained"
-            onClick={addNewTemplate}
-            className="bg-tealBlue"
-          >
+        <DialogContent>
+          <div className="grid grid-cols-3 gap-3">{templateCards}</div>
+          <Button variant="contained" onClick={addNewTemplate}>
             Make Your Own!
           </Button>
         </DialogContent>

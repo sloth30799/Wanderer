@@ -1,6 +1,7 @@
 export interface UserType {
   _id: string
   userName: string
+  admin: boolean
   email: string
   password: string
 }
@@ -57,6 +58,7 @@ export interface GearType {
   updatedAt: string
   createdBy: string
   template: boolean
+  public: boolean
   essentials: ItemType[]
   accessories: ItemType[]
   equipments: ItemType[]

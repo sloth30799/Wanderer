@@ -41,14 +41,13 @@ const OneList = ({
       to={link}
       className={({ isActive }) =>
         isActive
-          ? `no-underline text-brightOrange font-extrabold`
-          : `no-underline text-${listColor ?? "black"} hover:font-semibold`
+          ? `no-underline text-black font-extrabold`
+          : `no-underline ${
+              listColor ? "text-red" : "text-black"
+            } hover:font-semibold`
       }
     >
-      <ListItem
-        disablePadding
-        className={`hover:text-${listColor ?? "brightOrange"}`}
-      >
+      <ListItem disablePadding className={`hover:text-${listColor ?? "black"}`}>
         <ListItemButton
           aria-owns={open ? "mouse-over-popover" : undefined}
           aria-haspopup="true"
@@ -92,11 +91,11 @@ const OneList = ({
         anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "bottom",
-          horizontal: "left",
+          horizontal: "right",
         }}
         transformOrigin={{
           vertical: "top",
-          horizontal: "left",
+          horizontal: "right",
         }}
         onClose={handlePopoverClose}
         disableRestoreFocus
@@ -105,8 +104,8 @@ const OneList = ({
           sx={{
             p: 0.5,
             fontSize: "0.7rem",
-            backgroundColor: listColor ?? "orange",
-            color: "white",
+            backgroundColor: listColor ?? "white",
+            color: listColor ? "white" : "black",
           }}
         >
           {text}

@@ -1,30 +1,44 @@
-import { Chip } from "@mui/material"
+import { Link } from "react-router-dom"
+import { Chip, Button } from "@mui/material"
+import InventoryIcon from "@mui/icons-material/Inventory"
 import { GearType } from "../types"
 
 type GearCardProps = {
   gear: GearType
+  templateBox?: boolean
+  loadTemplate?: (gear: GearType) => void
 }
 
-const GearCard = ({ gear }: GearCardProps) => {
+const GearCard = ({ gear, templateBox, loadTemplate }: GearCardProps) => {
   return (
-    <div className="font-title">
-      <div className="bg-deepBlue text-white rounded-t-lg p-3">
-        <h3 className="font-bold my-0">{gear.name}</h3>
+    <div className="font-title text-black shadow-black rounded-lg p-3 border-solid border border-black">
+      <div>
+        <div className="flex justify-between items-center">
+          <div>
+            <span className="uppercase text-grey text-xs">
+              {gear.createdBy}
+            </span>
+            <h3 className="font-bold uppercase my-0 block h-12">{gear.name}</h3>
+          </div>
+          <InventoryIcon className="bg-brightOrange rounded-lg p-1 text-white text-3xl" />
+        </div>
+        <p className="text-sm text-grey truncate">{gear.note}</p>
       </div>
-      <div className="bg-whiteSmoke text-deepBlue font-bold grid grid-cols-1 md:grid-cols-3 gap-3 py-3">
-        <span className="flex flex-col gap-2 items-center text-sm">
-          Equipments
-          <Chip label={gear.equipments.length} color="info" size="small" />
-        </span>
-        <span className="flex flex-col gap-2 items-center text-sm">
-          Accessories
-          <Chip label={gear.accessories.length} color="success" size="small" />
-        </span>
-        <span className="flex flex-col gap-2 items-center text-sm">
-          Essentials
-          <Chip label={gear.essentials.length} color="error" size="small" />
-        </span>
+      <div className="flex flex-col gap-3">
+        <Chip label={`Equipments: ${gear.equipments.length}`} size="small" />
+        <Chip label={`Accessories: ${gear.accessories.length}`} size="small" />
+        <Chip label={`Essentials: ${gear.essentials.length}`} size="small" />
       </div>
+      {templateBox && loadTemplate && (
+        <div className="mt-3 flex justify-between">
+          <Link to={`/gear/${gear._id}`}>
+            <Button variant="text">Preview</Button>
+          </Link>
+          <Button variant="contained" onClick={() => loadTemplate(gear)}>
+            Use
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

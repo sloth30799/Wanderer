@@ -13,7 +13,6 @@ const authRoutes = require("./routes/auth")
 const blogsRoutes = require("./routes/blogs")
 const gearsRoutes = require("./routes/gears")
 const tripsRoutes = require("./routes/trips")
-const templatesRoutes = require("./routes/templates")
 
 //Use .env file in config folder
 require("dotenv").config({ path: "./src/config/.env" })
@@ -57,7 +56,6 @@ app.use("/api/auth", authRoutes)
 app.use("/api/blog", blogsRoutes)
 app.use("/api/trip", tripsRoutes)
 app.use("/api/gear", gearsRoutes)
-app.use("/api/template", templatesRoutes)
 
 app.use("*", (_, res) => {
   res.sendFile(path.join(__dirname, "../../frontend/dist/index.html"))

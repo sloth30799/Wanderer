@@ -16,6 +16,8 @@ import { useEffect } from "react"
 import { GearCategory, GearType, ItemType } from "../types"
 import { useUpdateGearMutation } from "../api/gearApiSlice"
 import { toast } from "react-hot-toast"
+import { useDispatch } from "react-redux"
+import { updateBackpackingContent } from "../services/features/profile/profileSlice"
 
 type OneItemProps = {
   item: ItemType
@@ -106,7 +108,8 @@ const AddItem = ({ category, addGear }: AddItemProps) => {
   )
 }
 
-const GearDisplay = ({ gearData }: GearDisplayProps) => {
+const GearList = ({ gearData }: GearDisplayProps) => {
+  const dispatch = useDispatch()
   const [gear, setGear] = useState(gearData)
   const { equipments, accessories, essentials } = gear
   const [updateGearList, { isLoading, isSuccess }] = useUpdateGearMutation()
@@ -121,8 +124,14 @@ const GearDisplay = ({ gearData }: GearDisplayProps) => {
 
     const form = e.target as HTMLFormElement
     const formData = new FormData(form)
-    const category = formData.get("category") as GearCategory
-    const item = formData.get("item") as string
+    let category: GearCategory = "accessories"
+    let item = ""
+
+    for (const pair of formData.entries()) {
+      category = pair[0] as GearCategory
+      item = pair[1] as string
+    }
+
     const itemList = gear[category]
 
     setGear((prevGear) => {
@@ -188,63 +197,61 @@ const GearDisplay = ({ gearData }: GearDisplayProps) => {
   }
 
   async function updateGear() {
-    await updateGearList({ id: gear._id, gear: gear })
+    await updateGearList({ gear })
+    dispatch(updateBackpackingContent({ category: "gears", content: gear }))
     if (isLoading) toast.loading("Updating")
     if (isSuccess) toast.success("Updated!")
   }
-
-  const equipmentsLists = equipments.map((item) => {
-    return (
-      <OneItem
-        key={item.name}
-        item={item}
-        category={"equipments"}
-        checkGear={checkGear}
-        removeGear={removeGear}
-      />
-    )
-  })
-
-  const accessoriesLists = accessories.map((item) => {
-    return (
-      <OneItem
-        key={item.name}
-        item={item}
-        category={"accessories"}
-        checkGear={checkGear}
-        removeGear={removeGear}
-      />
-    )
-  })
-
-  const essentialsLists = essentials.map((item) => {
-    return (
-      <OneItem
-        key={item.name}
-        item={item}
-        category={"essentials"}
-        checkGear={checkGear}
-        removeGear={removeGear}
-      />
-    )
-  })
 
   return (
     <main className="flex flex-col gap-3 mt-6 m-auto">
       <div className="flex flex-col md:flex-row gap-3">
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Equipments</h2>
-          {equipmentsLists}
+          {equipments &&
+            equipments.map((item) => {
+              return (
+                <OneItem
+                  key={item.name}
+                  item={item}
+                  category={"accessories"}
+                  checkGear={checkGear}
+                  removeGear={removeGear}
+                />
+              )
+            })}
           <AddItem category={"equipments"} addGear={addGear} />
         </div>
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Accessories</h2>
-          {accessoriesLists}
+          {accessories &&
+            accessories.map((item) => {
+              return (
+                <OneItem
+                  key={item.name}
+                  item={item}
+                  category={"accessories"}
+                  checkGear={checkGear}
+                  removeGear={removeGear}
+                />
+              )
+            })}
           <AddItem category={"accessories"} addGear={addGear} />
         </div>
         <div className={styles.listsBox}>
           <h2 className={styles.listTitle}>Essentials</h2>
-          {essentialsLists}
+          {essentials &&
+            essentials.map((item) => {
+              return (
+                <OneItem
+                  key={item.name}
+                  item={item}
+                  category={"essentials"}
+                  checkGear={checkGear}
+                  removeGear={removeGear}
+                />
+              )
+            })}
           <AddItem category={"essentials"} addGear={addGear} />
         </div>
       </div>
@@ -266,4 +273,4 @@ const GearDisplay = ({ gearData }: GearDisplayProps) => {
   )
 }
 
-export default GearDisplay
+export default GearList

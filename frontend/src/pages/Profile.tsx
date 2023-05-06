@@ -6,7 +6,7 @@ import { LoadingScreen } from "../components/loading"
 
 const styles = {
   navLink: `no-underline text-black font-title`,
-  activeLink: `no-underline text-grey font-title font-bold rounded-lg`,
+  activeLink: `no-underline text-deepBlue font-title font-bold rounded-lg`,
 }
 
 const Profile = () => {
@@ -18,7 +18,7 @@ const Profile = () => {
   return (
     <div>
       <div>
-        <h2 className="font-title">Welcome back {user?.userName}!</h2>
+        <h2 className="font-title my-0 mb-3">Welcome back {user?.userName}!</h2>
         <nav className="flex gap-6 items-center border-solid border-0 border-grey border-b-2 p-1">
           <NavLink
             to="trip"

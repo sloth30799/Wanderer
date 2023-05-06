@@ -7,7 +7,9 @@ module.exports = {
     try {
       if (!req.user) res.status(200).json(null)
       const blogs = await Blog.find({ user: req.user.id }).lean()
-      const trips = await Trip.find({ user: req.user.id }).lean()
+      const trips = await Trip.find({ user: req.user.id })
+        .lean()
+        .populate("gear")
       const gears = await Gear.find({
         user: req.user.id,
         template: true,

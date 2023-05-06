@@ -1,15 +1,9 @@
-import { CardActionArea, CardContent, Card, Button } from "@mui/material"
+import { Button } from "@mui/material"
 import { Link } from "react-router-dom"
-import { timeFormat } from "../utils/formats"
 import { useSelector } from "react-redux"
 import { selectTrips } from "../services/store"
 import { TripType } from "../types"
-
-const styles = {
-  card: `bg-whiteSmoke rounded-lg text-black`,
-  completedText: `text-sm text-brightGreen font-bold font-title`,
-  inCompletedText: `text-sm text-brightOrange font-bold font-title`,
-}
+import TripCard from "../components/TripCard"
 
 const ProfileTrips = () => {
   const trips: TripType[] = useSelector(selectTrips)
@@ -17,24 +11,7 @@ const ProfileTrips = () => {
   const tripsRender = trips.map((trip: TripType) => {
     return (
       <Link to={`/trip/${trip._id}`} key={trip._id} className="no-underline">
-        <Card className={styles.card}>
-          <CardActionArea>
-            <CardContent className="flex flex-col gap-3">
-              <h2 className="my-0 font-title">{trip.destination}</h2>
-              <span className="text-xs font-title text-tealBlue font-bold">
-                {timeFormat(trip.startDate, "LL")} -{" "}
-                {timeFormat(trip.endDate, "LL")}
-              </span>
-              <span
-                className={
-                  trip.completed ? styles.completedText : styles.inCompletedText
-                }
-              >
-                {trip.completed ? "Journey complete" : "Journey in progress"}
-              </span>
-            </CardContent>
-          </CardActionArea>
-        </Card>
+        <TripCard trip={trip} />
       </Link>
     )
   })
