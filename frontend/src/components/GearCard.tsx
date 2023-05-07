@@ -22,7 +22,7 @@ const GearCard = ({ gear, templateBox, loadTemplate }: GearCardProps) => {
           </div>
           <InventoryIcon className="bg-brightOrange rounded-lg p-1 text-white text-3xl" />
         </div>
-        <p className="text-sm text-grey truncate">{gear.note}</p>
+        <p className="text-sm text-grey line-clamp-2">{gear.note}</p>
       </div>
       <div className="flex flex-col gap-3">
         <Chip label={`Equipments: ${gear.equipments.length}`} size="small" />

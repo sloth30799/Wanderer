@@ -33,6 +33,9 @@ module.exports = {
           "2xl": "6rem",
         },
       },
+      aspectRatio: {
+        "1/2": "1 / 2",
+      },
       colors: {
         whiteSmoke: "#edede9",
         grey: "#505a6c",

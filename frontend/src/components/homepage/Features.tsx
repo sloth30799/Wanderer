@@ -33,7 +33,11 @@ const Card = ({ title, body, image }: CardProps) => {
         <h5 className="font-title font-bold text-brightOrange">{title}</h5>
         <p className="text-xs">{body}</p>
       </div>
-      <img src={image} alt="" className="w-full h-3/4 pointer-events-none" />
+      <img
+        src={image}
+        alt="image"
+        className="w-full h-3/4 pointer-events-none"
+      />
     </div>
   )
 }
