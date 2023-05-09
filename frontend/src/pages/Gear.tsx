@@ -10,7 +10,7 @@ import {
   IconButton,
 } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
-import EditIcon from "@mui/icons-material/Edit"
+// import EditIcon from "@mui/icons-material/Edit"
 import GearList from "../components/GearList"
 import { deleteBackpackingContent } from "../services/features/profile/profileSlice"
 import { useDeleteGearMutation } from "../api/gearApiSlice"
@@ -29,9 +29,9 @@ const Gear = () => {
   const [deleteGear] = useDeleteGearMutation()
   const [open, setOpen] = useState(false)
 
-  const handleClickOpen = () => {
-    setOpen(true)
-  }
+  // const handleClickOpen = () => {
+  //   setOpen(true)
+  // }
 
   const handleClose = () => {
     setOpen(false)
