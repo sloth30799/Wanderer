@@ -62,13 +62,13 @@ const Gear = () => {
         <span>Created By {gear.createdBy}</span>
       </div>
       <div className="flex justify-end">
-        <IconButton
+        {/* <IconButton
           className="text-black"
           aria-label="edit"
           onClick={handleClickOpen}
         >
           <EditIcon />
-        </IconButton>
+        </IconButton> */}
         <IconButton
           aria-label="delete"
           className="text-black"
