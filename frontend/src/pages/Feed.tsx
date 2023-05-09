@@ -28,8 +28,17 @@ const Feed = () => {
     const blogsRender = blogs.map((blog: BlogType) => {
       return <BlogCard key={blog._id} blog={blog} />
     })
+
     return blogsRender
   }
+
+  const fallbackRender = (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <BlogSkeleton />
+      <BlogSkeleton />
+      <BlogSkeleton />
+    </div>
+  )
 
   return (
     <>
@@ -37,12 +46,11 @@ const Feed = () => {
         <span className="tracking-wider text-sm text-grey">Filter By City</span>
         <nav className=""></nav>
       </div> */}
-
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
-        <Suspense fallback={<BlogSkeleton />}>
+      <Suspense fallback={fallbackRender}>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           <Await resolve={loaderData.feed}>{RenderFeed}</Await>
-        </Suspense>
-      </div>
+        </div>
+      </Suspense>
     </>
   )
 }

@@ -64,7 +64,7 @@ export interface GearType {
   equipments: ItemType[]
   user: UserType
   name: string
-  note: string
+  note?: string
 }
 
 export type GearCategory = "essentials" | "accessories" | "equipments"

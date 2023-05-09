@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom"
 import { useAddTripMutation } from "../api/tripApiSlice"
 import { Link } from "react-router-dom"
 import { addBackpackingContent } from "../services/features/profile/profileSlice"
+import { toast } from "react-hot-toast"
 
 const styles = {
   label: `font-bold font-title text-brightOrange`,
@@ -26,14 +27,18 @@ const AddTrip = () => {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
-    console.log(formData)
 
     try {
       const { data }: any = await createTrip(formData)
-      console.log(data)
+
+      if (data.success === false) toast.error("Something went Wrong!")
+
       if (data.trip) {
         dispatch(
           addBackpackingContent({ category: "trips", content: data.trip })
+        )
+        dispatch(
+          addBackpackingContent({ category: "gears", content: data.trip.gear })
         )
         navigate(`/trip/${data.trip._id}`)
       }
@@ -153,7 +158,7 @@ const AddTrip = () => {
           rows={4}
         />
         <Button variant="contained" type="submit" disabled={isLoading}>
-          {isLoading ? "Starting" : "Explore further"}
+          {isLoading ? "Exploring" : "Explore further"}
         </Button>
       </form>
     </div>

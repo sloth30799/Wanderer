@@ -1,3 +1,4 @@
+import { GearType } from "../types"
 import { apiSlice } from "./apiSlice"
 
 const gearApiSlice = apiSlice.injectEndpoints({
@@ -8,7 +9,7 @@ const gearApiSlice = apiSlice.injectEndpoints({
     fetchTemplates: builder.query<any, void>({
       query: () => "gear/fetchTemplates",
     }),
-    addGear: builder.mutation<any, void>({
+    addGear: builder.mutation<{ success: boolean; gear?: GearType }, void>({
       query: () => ({
         url: `gear/createGear`,
         method: "POST",

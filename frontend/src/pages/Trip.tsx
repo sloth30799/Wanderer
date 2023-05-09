@@ -1,6 +1,7 @@
+import { useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
-import { IconButton, Divider, FormControlLabel, Checkbox } from "@mui/material"
+import { IconButton, Divider } from "@mui/material"
 import DeleteIcon from "@mui/icons-material/Delete"
 import Templates from "../components/TemplatesBox"
 import GearList from "../components/GearList"
@@ -18,7 +19,7 @@ import {
 } from "../api/tripApiSlice"
 import { toast } from "react-hot-toast"
 import { useSelector } from "react-redux"
-import { selectTrips } from "../services/store"
+import { selectGears, selectTrips } from "../services/store"
 import { useUpdateGearMutation } from "../api/gearApiSlice"
 
 const styles = {
@@ -31,14 +32,17 @@ const Trip = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
+  const [edit, setEdit] = useState(false)
 
   const trips = useSelector(selectTrips)
+  const trip = trips.find((trip) => trip._id === id)
+
+  const gears = useSelector(selectGears)
+  const gear = gears.find((gear) => gear._id === trip?.gear._id)
+
   const [completedTrip] = useCompletedTripMutation()
   const [deleteTrip, { isSuccess: deleteSuccess }] = useDeleteTripMutation()
   const [updateGearList] = useUpdateGearMutation()
-
-  const trip = trips.find((trip) => trip._id === id)
-  const gear = trip?.gear
 
   if (trip === undefined) return <h2>Trip not Found!</h2>
   if (gear === undefined) return <h2>Gear not Found!</h2>
@@ -128,12 +132,12 @@ const Trip = () => {
           </div>
         </div>
         <div className="flex flex-row justify-between">
-          <FormControlLabel
-            control={<Checkbox />}
+          {/* <FormControlLabel
+            control={<Switch />}
             label={"Completed"}
             onChange={handleCompleted}
             checked={trip.completed}
-          />
+          /> */}
           <IconButton
             aria-label="delete"
             className="place-self-end text-black"
@@ -144,9 +148,8 @@ const Trip = () => {
         </div>
       </div>
       <div className="flex flex-col justify-between mt-3">
-        <h3 className="text-center">Gear List</h3>
         <Templates loadTemplate={loadTemplate} />
-        {gear && <GearList gearData={gear} />}
+        {gear ? <GearList gearData={gear} /> : <h1>No gear List</h1>}
       </div>
     </div>
   )

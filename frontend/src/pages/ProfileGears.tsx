@@ -18,12 +18,16 @@ const ProfileGears = () => {
 
   async function addGear() {
     try {
-      const { gear } = await addTemplate().unwrap()
+      const data = await addTemplate().unwrap()
 
-      if (gear) {
-        toast.success("Template Created!")
-        dispatch(addBackpackingContent({ category: "gears", content: gear }))
-        navigate(`/gear/${gear._id}`)
+      if (data.success === false) toast.error("Something went Wrong!")
+
+      if (data.gear) {
+        toast.success("Gear List Created!")
+        dispatch(
+          addBackpackingContent({ category: "gears", content: data.gear })
+        )
+        navigate(`/gear/${data.gear._id}`)
       }
     } catch (error) {
       console.error(error)

@@ -18,9 +18,9 @@ const GearCard = ({ gear, templateBox, loadTemplate }: GearCardProps) => {
             <span className="uppercase text-grey text-xs">
               {gear.createdBy}
             </span>
-            <h3 className="font-bold uppercase my-0 block h-12">{gear.name}</h3>
+            <h3 className="font-bold uppercase my-0">{gear.name}</h3>
           </div>
-          <InventoryIcon className="bg-brightOrange rounded-lg p-1 text-white text-3xl" />
+          <InventoryIcon className="bg-brightOrange rounded-lg p-1 text-white text-3xl ml-1" />
         </div>
         <p className="text-sm text-grey line-clamp-2">{gear.note}</p>
       </div>

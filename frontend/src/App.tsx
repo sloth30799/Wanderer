@@ -57,7 +57,7 @@ const router = createBrowserRouter(
 
 function App() {
   return (
-    <Preloader backgroundColor="bg-white" color="#ff9900" size={40}>
+    <Preloader backgroundColor="bg-white" color="#ff9900" size={20}>
       <RouterProvider router={router} />
     </Preloader>
   )

@@ -30,13 +30,13 @@ export const theme = createTheme({
       defaultProps: {
         inputProps: {
           style: {
-            fontSize: "0.8rem",
+            fontSize: "0.9rem",
             fontFamily: "Pilcrow rounded",
           },
         },
         InputLabelProps: {
           style: {
-            fontSize: "0.9rem",
+            fontSize: "1rem",
             padding: 0,
             color: "#000",
             fontFamily: "Pilcrow rounded",

@@ -59,7 +59,7 @@ const AddBlog = () => {
           id="tag"
           name="tag"
           label="Tag"
-          placeholder="Eg. London"
+          placeholder="Eg. New Zealand"
           required
         />
         <TextField
