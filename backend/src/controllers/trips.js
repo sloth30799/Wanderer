@@ -32,6 +32,7 @@ module.exports = {
       const gear = await Gear.create({
         name: destination,
         user: req.user.id,
+        template: true,
         equipments: [],
         accessories: [],
         essentials: [],
@@ -66,7 +67,7 @@ module.exports = {
       }
 
       console.log("Trip has been added!")
-      res.status(200).json({ success: true, trip: trip })
+      res.status(200).json({ success: true, trip })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })
@@ -80,18 +81,15 @@ module.exports = {
         },
         { completed: req.body.completed }
       )
+
       if (!trip) {
         return res
           .status(404)
           .json({ success: false, error: "Trip not updated" })
       }
 
-      req.flash("success", {
-        msg: "Success! Your Trip has been updated.",
-      })
       res.status(200).json({
         success: true,
-        messages: req.flash(),
         completed: trip.completed,
       })
     } catch (error) {
@@ -108,17 +106,18 @@ module.exports = {
         return res.status(404).json({ success: false, error: "Trip not found" })
       }
 
-      const gearId = trip.gear._id
-      const gear = await Gear.findById({ _id: gearId })
-      if (!gear) {
-        return res.status(404).json({ success: false, error: "Gear not found" })
+      if (trip.gear) {
+        const gearId = trip.gear._id
+        const gear = await Gear.findById({ _id: gearId })
+
+        if (gear.template === false) await Gear.deleteOne({ _id: gearId })
       }
 
       // Delete trip from db
       await Trip.deleteOne({ _id: req.params.id })
-      if (gear.template === false) await Gear.deleteOne({ _id: gearId })
       console.log("Deleted Trip")
-      res.status(200).json({ success: true, data: "Deleted Trip" })
+
+      res.status(200).json({ success: true, messages: "Deleted Trip" })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })

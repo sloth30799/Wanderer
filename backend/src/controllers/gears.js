@@ -39,12 +39,12 @@ module.exports = {
   createGear: async (req, res) => {
     try {
       const gear = await Gear.create({
-        name: req.user.userName,
+        name: "List",
         user: req.user.id,
+        template: true,
         equipments: [],
         accessories: [],
         essentials: [],
-        createdBy: req.user.userName,
       })
 
       if (!gear) {
@@ -52,11 +52,8 @@ module.exports = {
           .status(404)
           .json({ success: false, data: "Failed to create gear template" })
       }
-      req.flash("success", {
-        msg: "Success! Your Gear Template has been created.",
-      })
 
-      res.status(200).json({ success: true, gear: gear, messages: req.flash() })
+      res.status(200).json({ success: true, gear: gear })
     } catch (error) {
       console.error(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })
@@ -66,7 +63,6 @@ module.exports = {
     try {
       const updatedGear = req.body
 
-      console.log(updatedGear)
       const gear = await Gear.findOneAndReplace(
         {
           _id: updatedGear._id,
@@ -78,11 +74,7 @@ module.exports = {
         res.status(404).json({ success: false, messages: "Gear not Updated" })
       }
 
-      req.flash("success", {
-        msg: "Success! Your Gear List has been updated.",
-      })
-
-      res.status(200).json({ success: true, messages: req.flash(), gear })
+      res.status(200).json({ success: true, gear })
     } catch (error) {
       console.log(error)
       res.status(400).json({ success: false, error: "Internal Server Error" })

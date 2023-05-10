@@ -29,6 +29,7 @@ module.exports = {
         likes: 0,
         user: req.user.id,
       })
+
       if (!blog) {
         res.status(404).json({ success: false, data: "Failed to create Blog" })
       }
@@ -49,12 +50,13 @@ module.exports = {
         },
         { new: true }
       )
+
       if (!blog) {
         res.status(404).json({ success: false, data: "Blog not updated" })
       }
 
       console.log("Likes +1")
-      res.status(200).json({ success: true, data: blog.likes })
+      res.status(200).json({ success: true, likes: blog.likes })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })
@@ -72,7 +74,7 @@ module.exports = {
       // Delete blog from db
       await Blog.deleteOne({ _id: req.params.id })
       console.log("Deleted Blog")
-      res.status(200).json({ success: true, data: "Deleted Blog" })
+      res.status(200).json({ success: true, messages: "Deleted Blog" })
     } catch (err) {
       console.log(err)
       res.status(400).json({ success: false, error: "Internal Server Error" })

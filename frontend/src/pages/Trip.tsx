@@ -32,6 +32,7 @@ const Trip = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [edit, setEdit] = useState(false)
 
   const trips = useSelector(selectTrips)
@@ -47,16 +48,16 @@ const Trip = () => {
   if (trip === undefined) return <h2>Trip not Found!</h2>
   if (gear === undefined) return <h2>Gear not Found!</h2>
 
-  async function handleCompleted() {
-    if (trip !== undefined) {
-      await completedTrip({
-        id: trip._id,
-        completed: trip.completed,
-      })
-      dispatch(updateBackpackingContent({ category: "trips", content: trip }))
-      toast.success("Updated")
-    }
-  }
+  // async function handleCompleted() {
+  //   if (trip !== undefined) {
+  //     await completedTrip({
+  //       id: trip._id,
+  //       completed: trip.completed,
+  //     })
+  //     dispatch(updateBackpackingContent({ category: "trips", content: trip }))
+  //     toast.success("Updated")
+  //   }
+  // }
 
   const handleDelete = async () => {
     await deleteTrip(trip._id) // api call

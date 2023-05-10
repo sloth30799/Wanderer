@@ -34,9 +34,6 @@ const GearSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  createdBy: {
-    type: String,
-  },
   note: {
     type: String,
   },

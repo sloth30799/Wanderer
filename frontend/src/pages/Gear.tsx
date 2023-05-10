@@ -13,7 +13,7 @@ import EditIcon from "@mui/icons-material/Edit"
 import GearList from "../components/GearList"
 import {
   deleteBackpackingContent,
-  updateBackpackingContent,
+  // updateBackpackingContent,
 } from "../services/features/profile/profileSlice"
 import {
   useDeleteGearMutation,
@@ -22,14 +22,14 @@ import {
 import { useSelector } from "react-redux"
 import { selectGears } from "../services/store"
 import { GearType } from "../types"
-import { toast } from "react-hot-toast"
+// import { toast } from "react-hot-toast"
 
 const Gear = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
 
-  const [updateGearList, { isSuccess }] = useUpdateGearMutation()
+  // const [updateGearList, { isSuccess }] = useUpdateGearMutation()
   const [deleteGear] = useDeleteGearMutation()
 
   const gears = useSelector(selectGears) as GearType[]

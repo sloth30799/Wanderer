@@ -14,6 +14,7 @@ module.exports = {
 
       const gears = await Gear.find({
         user: req.user.id,
+        template: true,
       }).lean()
 
       res.status(200).json({ success: true, blogs: blogs, trips, gears })
