@@ -1,4 +1,4 @@
-import { useState } from "react"
+// import { useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { IconButton, Divider } from "@mui/material"
@@ -11,10 +11,10 @@ import { dollarFormat } from "../utils/formats"
 import {
   chooseTemplate,
   deleteBackpackingContent,
-  updateBackpackingContent,
+  // updateBackpackingContent,
 } from "../services/features/profile/profileSlice"
 import {
-  useCompletedTripMutation,
+  // useCompletedTripMutation,
   useDeleteTripMutation,
 } from "../api/tripApiSlice"
 import { toast } from "react-hot-toast"
@@ -32,8 +32,7 @@ const Trip = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id } = useParams()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [edit, setEdit] = useState(false)
+  // const [edit, setEdit] = useState(false)
 
   const trips = useSelector(selectTrips)
   const trip = trips.find((trip) => trip._id === id)
@@ -41,7 +40,7 @@ const Trip = () => {
   const gears = useSelector(selectGears)
   const gear = gears.find((gear) => gear._id === trip?.gear._id)
 
-  const [completedTrip] = useCompletedTripMutation()
+  // const [completedTrip] = useCompletedTripMutation()
   const [deleteTrip, { isSuccess: deleteSuccess }] = useDeleteTripMutation()
   const [updateGearList] = useUpdateGearMutation()
 

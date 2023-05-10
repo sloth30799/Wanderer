@@ -17,7 +17,7 @@ import {
 } from "../services/features/profile/profileSlice"
 import {
   useDeleteGearMutation,
-  useUpdateGearMutation,
+  // useUpdateGearMutation,
 } from "../api/gearApiSlice"
 import { useSelector } from "react-redux"
 import { selectGears } from "../services/store"
