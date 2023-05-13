@@ -66,7 +66,7 @@ const Blog = () => {
         <img src={blog.image} alt={blog.title} className="h-96" />
       </div>
       <div className="flex flex-col gap-6">
-        <p className="">{blog.caption}</p>
+        <p className="whitespace-pre-line">{blog.caption}</p>
         <div className="flex justify-between">
           <IconButton
             aria-label="add to favorites"
